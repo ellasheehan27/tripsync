@@ -31,6 +31,7 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
 .btn-ghost{background:none;color:#6b6760;padding:8px 12px}.btn-ghost:hover{background:#f5f2ed}
 .btn-full{width:100%}.btn-sm{padding:8px 14px;font-size:13px;border-radius:10px}
 .btn-danger{background:#fee2e2;color:#dc2626}.btn-danger:hover{background:#fecaca}
+.btn-teal{background:#0f7b6c;color:#fff}.btn-teal:hover{background:#0a6459}
 .err{background:#fee2e2;color:#dc2626;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none}
 .ok{background:#d1fae5;color:#065f46;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none}
 .nav{background:#fff;border-bottom:1px solid #ebe8e3;position:sticky;top:0;z-index:100}
@@ -44,22 +45,22 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
 .trips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding-bottom:40px}
 .trip-card{background:#fff;border-radius:20px;overflow:hidden;cursor:pointer;transition:.2s;border:1.5px solid #ebe8e3;display:block}
 .trip-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.1);border-color:#e8572a}
-.trip-img{width:100%;height:160px;object-fit:cover;display:block;background:#ebe8e3}
-.trip-img-placeholder{width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.trip-img{width:100%;height:160px;object-fit:cover;display:block}
+.trip-img-placeholder{width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:48px;background:linear-gradient(135deg,#e8572a22,#0f7b6c22)}
 .trip-body{padding:16px 18px 18px}
 .trip-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:4px}
 .trip-meta{font-size:13px;color:#6b6760}
-.new-trip-card{background:#fff;border-radius:20px;border:2px dashed #d5d2cb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:.2s;min-height:200px;color:#9ca3af}
+.new-trip-card{background:#fff;border-radius:20px;border:2px dashed #d5d2cb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:.2s;min-height:220px;color:#9ca3af}
 .new-trip-card:hover{border-color:#e8572a;color:#e8572a;background:#fdf9f7}
-.trip-hero{position:relative;height:240px;background:#1a1814;overflow:hidden}
+.trip-hero{position:relative;height:260px;background:#1a1814;overflow:hidden}
 .trip-hero img{width:100%;height:100%;object-fit:cover;opacity:.85}
-.trip-hero-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px}
-.trip-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.6))}
+.trip-hero-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;background:linear-gradient(135deg,#e8572a,#0f7b6c)}
+.trip-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.65))}
 .trip-hero-content{position:absolute;bottom:0;left:0;right:0;padding:24px}
-.trip-hero-content h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px;font-family:'Syne',sans-serif}
+.trip-hero-content h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:8px;font-family:'Syne',sans-serif}
 .trip-hero-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .trip-hero-meta span{font-size:13px;color:rgba(255,255,255,.85)}
-.trip-tabs{background:#fff;border-bottom:1px solid #ebe8e3;top:60px;z-index:90;overflow-x:auto}
+.trip-tabs{background:#fff;border-bottom:1px solid #ebe8e3;overflow-x:auto}
 .trip-tabs-inner{display:flex;max-width:960px;margin:0 auto;padding:0 20px}
 .trip-tab{padding:14px 16px;font-size:13px;font-weight:600;color:#6b6760;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.15s;font-family:'DM Sans',sans-serif}
 .trip-tab.active{color:#e8572a;border-bottom-color:#e8572a}
@@ -67,33 +68,31 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
 .card{background:#fff;border-radius:16px;border:1.5px solid #ebe8e3;padding:20px;margin-bottom:12px}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .card-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px}
 .section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
-.divider{height:1px;background:#ebe8e3;margin:12px 0}
-.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f5f2ed}
+.row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #f5f2ed}
 .row:last-child{border-bottom:none}
-.vote-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0}
-.vote-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid #ebe8e3;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.15s}
-.vote-btn:hover{border-color:#e8572a}
-.vote-btn.up{background:#e8572a;border-color:#e8572a;color:#fff}
-.vote-btn.down{background:#f5f2ed;border-color:#d5d2cb}
-.vote-score{font-size:12px;font-weight:700;color:#6b6760}
-.lock-btn{padding:6px 10px;border-radius:8px;border:1.5px solid #ebe8e3;background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:#6b6760;font-family:'DM Sans',sans-serif}
+/* Thumbs up/down vote buttons */
+.vote-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
+.thumb-btn{width:36px;height:36px;border-radius:10px;border:1.5px solid #ebe8e3;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.15s;line-height:1}
+.thumb-btn:hover{transform:scale(1.1)}
+.thumb-btn.up{background:#dcfce7;border-color:#16a34a}
+.thumb-btn.down{background:#fee2e2;border-color:#dc2626}
+.vote-score{font-size:12px;font-weight:700;color:#6b6760;min-width:20px;text-align:center}
+.lock-btn{padding:6px 12px;border-radius:8px;border:1.5px solid #ebe8e3;background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:#6b6760;font-family:'DM Sans',sans-serif;white-space:nowrap}
 .lock-btn:hover{border-color:#0f7b6c;color:#0f7b6c}
 .lock-btn.locked{background:#0f7b6c;border-color:#0f7b6c;color:#fff}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
 .cal-hdr{text-align:center;font-size:11px;font-weight:600;color:#6b6760;padding:4px 0}
-.cal-day{aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid transparent;transition:.15s;font-size:13px;font-weight:500;position:relative}
+.cal-day{aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid transparent;transition:.15s;font-size:13px;font-weight:500}
 .cal-day:hover:not(.past):not(.empty){background:#f5f2ed}
 .cal-day.sel{border-color:#e8572a;background:#fdf1ec;color:#e8572a;font-weight:700}
 .cal-day.past{color:#d5d2cb;cursor:default}
 .cal-day.empty{cursor:default}
-.cal-day.h1{background:#d1fae5}
-.cal-day.h2{background:#6ee7b7}
-.cal-day.h3{background:#059669;color:#fff}
+.cal-day.h1{background:#d1fae5}.cal-day.h2{background:#6ee7b7}.cal-day.h3{background:#059669;color:#fff}
 .cal-count{font-size:9px;color:#6b6760;line-height:1}
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.cal-nav-btn{background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;color:#6b6760;font-size:18px}
+.cal-nav-btn{background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;color:#6b6760;font-size:20px}
 .cal-nav-btn:hover{background:#f5f2ed}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:flex-end;justify-content:center;padding:20px}
 @media(min-width:600px){.modal-overlay{align-items:center}}
@@ -106,16 +105,14 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
 .empty{text-align:center;padding:48px 20px;color:#6b6760}
 .empty-icon{font-size:48px;margin-bottom:12px}
 .empty-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#1a1814;margin-bottom:6px}
-.photo-upload{border:2px dashed #d5d2cb;border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:.15s;position:relative}
+.photo-upload{border:2px dashed #d5d2cb;border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:.15s;position:relative;overflow:hidden}
 .photo-upload:hover{border-color:#e8572a;background:#fdf9f7}
-.photo-upload input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.photo-preview{width:100%;height:160px;object-fit:cover;border-radius:12px;display:block}
+.photo-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.photo-preview{width:100%;height:180px;object-fit:cover;border-radius:12px;display:block}
 .chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;background:#f5f2ed;color:#6b6760}
 .poll-option{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid #ebe8e3;background:#fff;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;text-align:left;transition:.15s;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .poll-option:hover:not([disabled]){border-color:#e8572a}
-.poll-option.my-vote{border-color:#e8572a;font-weight:600}
-.poll-option.winner{border-color:#0f7b6c}
-.poll-bar{position:absolute;inset:0;z-index:0;transition:.5s;opacity:.15}
+.poll-bar{position:absolute;inset:0;z-index:0;transition:.5s;opacity:.12}
 .poll-label{position:relative;z-index:1}
 .poll-pct{position:relative;z-index:1;font-size:12px;font-weight:600;color:#6b6760}
 .ann-card{background:#fffbf0;border:1.5px solid #fde68a;border-radius:14px;padding:16px;margin-bottom:10px}
@@ -128,16 +125,23 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
 .stat-card{background:#fff;border-radius:16px;border:1.5px solid #ebe8e3;padding:16px;text-align:center}
 .stat-val{font-size:24px;font-weight:800;font-family:'Syne',sans-serif;margin-top:4px}
-.dest-card{border:1.5px solid #ebe8e3;border-radius:14px;padding:16px;margin-bottom:10px}
+.dest-card{border:1.5px solid #ebe8e3;border-radius:14px;padding:16px;margin-bottom:10px;background:#fff}
 .dest-card.leading{border-color:#e8572a}
 .dest-card.locked{border-color:#0f7b6c;background:#f0fdf4}
+.export-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.invite-method{display:flex;gap:8px;margin-bottom:16px}
+.invite-method button{flex:1;padding:10px;border-radius:10px;border:1.5px solid #ebe8e3;background:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.invite-method button.active{border-color:#e8572a;background:#fdf1ec;color:#e8572a}
+.invite-link-box{background:#f5f2ed;border-radius:12px;padding:12px 14px;font-size:13px;word-break:break-all;color:#1a1814;margin-bottom:12px}
 .flex{display:flex}.gap8{gap:8px}.gap12{gap:12px}.ac{align-items:center}.jb{justify-content:space-between}.f1{flex:1}.wrap{flex-wrap:wrap}
 .mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
 .w100{width:100%}.sm{font-size:13px}.xs{font-size:11px}.muted{color:#6b6760}.bold{font-weight:600}
+@media(max-width:600px){.grid3{grid-template-columns:1fr 1fr}.auth-card{padding:32px 24px}.trip-hero{height:200px}.export-bar{flex-direction:column}}
 </style>
 </head>
 <body>
 
+<!-- AUTH -->
 <div id="pg-auth" class="page active">
   <div class="center">
     <div class="auth-card">
@@ -149,7 +153,7 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
       <div id="auth-err" class="err"></div>
       <div id="login-form">
         <div class="field"><label>Email</label><input type="email" id="li-email" placeholder="you@email.com"></div>
-        <div class="field"><label>Password</label><input type="password" id="li-pw" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"></div>
+        <div class="field"><label>Password</label><input type="password" id="li-pw" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"></div>
         <button class="btn btn-primary btn-full" onclick="doLogin()">Log in &rarr;</button>
       </div>
       <div id="signup-form" style="display:none">
@@ -162,6 +166,7 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
   </div>
 </div>
 
+<!-- DASHBOARD -->
 <div id="pg-dash" class="page">
   <nav class="nav"><div class="nav-inner">
     <div class="nav-logo" onclick="showDash()"><div class="nav-logo-icon">&#x2708;</div><span class="nav-logo-text">TripSync</span></div>
@@ -173,6 +178,7 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
   </div>
 </div>
 
+<!-- TRIP PAGE -->
 <div id="pg-trip" class="page">
   <nav class="nav"><div class="nav-inner">
     <div class="flex ac gap8">
@@ -180,7 +186,7 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
       <div class="nav-logo" onclick="showDash()"><div class="nav-logo-icon">&#x2708;</div><span class="nav-logo-text">TripSync</span></div>
     </div>
     <div class="nav-right">
-      <button class="btn btn-secondary btn-sm" onclick="copyInvite()">Copy invite link</button>
+      <button class="btn btn-secondary btn-sm" onclick="openM('m-invite')">+ Invite</button>
       <div id="trip-av" class="avatar"></div>
     </div>
   </div></nav>
@@ -221,7 +227,7 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
     <div class="field"><label>Trip photo</label>
       <div class="photo-upload" id="ct-photo-wrap">
         <input type="file" id="ct-photo" accept="image/*" onchange="prevPhoto(this,'ct-prev','ct-photo-ui')">
-        <div id="ct-photo-ui"><div style="font-size:28px;margin-bottom:8px">&#x1F4F7;</div><div style="font-size:14px;font-weight:600;color:#6b6760">Click to upload photo</div><div style="font-size:12px;color:#b0aca6;margin-top:4px">Optional</div></div>
+        <div id="ct-photo-ui"><div style="font-size:32px;margin-bottom:8px">&#x1F4F7;</div><div style="font-size:14px;font-weight:600;color:#6b6760">Tap to add a photo</div><div style="font-size:12px;color:#b0aca6;margin-top:4px">JPG or PNG from your camera roll</div></div>
         <img id="ct-prev" class="photo-preview" style="display:none">
       </div>
     </div>
@@ -240,7 +246,7 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
     <div class="field"><label>Change photo</label>
       <div class="photo-upload">
         <input type="file" id="et-photo" accept="image/*" onchange="prevPhoto(this,'et-prev','et-photo-ui')">
-        <div id="et-photo-ui"><div style="font-size:24px;margin-bottom:6px">&#x1F4F7;</div><div style="font-size:13px;font-weight:600;color:#6b6760">Click to change photo</div></div>
+        <div id="et-photo-ui"><div style="font-size:28px;margin-bottom:6px">&#x1F4F7;</div><div style="font-size:13px;font-weight:600;color:#6b6760">Tap to change photo</div></div>
         <img id="et-prev" class="photo-preview" style="display:none">
       </div>
     </div>
@@ -254,6 +260,8 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
     <div class="modal-header"><span class="modal-title">Add activity</span><button class="modal-close" onclick="closeM('m-act')">&#x2715;</button></div>
     <div class="field"><label>Activity name *</label><input type="text" id="act-name" placeholder="Dinner at Nobu"></div>
     <div class="field"><label>Description</label><input type="text" id="act-desc" placeholder="Optional details"></div>
+    <div class="field"><label>Date</label><input type="date" id="act-date"></div>
+    <div class="field"><label>Time</label><input type="time" id="act-time"></div>
     <div class="field"><label>Estimated cost</label><input type="text" id="act-cost" placeholder="$30/person"></div>
     <div id="act-err" class="err"></div>
     <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-act')">Cancel</button><button class="btn btn-primary f1" onclick="doAddAct()">Add</button></div>
@@ -304,428 +312,161 @@ input::placeholder,textarea::placeholder{color:#b0aca6}
 
 <div id="m-invite" class="modal-overlay hidden">
   <div class="modal">
-    <div class="modal-header"><span class="modal-title">Invite someone</span><button class="modal-close" onclick="closeM('m-invite')">&#x2715;</button></div>
-    <p class="sm muted mb12">They need a TripSync account first, then add them by email.</p>
-    <div class="field"><label>Their email *</label><input type="email" id="inv-email" placeholder="friend@email.com"></div>
+    <div class="modal-header"><span class="modal-title">Invite to trip</span><button class="modal-close" onclick="closeM('m-invite')">&#x2715;</button></div>
+    <p class="sm muted mb12">Share the invite link below via text, email, or any app.</p>
+    <div class="invite-link-box" id="invite-link-display"></div>
+    <div class="flex gap8 mb16">
+      <button class="btn btn-primary f1" onclick="copyInviteFromModal()">&#x1F4CB; Copy link</button>
+      <button class="btn btn-secondary f1" onclick="shareInvite()">&#x1F4E4; Share</button>
+    </div>
+    <div style="height:1px;background:#ebe8e3;margin-bottom:16px"></div>
+    <p class="sm bold mb8">Or add someone who already has an account:</p>
+    <div class="field"><label>Their email</label><input type="email" id="inv-email" placeholder="friend@email.com"></div>
     <div id="inv-err" class="err"></div>
     <div id="inv-ok" class="ok"></div>
-    <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-invite')">Cancel</button><button class="btn btn-primary f1" onclick="doInvite()">Add to trip</button></div>
+    <div class="flex gap8"><button class="btn btn-secondary f1" onclick="closeM('m-invite')">Done</button><button class="btn btn-primary f1" onclick="doInvite()">Add to trip</button></div>
   </div>
 </div>
 
 <script>
-var SB_URL = 'https://ykxprrbbsldbwmhfmrkf.supabase.co';
-var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlreHBycmJic2xkYndtaGZtcmtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyMzYyOTAsImV4cCI6MjA4OTgxMjI5MH0.Gt8MeYBh6n8KbChSQ-7bWXzf_yZ0-BU4_LyFEVFZhSM';
-var sb = supabase.createClient(SB_URL, SB_KEY);
+var SB_URL='https://ykxprrbbsldbwmhfmrkf.supabase.co';
+var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlreHBycmJic2xkYndtaGZtcmtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyMzYyOTAsImV4cCI6MjA4OTgxMjI5MH0.Gt8MeYBh6n8KbChSQ-7bWXzf_yZ0-BU4_LyFEVFZhSM';
+var sb=supabase.createClient(SB_URL,SB_KEY);
+var CU=null,CP=null,CT=null,calMonth=new Date(),myDates={};
 
-var CU = null, CP = null, CT = null, calMonth = new Date(), myDates = {};
+function g(id){return document.getElementById(id);}
+function v(id){return g(id).value.trim();}
+function sv(id,val){g(id).value=val||'';}
+function showPg(id){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});g(id).classList.add('active');window.scrollTo(0,0);}
+function openM(id){g(id).classList.remove('hidden');}
+function closeM(id){g(id).classList.add('hidden');}
+function showErr(id,msg){var el=g(id);el.textContent=msg;el.style.display='block';}
+function hideErr(id){g(id).style.display='none';}
+function showOk(id,msg){var el=g(id);el.textContent=msg;el.style.display='block';}
 
-function g(id){ return document.getElementById(id); }
-function v(id){ return g(id).value.trim(); }
-function sv(id,val){ g(id).value = val || ''; }
-function showPg(id){ document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');}); g(id).classList.add('active'); window.scrollTo(0,0); }
-function openM(id){ g(id).classList.remove('hidden'); }
-function closeM(id){ g(id).classList.add('hidden'); }
-function showErr(id,msg){ var el=g(id); el.textContent=msg; el.style.display='block'; }
-function hideErr(id){ g(id).style.display='none'; }
-function showOk(id,msg){ var el=g(id); el.textContent=msg; el.style.display='block'; }
-
-var COLORS = ['#e8572a','#0f7b6c','#c9973a','#7c3aed','#db2777','#2563eb','#059669','#d97706'];
-function avColor(name){
-  var h=0, s=name||'';
-  for(var i=0;i<s.length;i++) h+=s.charCodeAt(i);
-  return COLORS[h%COLORS.length];
-}
-function initials(name){
-  var parts=(name||'?').split(' ');
-  return parts.map(function(w){return w[0]||'';}).join('').toUpperCase().slice(0,2);
-}
-function makeAv(name,size){
-  size=size||34;
-  return '<div class="avatar" style="width:'+size+'px;height:'+size+'px;background:'+avColor(name)+';font-size:'+Math.floor(size*.38)+'px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700">'+initials(name)+'</div>';
-}
-function fmtD(d){ if(!d)return ''; var dt=new Date(d+'T00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
-function fmtS(d){ if(!d)return ''; var dt=new Date(d+'T00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
-function ago(d){
-  var s=Math.floor((Date.now()-new Date(d))/1000);
-  if(s<60)return 'just now';
-  if(s<3600)return Math.floor(s/60)+'m ago';
-  if(s<86400)return Math.floor(s/3600)+'h ago';
-  return Math.floor(s/86400)+'d ago';
-}
-function isHost(){ return CT && CU && CT.host_id===CU.id; }
-function canEdit(){
-  if(!CT||!CU)return false;
-  if(isHost())return true;
-  var me=(CT._members||[]).find(function(m){return m.user_id===CU.id;});
-  return me && me.role==='co-host';
-}
+var COLORS=['#e8572a','#0f7b6c','#c9973a','#7c3aed','#db2777','#2563eb','#059669','#d97706'];
+function avColor(name){var h=0,s=name||'';for(var i=0;i<s.length;i++)h+=s.charCodeAt(i);return COLORS[h%COLORS.length];}
+function initials(name){return (name||'?').split(' ').map(function(w){return w[0]||'';}).join('').toUpperCase().slice(0,2);}
+function makeAv(name,size){size=size||34;return '<div style="width:'+size+'px;height:'+size+'px;background:'+avColor(name)+';font-size:'+Math.floor(size*.38)+'px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700;flex-shrink:0">'+initials(name)+'</div>';}
+function fmtD(d){if(!d)return'';var dt=new Date(d+'T00:00');return dt.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
+function fmtS(d){if(!d)return'';var dt=new Date(d+'T00:00');return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+function ago(d){var s=Math.floor((Date.now()-new Date(d))/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
+function isHost(){return CT&&CU&&CT.host_id===CU.id;}
+function canEdit(){if(!CT||!CU)return false;if(isHost())return true;var me=(CT._members||[]).find(function(m){return m.user_id===CU.id;});return me&&me.role==='co-host';}
+function myName(){return(CP&&CP.name)||((CU&&CU.user_metadata&&CU.user_metadata.name))||((CU&&CU.email&&CU.email.split('@')[0]))||'Traveler';}
+function inviteUrl(){return window.location.origin+window.location.pathname+'?join='+CT.id;}
 
 // AUTH
-function authTab(mode,btn){
-  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
-  btn.classList.add('active');
-  g('login-form').style.display = mode==='login'?'block':'none';
-  g('signup-form').style.display = mode==='signup'?'block':'none';
-  g('auth-err').style.display='none';
-}
-
-async function doLogin(){
-  var email=v('li-email'), pw=v('li-pw');
-  if(!email||!pw){showErr('auth-err','Please fill in all fields');return;}
-  hideErr('auth-err');
-  var res=await sb.auth.signInWithPassword({email:email,password:pw});
-  if(res.error){showErr('auth-err',res.error.message);return;}
-  await afterLogin(res.data.user);
-}
-
-async function doSignup(){
-  var name=v('su-name'), email=v('su-email'), pw=v('su-pw');
-  if(!name||!email||!pw){showErr('auth-err','Please fill in all fields');return;}
-  if(pw.length<6){showErr('auth-err','Password must be at least 6 characters');return;}
-  hideErr('auth-err');
-  var res=await sb.auth.signUp({email:email,password:pw,options:{data:{name:name}}});
-  if(res.error){showErr('auth-err',res.error.message);return;}
-  if(res.data.user) await afterLogin(res.data.user);
-}
-
-async function afterLogin(user){
-  CU=user;
-  var profRes=await sb.from('profiles').select('*').eq('id',user.id).single();
-  CP=profRes.data;
-  showDash();
-}
-
-async function doLogout(){
-  await sb.auth.signOut();
-  CU=null; CP=null; CT=null;
-  showPg('pg-auth');
-}
-
-function myName(){ return (CP&&CP.name)||((CU&&CU.user_metadata&&CU.user_metadata.name))||((CU&&CU.email&&CU.email.split('@')[0]))||'Traveler'; }
+function authTab(mode,btn){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});btn.classList.add('active');g('login-form').style.display=mode==='login'?'block':'none';g('signup-form').style.display=mode==='signup'?'block':'none';g('auth-err').style.display='none';}
+async function doLogin(){var email=v('li-email'),pw=v('li-pw');if(!email||!pw){showErr('auth-err','Please fill in all fields');return;}hideErr('auth-err');var res=await sb.auth.signInWithPassword({email:email,password:pw});if(res.error){showErr('auth-err',res.error.message);return;}await afterLogin(res.data.user);}
+async function doSignup(){var name=v('su-name'),email=v('su-email'),pw=v('su-pw');if(!name||!email||!pw){showErr('auth-err','Please fill in all fields');return;}if(pw.length<6){showErr('auth-err','Password must be at least 6 characters');return;}hideErr('auth-err');var res=await sb.auth.signUp({email:email,password:pw,options:{data:{name:name}}});if(res.error){showErr('auth-err',res.error.message);return;}if(res.data.user)await afterLogin(res.data.user);}
+async function afterLogin(user){CU=user;var pr=await sb.from('profiles').select('*').eq('id',user.id).single();CP=pr.data;showDash();}
+async function doLogout(){await sb.auth.signOut();CU=null;CP=null;CT=null;showPg('pg-auth');}
 
 // DASHBOARD
-async function showDash(){
-  showPg('pg-dash');
-  var name=myName();
-  g('dash-hi').textContent='Hey '+name.split(' ')[0]+' \uD83D\uDC4B';
-  var av=g('dash-av'); av.textContent=initials(name); av.style.background=avColor(name);
-  await loadTrips();
-}
-
-async function loadTrips(){
-  var mRes=await sb.from('trip_members').select('trip_id').eq('user_id',CU.id);
-  var ids=(mRes.data||[]).map(function(r){return r.trip_id;});
-  var trips=[];
-  if(ids.length>0){
-    var tRes=await sb.from('trips').select('*').in('id',ids).order('created_at',{ascending:false});
-    trips=tRes.data||[];
-  }
-  renderTrips(trips);
-}
-
+async function showDash(){showPg('pg-dash');var name=myName();g('dash-hi').textContent='Hey '+name.split(' ')[0]+' \uD83D\uDC4B';var av=g('dash-av');av.textContent=initials(name);av.style.background=avColor(name);await loadTrips();}
+async function loadTrips(){var mr=await sb.from('trip_members').select('trip_id').eq('user_id',CU.id);var ids=(mr.data||[]).map(function(r){return r.trip_id;});var trips=[];if(ids.length){var tr=await sb.from('trips').select('*').in('id',ids).order('created_at',{ascending:false});trips=tr.data||[];}renderTrips(trips);}
 function renderTrips(trips){
   var grid=g('trips-grid');
-  var newBtn='<div class="new-trip-card" onclick="openCreateTrip()"><div style="font-size:40px;margin-bottom:8px">&#x2708;</div><div style="font-weight:600;font-size:14px">Plan a new trip</div></div>';
+  var newBtn='<div class="new-trip-card" onclick="openCreateTrip()"><div style="font-size:44px;margin-bottom:8px">&#x2708;</div><div style="font-weight:700;font-size:15px">Plan a new trip</div><div style="font-size:13px;margin-top:4px;color:#b0aca6">Tap to get started</div></div>';
   if(!trips.length){grid.innerHTML=newBtn;return;}
   var html='';
   trips.forEach(function(t){
-    var hostBadge=t.host_id===CU.id?'<span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">&#x1F451; Host</span>':'<span style="background:#f0fdf4;color:#166534;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">Member</span>';
-    var imgHtml=t.image_url?'<img class="trip-img" src="'+t.image_url+'" alt="'+t.name+'">':'<div class="trip-img-placeholder">&#x2708;</div>';
-    var destHtml=t.destination?'<div>&#x1F4CD; '+t.destination+'</div>':'';
-    var dateHtml=(t.date_start)?'<div>&#x1F4C5; '+fmtS(t.date_start)+(t.date_end?' &rarr; '+fmtS(t.date_end):'')+'</div>':'';
-    html+='<div class="trip-card" onclick="openTrip(\''+t.id+'\')">'+imgHtml+'<div class="trip-body"><div class="trip-name">'+t.name+'</div><div class="trip-meta">'+destHtml+dateHtml+'<div style="margin-top:6px">'+hostBadge+'</div></div></div></div>';
+    var hb=t.host_id===CU.id?'<span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">&#x1F451; Host</span>':'<span style="background:#f0fdf4;color:#166534;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">Member</span>';
+    var img=t.image_url?'<img class="trip-img" src="'+t.image_url+'" alt="'+t.name+'">':'<div class="trip-img-placeholder">&#x2708;</div>';
+    var dest=t.destination?'<div style="margin-bottom:3px">&#x1F4CD; '+t.destination+'</div>':'';
+    var dates=t.date_start?'<div style="margin-bottom:3px">&#x1F4C5; '+fmtS(t.date_start)+(t.date_end?' &rarr; '+fmtS(t.date_end):'')+'</div>':'';
+    html+='<div class="trip-card" onclick="openTrip(\''+t.id+'\')">'+img+'<div class="trip-body"><div class="trip-name">'+t.name+'</div><div class="trip-meta">'+dest+dates+'<div style="margin-top:6px">'+hb+'</div></div></div></div>';
   });
   grid.innerHTML=html+newBtn;
 }
 
 // CREATE TRIP
-function openCreateTrip(){
-  sv('ct-name','');sv('ct-dest','');sv('ct-s','');sv('ct-e','');
-  g('ct-prev').style.display='none'; g('ct-photo-ui').style.display='block';
-  g('ct-photo').value=''; hideErr('ct-err');
-  openM('m-create');
-}
-
-function prevPhoto(input,prevId,uiId){
-  var file=input.files[0]; if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(e){
-    var prev=g(prevId); prev.src=e.target.result; prev.style.display='block';
-    g(uiId).style.display='none';
-  };
-  reader.readAsDataURL(file);
-}
-
-async function uploadPhoto(inputId, tripId){
-  var input=g(inputId); if(!input.files[0])return null;
-  var file=input.files[0];
-  var ext=file.name.split('.').pop();
-  var path='trips/'+tripId+'.'+ext;
-  var upRes=await sb.storage.from('trip-photos').upload(path,file,{upsert:true});
-  if(upRes.error){console.error('upload',upRes.error);return null;}
-  return sb.storage.from('trip-photos').getPublicUrl(path).data.publicUrl;
-}
-
-async function doCreateTrip(){
-  var name=v('ct-name');
-  if(!name){showErr('ct-err','Trip name is required');return;}
-  hideErr('ct-err');
-  var res=await sb.from('trips').insert({name:name,host_id:CU.id,destination:v('ct-dest')||null,date_start:v('ct-s')||null,date_end:v('ct-e')||null}).select().single();
-  if(res.error){showErr('ct-err',res.error.message);return;}
-  var trip=res.data;
-  if(g('ct-photo').files[0]){
-    var url=await uploadPhoto('ct-photo',trip.id);
-    if(url){await sb.from('trips').update({image_url:url}).eq('id',trip.id); trip.image_url=url;}
-  }
-  closeM('m-create');
-  await openTrip(trip.id);
-}
+function openCreateTrip(){sv('ct-name','');sv('ct-dest','');sv('ct-s','');sv('ct-e','');g('ct-prev').style.display='none';g('ct-photo-ui').style.display='block';g('ct-photo').value='';hideErr('ct-err');openM('m-create');}
+function prevPhoto(input,prevId,uiId){var file=input.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var prev=g(prevId);prev.src=e.target.result;prev.style.display='block';g(uiId).style.display='none';};reader.readAsDataURL(file);}
+async function uploadPhoto(inputId,tripId){var input=g(inputId);if(!input.files[0])return null;var file=input.files[0];var ext=file.name.split('.').pop();var path='trips/'+tripId+'.'+ext;var up=await sb.storage.from('trip-photos').upload(path,file,{upsert:true});if(up.error){console.error('upload',up.error);return null;}return sb.storage.from('trip-photos').getPublicUrl(path).data.publicUrl;}
+async function doCreateTrip(){var name=v('ct-name');if(!name){showErr('ct-err','Trip name is required');return;}hideErr('ct-err');var res=await sb.from('trips').insert({name:name,host_id:CU.id,destination:v('ct-dest')||null,date_start:v('ct-s')||null,date_end:v('ct-e')||null}).select().single();if(res.error){showErr('ct-err',res.error.message);return;}var trip=res.data;if(g('ct-photo').files[0]){var url=await uploadPhoto('ct-photo',trip.id);if(url){await sb.from('trips').update({image_url:url}).eq('id',trip.id);trip.image_url=url;}}closeM('m-create');await openTrip(trip.id);}
 
 // OPEN TRIP
-async function openTrip(tripId){
-  var tRes=await sb.from('trips').select('*').eq('id',tripId).single();
-  if(!tRes.data){alert('Trip not found');return;}
-  CT=tRes.data;
-  var mRes=await sb.from('trip_members').select('*, profiles(id,name,email)').eq('trip_id',tripId);
-  CT._members=mRes.data||[];
-  var name=myName();
-  var av=g('trip-av'); av.textContent=initials(name); av.style.background=avColor(name);
-  renderHero();
-  showPg('pg-trip');
-  goTab('overview', document.querySelector('.trip-tab'));
-}
+async function openTrip(tripId){var tr=await sb.from('trips').select('*').eq('id',tripId).single();if(!tr.data){alert('Trip not found');return;}CT=tr.data;var mr=await sb.from('trip_members').select('*, profiles(id,name,email)').eq('trip_id',tripId);CT._members=mr.data||[];var name=myName();var av=g('trip-av');av.textContent=initials(name);av.style.background=avColor(name);renderHero();showPg('pg-trip');goTab('overview',document.querySelector('.trip-tab'));}
+function renderHero(){g('hero-name').textContent=CT.name;if(CT.image_url){g('hero-img').src=CT.image_url;g('hero-img').style.display='block';g('hero-ph').style.display='none';}else{g('hero-img').style.display='none';g('hero-ph').style.display='flex';}g('hero-dest').innerHTML=CT.destination?'&#x1F4CD; '+CT.destination:'';g('hero-dates').innerHTML=CT.date_start?'&#x1F4C5; '+fmtS(CT.date_start)+(CT.date_end?' &rarr; '+fmtS(CT.date_end):''):'';g('hero-members').innerHTML='&#x1F465; '+(CT._members.length)+' member'+(CT._members.length!==1?'s':'');}
+function goTab(name,btn){document.querySelectorAll('.trip-tab').forEach(function(t){t.classList.remove('active');});if(btn)btn.classList.add('active');var tabs={overview:tabOverview,avail:tabAvail,dests:tabDests,acts:tabActs,expenses:tabExp,polls:tabPolls,updates:tabUpdates,members:tabMembers};if(tabs[name])tabs[name]();}
 
-function renderHero(){
-  g('hero-name').textContent=CT.name;
-  if(CT.image_url){g('hero-img').src=CT.image_url;g('hero-img').style.display='block';g('hero-ph').style.display='none';}
-  else{g('hero-img').style.display='none';g('hero-ph').style.display='flex';}
-  g('hero-dest').innerHTML=CT.destination?'&#x1F4CD; '+CT.destination:'';
-  g('hero-dates').innerHTML=CT.date_start?'&#x1F4C5; '+fmtS(CT.date_start)+(CT.date_end?' &rarr; '+fmtS(CT.date_end):''):'';
-  g('hero-members').innerHTML='&#x1F465; '+(CT._members.length)+' member'+(CT._members.length!==1?'s':'');
-}
-
-function goTab(name,btn){
-  document.querySelectorAll('.trip-tab').forEach(function(t){t.classList.remove('active');});
-  if(btn)btn.classList.add('active');
-  var tabs={overview:tabOverview,avail:tabAvail,dests:tabDests,acts:tabActs,expenses:tabExp,polls:tabPolls,updates:tabUpdates,members:tabMembers};
-  if(tabs[name])tabs[name]();
-}
-
-function copyInvite(){
-  var url=window.location.origin+window.location.pathname+'?join='+CT.id;
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(url).then(function(){alert('Invite link copied! Share it with your friends.');});
-  } else {
-    prompt('Copy this link:',url);
-  }
-}
+// INVITE
+function openInviteModal(){var url=inviteUrl();g('invite-link-display').textContent=url;g('inv-email').value='';hideErr('inv-err');g('inv-ok').style.display='none';openM('m-invite');}
+function copyInviteFromModal(){var url=inviteUrl();if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){alert('Invite link copied! Share it via text, email, or any app.');});}else{prompt('Copy this link:',url);}}
+function shareInvite(){var url=inviteUrl();if(navigator.share){navigator.share({title:'Join '+CT.name+' on TripSync',text:'Hey! Join our trip on TripSync:',url:url}).catch(function(){});} else{copyInviteFromModal();}}
+async function doInvite(){var email=v('inv-email');if(!email){showErr('inv-err','Email required');return;}hideErr('inv-err');g('inv-ok').style.display='none';var res=await sb.from('profiles').select('id,name,email').eq('email',email).single();if(!res.data){showErr('inv-err','No TripSync account found for '+email+'. They need to sign up first, then you can add them here.');return;}var already=(CT._members||[]).find(function(m){return m.user_id===res.data.id;});if(already){showErr('inv-err','This person is already in the trip');return;}await sb.from('trip_members').insert({trip_id:CT.id,user_id:res.data.id,role:'member'});showOk('inv-ok',res.data.name+' added to the trip!');sv('inv-email','');await tabMembers();renderHero();}
 
 // OVERVIEW
-function tabOverview(){
-  var edit=canEdit()||isHost();
-  var locked=CT.locked_destination?'<div style="background:#f0fdf4;border:1.5px solid #0f7b6c;border-radius:12px;padding:12px 14px;margin-top:8px"><span style="color:#0f7b6c;font-weight:600">&#x2705; Destination locked: '+CT.locked_destination+'</span></div>':'';
-  var destRow=CT.destination?'<div class="flex ac gap8 mb8"><span style="font-size:18px">&#x1F4CD;</span><span class="bold">'+CT.destination+'</span></div>':'';
-  var dateRow=CT.date_start?'<div class="flex ac gap8 mb8"><span style="font-size:18px">&#x1F4C5;</span><span>'+fmtD(CT.date_start)+(CT.date_end?' &rarr; '+fmtD(CT.date_end):'')+'</span></div>':'';
-  var noDetails=(!CT.destination&&!CT.date_start&&!CT.locked_destination)?'<p class="muted sm">No details yet. Tap Edit to add dates and destination.</p>':'';
-  g('trip-content').innerHTML='<div class="card"><div class="card-header"><span class="card-title">Trip details</span>'+(edit?'<button class="btn btn-secondary btn-sm" onclick="openEditTrip()">&#x270F; Edit</button>':'')+'</div>'+destRow+dateRow+locked+noDetails+'</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">'
-    +'<div class="card" style="cursor:pointer" onclick="goTab(\'avail\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F4C5;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Availability</div><div class="sm muted">See when everyone is free</div></div>'
-    +'<div class="card" style="cursor:pointer" onclick="goTab(\'dests\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F30D;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Destinations</div><div class="sm muted">Vote on where to go</div></div>'
-    +'<div class="card" style="cursor:pointer" onclick="goTab(\'acts\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F3AF;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Activities</div><div class="sm muted">Plan what to do</div></div>'
-    +'<div class="card" style="cursor:pointer" onclick="goTab(\'expenses\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F4B8;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Expenses</div><div class="sm muted">Split costs fairly</div></div>'
-    +'</div>';
-}
+function tabOverview(){var edit=canEdit()||isHost();var locked=CT.locked_destination?'<div style="background:#f0fdf4;border:1.5px solid #0f7b6c;border-radius:12px;padding:12px 14px;margin-top:8px"><span style="color:#0f7b6c;font-weight:600">&#x2705; Destination locked: '+CT.locked_destination+'</span></div>':'';var destRow=CT.destination?'<div class="flex ac gap8 mb8"><span style="font-size:18px">&#x1F4CD;</span><span class="bold">'+CT.destination+'</span></div>':'';var dateRow=CT.date_start?'<div class="flex ac gap8 mb8"><span style="font-size:18px">&#x1F4C5;</span><span>'+fmtD(CT.date_start)+(CT.date_end?' &rarr; '+fmtD(CT.date_end):'')+'</span></div>':'';var noDetails=(!CT.destination&&!CT.date_start&&!CT.locked_destination)?'<p class="muted sm">No details yet. Tap Edit to add dates and destination.</p>':'';g('trip-content').innerHTML='<div class="card"><div class="card-header"><span class="card-title">Trip details</span>'+(edit?'<button class="btn btn-secondary btn-sm" onclick="openEditTrip()">&#x270F; Edit</button>':'')+'</div>'+destRow+dateRow+locked+noDetails+'</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px"><div class="card" style="cursor:pointer" onclick="goTab(\'avail\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F4C5;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Availability</div><div class="sm muted">See when everyone is free</div></div><div class="card" style="cursor:pointer" onclick="goTab(\'dests\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F30D;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Destinations</div><div class="sm muted">Vote on where to go</div></div><div class="card" style="cursor:pointer" onclick="goTab(\'acts\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F3AF;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Activities</div><div class="sm muted">Plan what to do</div></div><div class="card" style="cursor:pointer" onclick="goTab(\'expenses\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F4B8;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Expenses</div><div class="sm muted">Split costs fairly</div></div></div>';}
 
-function openEditTrip(){
-  sv('et-name',CT.name);sv('et-dest',CT.destination);sv('et-s',CT.date_start);sv('et-e',CT.date_end);
-  g('et-prev').style.display='none';g('et-photo-ui').style.display='block';g('et-photo').value='';hideErr('et-err');
-  openM('m-edit');
-}
-
-async function doEditTrip(){
-  var name=v('et-name');if(!name){showErr('et-err','Name required');return;}
-  hideErr('et-err');
-  var updates={name:name,destination:v('et-dest')||null,date_start:v('et-s')||null,date_end:v('et-e')||null};
-  if(g('et-photo').files[0]){var url=await uploadPhoto('et-photo',CT.id);if(url)updates.image_url=url;}
-  await sb.from('trips').update(updates).eq('id',CT.id);
-  var r=await sb.from('trips').select('*').eq('id',CT.id).single();
-  CT=Object.assign(CT,r.data);
-  renderHero();closeM('m-edit');tabOverview();
-}
+function openEditTrip(){sv('et-name',CT.name);sv('et-dest',CT.destination);sv('et-s',CT.date_start);sv('et-e',CT.date_end);g('et-prev').style.display='none';g('et-photo-ui').style.display='block';g('et-photo').value='';hideErr('et-err');openM('m-edit');}
+async function doEditTrip(){var name=v('et-name');if(!name){showErr('et-err','Name required');return;}hideErr('et-err');var updates={name:name,destination:v('et-dest')||null,date_start:v('et-s')||null,date_end:v('et-e')||null};if(g('et-photo').files[0]){var url=await uploadPhoto('et-photo',CT.id);if(url)updates.image_url=url;}await sb.from('trips').update(updates).eq('id',CT.id);var r=await sb.from('trips').select('*').eq('id',CT.id).single();CT=Object.assign(CT,r.data);renderHero();closeM('m-edit');tabOverview();}
 
 // AVAILABILITY
-async function tabAvail(){
-  var res=await sb.from('availability').select('*, profiles(name)').eq('trip_id',CT.id);
-  var all=res.data||[];
-  var mine=all.find(function(r){return r.user_id===CU.id;});
-  myDates={};
-  if(mine&&mine.dates){mine.dates.forEach(function(d){myDates[d]=true;});}
-  renderCal(all);
-}
-
+async function tabAvail(){var res=await sb.from('availability').select('*, profiles(name)').eq('trip_id',CT.id);var all=res.data||[];var mine=all.find(function(r){return r.user_id===CU.id;});myDates={};if(mine&&mine.dates){mine.dates.forEach(function(d){myDates[d]=true;});}renderCal(all);}
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var DAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
-
-function renderCal(all){
-  var year=calMonth.getFullYear(), month=calMonth.getMonth();
-  var firstDay=new Date(year,month,1).getDay();
-  var days=new Date(year,month+1,0).getDate();
-  var cells=[]; for(var i=0;i<firstDay;i++)cells.push(null);
-  for(var d=1;d<=days;d++){var ds=year+'-'+String(month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');cells.push(ds);}
-  while(cells.length%7!==0)cells.push(null);
-
-  var max=(all||[]).length||1;
-  function countFor(ds){return (all||[]).filter(function(a){return a.dates&&a.dates.indexOf(ds)>=0;}).length;}
-
-  var hdrs=''; DAYS.forEach(function(d){hdrs+='<div class="cal-hdr">'+d+'</div>';});
-
-  var dayCells='';
-  cells.forEach(function(ds){
-    if(!ds){dayCells+='<div class="cal-day empty"></div>';return;}
-    var count=countFor(ds), sel=!!myDates[ds];
-    var today=new Date(new Date().toDateString());
-    var past=new Date(ds)<today;
-    var cls='cal-day'+(past?' past':'')+(sel?' sel':'');
-    if(!past&&!sel&&count>0){var r=count/max;cls+=r>=1?' h3':r>=.6?' h2':' h1';}
-    var day=parseInt(ds.split('-')[2]);
-    var countEl=count>0?'<div class="cal-count">'+count+'</div>':'';
-    var onclick=past?'':'toggleDay(\''+ds+'\')';
-    dayCells+='<div class="'+cls+'" onclick="'+onclick+'" title="'+count+' available">'+day+countEl+'</div>';
-  });
-
-  var submitted='';
-  (all||[]).forEach(function(a){submitted+=makeAv(a.profiles&&a.profiles.name||'?',28)+'<span class="sm" style="margin-right:8px">'+(a.profiles&&a.profiles.name||'?')+'</span>';});
-
-  g('trip-content').innerHTML='<div class="card"><div class="card-header"><span class="card-title">When is everyone free?</span></div><p class="sm muted mb12">Tap dates you\'re available then hit Save. Darker green = more people free.</p><div class="cal-nav"><button class="cal-nav-btn" onclick="changeMonth(-1)">&#x2039;</button><span style="font-weight:700;font-size:15px">'+MONTHS[month]+' '+year+'</span><button class="cal-nav-btn" onclick="changeMonth(1)">&#x203A;</button></div><div class="cal-grid">'+hdrs+dayCells+'</div><button class="btn btn-primary w100 mt16" onclick="saveAvail()">Save my availability</button></div>'+(all.length?'<div class="card mt12"><div class="card-title mb8">Who\'s submitted</div><div class="flex ac wrap gap8">'+submitted+'</div></div>':'');
-}
-
+function renderCal(all){var year=calMonth.getFullYear(),month=calMonth.getMonth();var firstDay=new Date(year,month,1).getDay();var days=new Date(year,month+1,0).getDate();var cells=[];for(var i=0;i<firstDay;i++)cells.push(null);for(var d=1;d<=days;d++){var ds=year+'-'+String(month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');cells.push(ds);}while(cells.length%7!==0)cells.push(null);var max=(all||[]).length||1;function countFor(ds){return(all||[]).filter(function(a){return a.dates&&a.dates.indexOf(ds)>=0;}).length;}var hdrs='';DAYS.forEach(function(d){hdrs+='<div class="cal-hdr">'+d+'</div>';});var dayCells='';cells.forEach(function(ds){if(!ds){dayCells+='<div class="cal-day empty"></div>';return;}var count=countFor(ds),sel=!!myDates[ds];var today=new Date(new Date().toDateString());var past=new Date(ds)<today;var cls='cal-day'+(past?' past':'')+(sel?' sel':'');if(!past&&!sel&&count>0){var r=count/max;cls+=r>=1?' h3':r>=.6?' h2':' h1';}var day=parseInt(ds.split('-')[2]);var countEl=count>0?'<div class="cal-count">'+count+'</div>':'';var onclick=past?'':'toggleDay(\''+ds+'\')';dayCells+='<div class="'+cls+'" onclick="'+onclick+'" title="'+count+' available">'+day+countEl+'</div>';});var submitted='';(all||[]).forEach(function(a){submitted+=makeAv(a.profiles&&a.profiles.name||'?',28)+'<span class="sm" style="margin-right:8px">'+(a.profiles&&a.profiles.name||'?')+'</span>';});g('trip-content').innerHTML='<div class="card"><div class="card-header"><span class="card-title">When is everyone free?</span></div><p class="sm muted mb12">Tap dates you\'re available then hit Save. Darker green = more people free.</p><div class="cal-nav"><button class="cal-nav-btn" onclick="changeMonth(-1)">&#x2039;</button><span style="font-weight:700;font-size:15px">'+MONTHS[month]+' '+year+'</span><button class="cal-nav-btn" onclick="changeMonth(1)">&#x203A;</button></div><div class="cal-grid">'+hdrs+dayCells+'</div><button class="btn btn-primary w100 mt16" onclick="saveAvail()">Save my availability</button></div>'+(all.length?'<div class="card mt12"><div class="card-title mb8">Submitted</div><div class="flex ac wrap gap8">'+submitted+'</div></div>':'');}
 function changeMonth(dir){calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+dir,1);tabAvail();}
 function toggleDay(ds){if(myDates[ds])delete myDates[ds];else myDates[ds]=true;tabAvail();}
-
-async function saveAvail(){
-  var name=myName();
-  var dates=Object.keys(myDates);
-  await sb.from('availability').upsert({trip_id:CT.id,user_id:CU.id,user_name:name,dates:dates,updated_at:new Date().toISOString()},{onConflict:'trip_id,user_id'});
-  alert('Availability saved!');
-  tabAvail();
-}
+async function saveAvail(){var dates=Object.keys(myDates);await sb.from('availability').upsert({trip_id:CT.id,user_id:CU.id,user_name:myName(),dates:dates,updated_at:new Date().toISOString()},{onConflict:'trip_id,user_id'});alert('Availability saved!');tabAvail();}
 
 // DESTINATIONS
-async function tabDests(){
-  var res=await sb.from('destinations').select('*').eq('trip_id',CT.id).order('created_at');
-  var dests=res.data||[];
-  var scored=dests.map(function(d){
-    var votes=d.votes||{}, score=0;
-    Object.values(votes).forEach(function(r){score+=Math.max(0,(dests.length+1)-r);});
-    return Object.assign({},d,{score:score,voterCount:Object.keys(votes).length});
-  }).sort(function(a,b){return b.score-a.score;});
+async function tabDests(){var res=await sb.from('destinations').select('*').eq('trip_id',CT.id).order('created_at');var dests=res.data||[];var scored=dests.map(function(d){var votes=d.votes||{},score=0;Object.values(votes).forEach(function(r){score+=Math.max(0,(dests.length+1)-r);});return Object.assign({},d,{score:score,voterCount:Object.keys(votes).length});}).sort(function(a,b){return b.score-a.score;});var html='<div class="section-header"><div><div class="section-title">Destinations</div><p class="sm muted">Rank your favorites</p></div><button class="btn btn-primary btn-sm" onclick="openM(\'m-dest\')">+ Suggest</button></div>';if(!scored.length){html+='<div class="empty"><div class="empty-icon">&#x1F30D;</div><div class="empty-title">No destinations yet</div><div class="empty-text">Be the first to suggest somewhere</div></div>';}else{scored.forEach(function(d,idx){var myRank=d.votes&&d.votes[CU.id]?d.votes[CU.id]:null;var icon=d.locked?'&#x1F512;':idx===0&&d.score>0?'&#x1F3C6;':'&#x1F4CD;';var lb=d.locked?'<span style="background:#dcfce7;color:#166534;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">Locked in</span>':'';var sb2=d.score>0?'<span class="chip">'+d.score+' pts &middot; '+d.voterCount+'</span>':'';var rankBtns='';if(!d.locked){rankBtns='<span class="sm muted">Your rank: '+(myRank?'#'+myRank:'not ranked')+'</span>';for(var r=1;r<=Math.min(3,dests.length||1);r++){rankBtns+='<button onclick="rankDest(\''+d.id+'\','+r+')" class="btn btn-sm '+(myRank===r?'btn-primary':'btn-secondary')+'">#'+r+'</button>';}rankBtns+='<button onclick="rankDest(\''+d.id+'\',null)" class="btn btn-sm btn-secondary">Clear</button>';}var lockBtn='';if(canEdit()||isHost()){if(!d.locked)lockBtn='<button onclick="lockDest(\''+d.id+'\',\''+d.location+'\')" class="lock-btn">Lock in</button>';else lockBtn='<button onclick="unlockDest(\''+d.id+'\')" class="lock-btn locked">Unlock</button>';}html+='<div class="dest-card '+(d.locked?'locked':idx===0&&d.score>0?'leading':'')+'"><div class="flex ac gap8 mb8"><span style="font-size:20px">'+icon+'</span><span class="bold" style="font-size:15px">'+d.location+'</span>'+lb+sb2+'</div>'+(d.description?'<p class="sm muted mb8">'+d.description+'</p>':'')+(d.estimated_cost?'<p class="sm muted mb8">~'+d.estimated_cost+'</p>':'')+'<div class="flex ac gap8 wrap">'+rankBtns+lockBtn+'</div></div>';});}g('trip-content').innerHTML=html;}
+async function rankDest(id,rank){var res=await sb.from('destinations').select('votes').eq('id',id).single();var votes=Object.assign({},(res.data&&res.data.votes)||{});if(rank===null)delete votes[CU.id];else votes[CU.id]=rank;await sb.from('destinations').update({votes:votes}).eq('id',id);tabDests();}
+async function lockDest(id,location){await sb.from('destinations').update({locked:true}).eq('id',id);await sb.from('trips').update({locked_destination:location}).eq('id',CT.id);CT.locked_destination=location;tabDests();renderHero();}
+async function unlockDest(id){await sb.from('destinations').update({locked:false}).eq('id',id);await sb.from('trips').update({locked_destination:null}).eq('id',CT.id);CT.locked_destination=null;tabDests();renderHero();}
+async function doAddDest(){var loc=v('dest-loc');if(!loc){showErr('dest-err','Location required');return;}hideErr('dest-err');await sb.from('destinations').insert({trip_id:CT.id,suggested_by:CU.id,suggested_by_name:myName(),location:loc,description:v('dest-why')||null,estimated_cost:v('dest-cost')||null,votes:{},locked:false});closeM('m-dest');tabDests();}
 
-  var html='<div class="section-header"><div><div class="section-title">Destinations</div><p class="sm muted">Rank your favorites</p></div><button class="btn btn-primary btn-sm" onclick="openM(\'m-dest\')">+ Suggest</button></div>';
-
-  if(!scored.length){
-    html+='<div class="empty"><div class="empty-icon">&#x1F30D;</div><div class="empty-title">No destinations yet</div><div class="empty-text">Be the first to suggest somewhere</div></div>';
-  } else {
-    scored.forEach(function(d,idx){
-      var myRank=d.votes&&d.votes[CU.id]?d.votes[CU.id]:null;
-      var icon=d.locked?'&#x1F512;':idx===0&&d.score>0?'&#x1F3C6;':'&#x1F4CD;';
-      var lockedBadge=d.locked?'<span style="background:#dcfce7;color:#166534;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">Locked in</span>':'';
-      var scoreBadge=d.score>0?'<span class="chip">'+d.score+' pts &middot; '+d.voterCount+' vote'+(d.voterCount!==1?'s':'')+'</span>':'';
-      var rankBtns='';
-      if(!d.locked){
-        rankBtns='<span class="sm muted">Your rank: '+(myRank?'#'+myRank:'not ranked')+'</span>';
-        for(var r=1;r<=Math.min(3,dests.length||1);r++){
-          rankBtns+='<button onclick="rankDest(\''+d.id+'\','+r+')" class="btn btn-sm '+(myRank===r?'btn-primary':'btn-secondary')+'">#'+r+'</button>';
-        }
-        rankBtns+='<button onclick="rankDest(\''+d.id+'\',null)" class="btn btn-sm btn-secondary">Clear</button>';
-      }
-      var lockBtn='';
-      if(canEdit()||isHost()){
-        if(!d.locked)lockBtn='<button onclick="lockDest(\''+d.id+'\',\''+d.location+'\')" class="lock-btn">Lock in</button>';
-        else lockBtn='<button onclick="unlockDest(\''+d.id+'\')" class="lock-btn locked">Unlock</button>';
-      }
-      html+='<div class="dest-card '+(d.locked?'locked':idx===0&&d.score>0?'leading':'')+'">'
-        +'<div class="flex ac gap8 mb8"><span style="font-size:20px">'+icon+'</span><span class="bold" style="font-size:15px">'+d.location+'</span>'+lockedBadge+scoreBadge+'</div>'
-        +(d.description?'<p class="sm muted mb8">'+d.description+'</p>':'')
-        +(d.estimated_cost?'<p class="sm muted mb8">~'+d.estimated_cost+'</p>':'')
-        +'<div class="flex ac gap8 wrap">'+rankBtns+lockBtn+'</div></div>';
-    });
-  }
-  g('trip-content').innerHTML=html;
-}
-
-async function rankDest(id,rank){
-  var res=await sb.from('destinations').select('votes').eq('id',id).single();
-  var votes=Object.assign({},(res.data&&res.data.votes)||{});
-  if(rank===null)delete votes[CU.id]; else votes[CU.id]=rank;
-  await sb.from('destinations').update({votes:votes}).eq('id',id);
-  tabDests();
-}
-
-async function lockDest(id,location){
-  await sb.from('destinations').update({locked:true}).eq('id',id);
-  await sb.from('trips').update({locked_destination:location}).eq('id',CT.id);
-  CT.locked_destination=location;
-  tabDests();renderHero();
-}
-
-async function unlockDest(id){
-  await sb.from('destinations').update({locked:false}).eq('id',id);
-  await sb.from('trips').update({locked_destination:null}).eq('id',CT.id);
-  CT.locked_destination=null;
-  tabDests();renderHero();
-}
-
-async function doAddDest(){
-  var loc=v('dest-loc');if(!loc){showErr('dest-err','Location required');return;}
-  hideErr('dest-err');
-  await sb.from('destinations').insert({trip_id:CT.id,suggested_by:CU.id,suggested_by_name:myName(),location:loc,description:v('dest-why')||null,estimated_cost:v('dest-cost')||null,votes:{},locked:false});
-  closeM('m-dest');tabDests();
-}
-
-// ACTIVITIES
+// ACTIVITIES — thumbs up/down + export
 async function tabActs(){
   var res=await sb.from('activities').select('*').eq('trip_id',CT.id).order('created_at');
   var acts=res.data||[];
-  var scored=acts.map(function(a){
-    var v=a.votes||{};
-    var up=Object.values(v).filter(function(x){return x==='up';}).length;
-    var down=Object.values(v).filter(function(x){return x==='down';}).length;
-    return Object.assign({},a,{up:up,down:down,score:up-down});
-  }).sort(function(a,b){
-    if(a.locked&&!b.locked)return -1;if(!a.locked&&b.locked)return 1;return b.score-a.score;
-  });
+  var scored=acts.map(function(a){var votes=a.votes||{};var up=Object.values(votes).filter(function(x){return x==='up';}).length;var down=Object.values(votes).filter(function(x){return x==='down';}).length;return Object.assign({},a,{up:up,down:down,score:up-down});}).sort(function(a,b){if(a.locked&&!b.locked)return -1;if(!a.locked&&b.locked)return 1;return b.score-a.score;});
 
-  var html='<div class="section-header"><div><div class="section-title">Activities</div><p class="sm muted">Vote on what you want to do</p></div><button class="btn btn-primary btn-sm" onclick="openM(\'m-act\')">+ Add</button></div>';
+  var exportBar='';
+  if(scored.length){
+    exportBar='<div class="export-bar">'
+      +'<button class="btn btn-secondary btn-sm" onclick="exportGoogleCal()">&#x1F4C5; Export to Google Calendar</button>'
+      +'<button class="btn btn-secondary btn-sm" onclick="exportPDF()">&#x1F4C4; Download as PDF</button>'
+      +'<button class="btn btn-secondary btn-sm" onclick="exportICS()">&#x1F4E5; Download .ics file</button>'
+      +'</div>';
+  }
+
+  var html='<div class="section-header"><div><div class="section-title">Activities</div><p class="sm muted">Thumbs up the ones you want to do</p></div><button class="btn btn-primary btn-sm" onclick="openActModal()">+ Add</button></div>'+exportBar;
 
   if(!scored.length){
-    html+='<div class="empty"><div class="empty-icon">&#x1F3AF;</div><div class="empty-title">No activities yet</div><div class="empty-text">Add things you want to do</div></div>';
+    html+='<div class="empty"><div class="empty-icon">&#x1F3AF;</div><div class="empty-title">No activities yet</div><div class="empty-text">Add things you want to do on the trip</div></div>';
   } else {
     html+='<div class="card">';
     scored.forEach(function(a){
       var myVote=a.votes&&a.votes[CU.id]||null;
-      var upCls='vote-btn'+(myVote==='up'?' up':'');
-      var downCls='vote-btn'+(myVote==='down'?' down':'');
       var scoreColor=a.score>0?'color:#059669':a.score<0?'color:#dc2626':'color:#6b6760';
-      var lockBtn='';
+      var lockedTag=a.locked?'<span style="background:#dcfce7;color:#166534;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;margin-left:6px">&#x1F512; Locked</span>':'';
+      var dateTime=(a.act_date||a.act_time)?'<div class="xs muted" style="margin-top:2px">'+(a.act_date?fmtS(a.act_date):'')+(a.act_time?' at '+a.act_time:'')+'</div>':'';
+      var actionBtns='';
       if(canEdit()||isHost()){
-        lockBtn='<div style="display:flex;flex-direction:column;gap:4px">'
+        actionBtns='<div style="display:flex;flex-direction:column;gap:4px;margin-left:4px">'
           +'<button onclick="toggleLockAct(\''+a.id+'\','+a.locked+')" class="lock-btn'+(a.locked?' locked':'')+'">'+(a.locked?'Unlock':'Lock')+'</button>'
           +'<button onclick="delAct(\''+a.id+'\')" class="btn btn-danger btn-sm">&#x2715;</button>'
           +'</div>';
       }
-      var lockedTag=a.locked?'<span style="background:#dcfce7;color:#166534;padding:2px 6px;border-radius:20px;font-size:11px;font-weight:600;margin-left:4px">&#x1F512;</span>':'';
       html+='<div class="row">'
         +'<div class="vote-wrap">'
-        +'<button class="'+upCls+'" onclick="voteAct(\''+a.id+'\',\'up\')">&#x25B2;</button>'
+        +'<button class="thumb-btn'+(myVote==='up'?' up':'')+'" onclick="voteAct(\''+a.id+'\',\'up\')" title="Thumbs up">&#x1F44D;</button>'
         +'<span class="vote-score" style="'+scoreColor+'">'+(a.score>0?'+':'')+a.score+'</span>'
-        +'<button class="'+downCls+'" onclick="voteAct(\''+a.id+'\',\'down\')">&#x25BC;</button>'
+        +'<button class="thumb-btn'+(myVote==='down'?' down':'')+'" onclick="voteAct(\''+a.id+'\',\'down\')" title="Thumbs down">&#x1F44E;</button>'
         +'</div>'
-        +'<div style="flex:1">'
+        +'<div style="flex:1;min-width:0">'
         +'<div class="bold">'+a.title+lockedTag+'</div>'
-        +'<div class="sm muted">'+(a.description||'')+(a.cost?' &middot; ~'+a.cost:'')+(a.suggested_by_name?' &middot; by '+a.suggested_by_name:'')+'</div>'
-        +'<div class="sm muted">'+a.up+' &#x1F44D; &middot; '+a.down+' &#x1F44E;</div>'
+        +(a.description?'<div class="sm muted">'+a.description+'</div>':'')
+        +dateTime
+        +(a.cost?'<div class="xs muted">~'+a.cost+'</div>':'')
+        +'<div class="xs muted">by '+a.suggested_by_name+' &middot; '+a.up+' &#x1F44D; '+a.down+' &#x1F44E;</div>'
         +'</div>'
-        +lockBtn
+        +actionBtns
         +'</div>';
     });
     html+='</div>';
@@ -733,300 +474,99 @@ async function tabActs(){
   g('trip-content').innerHTML=html;
 }
 
-async function voteAct(id,type){
-  var res=await sb.from('activities').select('votes').eq('id',id).single();
-  var votes=Object.assign({},(res.data&&res.data.votes)||{});
-  if(votes[CU.id]===type)delete votes[CU.id]; else votes[CU.id]=type;
-  await sb.from('activities').update({votes:votes}).eq('id',id);
-  tabActs();
+function openActModal(){sv('act-name','');sv('act-desc','');sv('act-date','');sv('act-time','');sv('act-cost','');hideErr('act-err');openM('m-act');}
+
+async function voteAct(id,type){var res=await sb.from('activities').select('votes').eq('id',id).single();var votes=Object.assign({},(res.data&&res.data.votes)||{});if(votes[CU.id]===type)delete votes[CU.id];else votes[CU.id]=type;await sb.from('activities').update({votes:votes}).eq('id',id);tabActs();}
+async function toggleLockAct(id,isLocked){await sb.from('activities').update({locked:!isLocked}).eq('id',id);tabActs();}
+async function delAct(id){if(!confirm('Delete this activity?'))return;await sb.from('activities').delete().eq('id',id);tabActs();}
+async function doAddAct(){var name=v('act-name');if(!name){showErr('act-err','Name required');return;}hideErr('act-err');await sb.from('activities').insert({trip_id:CT.id,suggested_by:CU.id,suggested_by_name:myName(),title:name,description:v('act-desc')||null,act_date:v('act-date')||null,act_time:v('act-time')||null,cost:v('act-cost')||null,votes:{},locked:false});closeM('m-act');tabActs();}
+
+// EXPORT ACTIVITIES
+async function getActsForExport(){var res=await sb.from('activities').select('*').eq('trip_id',CT.id).order('act_date',{ascending:true,nullsFirst:false});return res.data||[];}
+
+async function exportGoogleCal(){
+  var acts=await getActsForExport();
+  var withDates=acts.filter(function(a){return a.act_date;});
+  if(!withDates.length){alert('Add dates to your activities first to export them to Google Calendar.');return;}
+  withDates.forEach(function(a){
+    var date=a.act_date.replace(/-/g,'');
+    var time=a.act_time?a.act_time.replace(':','')+'00':'';
+    var start,end;
+    if(time){start=date+'T'+time;end=date+'T'+String(parseInt(a.act_time.split(':')[0])+1).padStart(2,'0')+a.act_time.split(':')[1]+'00';}
+    else{start=date;end=date;}
+    var title=encodeURIComponent(CT.name+': '+a.title);
+    var details=encodeURIComponent((a.description||'')+(a.cost?' Cost: '+a.cost:'')+(a.suggested_by_name?' Suggested by: '+a.suggested_by_name:''));
+    var url='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+title+'&dates='+start+'%2F'+end+'&details='+details;
+    window.open(url,'_blank');
+  });
 }
 
-async function toggleLockAct(id,isLocked){
-  await sb.from('activities').update({locked:!isLocked}).eq('id',id);
-  tabActs();
+async function exportICS(){
+  var acts=await getActsForExport();
+  var lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TripSync//EN','CALSCALE:GREGORIAN'];
+  acts.forEach(function(a){
+    var now=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+    var uid=a.id+'@tripsync';
+    lines.push('BEGIN:VEVENT');
+    lines.push('UID:'+uid);
+    lines.push('DTSTAMP:'+now);
+    lines.push('SUMMARY:'+CT.name+': '+a.title);
+    if(a.act_date){
+      var date=a.act_date.replace(/-/g,'');
+      if(a.act_time){
+        var t=a.act_time.replace(':','')+'00';
+        lines.push('DTSTART:'+date+'T'+t);
+        var endHr=String(parseInt(a.act_time.split(':')[0])+1).padStart(2,'0');
+        lines.push('DTEND:'+date+'T'+endHr+a.act_time.split(':')[1]+'00');
+      } else {
+        lines.push('DTSTART;VALUE=DATE:'+date);
+        lines.push('DTEND;VALUE=DATE:'+date);
+      }
+    }
+    if(a.description)lines.push('DESCRIPTION:'+a.description);
+    lines.push('END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  var blob=new Blob([lines.join('\r\n')],{type:'text/calendar'});
+  var url=URL.createObjectURL(blob);
+  var a2=document.createElement('a');a2.href=url;a2.download=CT.name.replace(/\s+/g,'_')+'_activities.ics';a2.click();URL.revokeObjectURL(url);
 }
 
-async function delAct(id){
-  if(!confirm('Delete this activity?'))return;
-  await sb.from('activities').delete().eq('id',id);
-  tabActs();
-}
-
-async function doAddAct(){
-  var name=v('act-name');if(!name){showErr('act-err','Name required');return;}
-  hideErr('act-err');
-  await sb.from('activities').insert({trip_id:CT.id,suggested_by:CU.id,suggested_by_name:myName(),title:name,description:v('act-desc')||null,cost:v('act-cost')||null,votes:{},locked:false});
-  closeM('m-act');tabActs();
+async function exportPDF(){
+  var acts=await getActsForExport();
+  var w=window.open('','_blank');
+  var rows=acts.map(function(a){return '<tr><td style="padding:10px;border-bottom:1px solid #eee"><strong>'+a.title+'</strong>'+(a.description?'<br><span style="color:#666;font-size:13px">'+a.description+'</span>':'')+'</td><td style="padding:10px;border-bottom:1px solid #eee;white-space:nowrap">'+(a.act_date?fmtD(a.act_date)+(a.act_time?' '+a.act_time:''):'TBD')+'</td><td style="padding:10px;border-bottom:1px solid #eee">'+(a.cost||'')+'</td></tr>';}).join('');
+  w.document.write('<!DOCTYPE html><html><head><title>'+CT.name+' - Activities</title><style>body{font-family:sans-serif;max-width:700px;margin:40px auto;padding:0 20px}h1{font-size:24px;margin-bottom:4px}p{color:#666;margin-bottom:24px}table{width:100%;border-collapse:collapse}th{text-align:left;padding:10px;background:#f5f5f5;font-size:13px}@media print{button{display:none}}</style></head><body><h1>'+CT.name+'</h1><p>Activities itinerary'+(CT.date_start?' &middot; '+fmtD(CT.date_start)+(CT.date_end?' to '+fmtD(CT.date_end):''):'')+'</p><button onclick="window.print()" style="margin-bottom:20px;padding:10px 20px;background:#e8572a;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px">&#x1F5A8; Print / Save as PDF</button><table><thead><tr><th>Activity</th><th>Date &amp; Time</th><th>Est. Cost</th></tr></thead><tbody>'+rows+'</tbody></table></body></html>');
+  w.document.close();
 }
 
 // EXPENSES
-async function tabExp(){
-  var res=await sb.from('expenses').select('*').eq('trip_id',CT.id).order('created_at',{ascending:false});
-  var exps=res.data||[];
-  var members=CT._members||[];
-  var total=exps.reduce(function(s,e){return s+Number(e.amount);},0);
-  var bal={};
-  members.forEach(function(m){bal[m.user_id]={name:m.profiles&&m.profiles.name||'?',amount:0};});
-  exps.forEach(function(e){
-    var split=e.split_among||[];if(!split.length)return;
-    var per=e.amount/split.length;
-    if(bal[e.paid_by])bal[e.paid_by].amount+=e.amount;
-    split.forEach(function(uid){if(bal[uid])bal[uid].amount-=per;});
-  });
-
-  var myBal=bal[CU.id]&&bal[CU.id].amount||0;
-  var myBalColor=myBal>0.01?'#059669':myBal<-0.01?'#dc2626':'#1a1814';
-  var myBalBg=myBal>0.01?'background:#f0fdf4':myBal<-0.01?'background:#fef2f2':'';
-
-  var settles=calcSettles(bal);
-
-  var settleHtml='';
-  settles.forEach(function(s){settleHtml+='<div class="settle-row"><span class="bold">'+s.from+'</span><span style="color:#e8572a;font-size:16px">&rarr;</span><span class="bold">'+s.to+'</span><span class="bold" style="margin-left:auto;color:#059669">$'+s.amount.toFixed(2)+'</span></div>';});
-
-  var balHtml='';
-  Object.entries(bal).forEach(function(entry){
-    var uid=entry[0],v=entry[1];
-    var cls=v.amount>0.01?'pos':v.amount<-0.01?'neg':'muted';
-    balHtml+='<div class="balance-row"><div class="flex ac gap8">'+makeAv(v.name,28)+'<span class="sm">'+v.name+(uid===CU.id?' (you)':'')+'</span></div><span class="'+cls+'">'+(v.amount>0.01?'+':'')+'$'+Math.abs(v.amount).toFixed(2)+'</span></div>';
-  });
-
-  var expHtml='';
-  exps.forEach(function(e){
-    var per=(e.amount/(e.split_among&&e.split_among.length||1)).toFixed(2);
-    expHtml+='<div class="row"><div style="width:36px;height:36px;border-radius:10px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F4B8;</div><div style="flex:1"><div class="bold sm">'+e.title+'</div><div class="xs muted">Paid by '+e.paid_by_name+' &middot; $'+per+'/person</div></div><div class="bold">$'+Number(e.amount).toFixed(2)+'</div></div>';
-  });
-
-  g('trip-content').innerHTML='<div class="section-header"><div><div class="section-title">Expenses</div><p class="sm muted">Track who paid what</p></div><button class="btn btn-primary btn-sm" onclick="openAddExp()">+ Add</button></div>'
-    +'<div class="grid3"><div class="stat-card"><div class="xs muted">Total spent</div><div class="stat-val">$'+total.toFixed(0)+'</div></div>'
-    +'<div class="stat-card" style="'+myBalBg+'"><div class="xs muted">Your balance</div><div class="stat-val" style="color:'+myBalColor+'">'+(myBal>0.01?'+':'')+'$'+Math.abs(myBal).toFixed(0)+'</div></div>'
-    +'<div class="stat-card"><div class="xs muted">Expenses</div><div class="stat-val">'+exps.length+'</div></div></div>'
-    +(settles.length?'<div class="card mb12"><div class="card-title mb8">How to settle up</div>'+settleHtml+'</div>':'')
-    +'<div class="card mb12"><div class="card-title mb8">Balances</div>'+balHtml+'</div>'
-    +(exps.length?'<div class="card"><div class="card-title mb8">All expenses</div>'+expHtml+'</div>':'');
-}
-
-function calcSettles(bal){
-  var c=[],d=[];
-  Object.entries(bal).forEach(function(entry){var name=entry[1].name,amount=entry[1].amount;if(amount>0.01)c.push({name:name,amount:amount});else if(amount<-0.01)d.push({name:name,amount:-amount});});
-  c.sort(function(a,b){return b.amount-a.amount;}); d.sort(function(a,b){return b.amount-a.amount;});
-  var txns=[],i=0,j=0;
-  var cc=c.map(function(x){return Object.assign({},x);}), dd=d.map(function(x){return Object.assign({},x);});
-  while(i<cc.length&&j<dd.length){var amt=Math.min(cc[i].amount,dd[j].amount);txns.push({from:dd[j].name,to:cc[i].name,amount:amt});cc[i].amount-=amt;dd[j].amount-=amt;if(cc[i].amount<0.01)i++;if(dd[j].amount<0.01)j++;}
-  return txns;
-}
-
-function openAddExp(){
-  var members=CT._members||[];
-  var sel=g('exp-paid'); sel.innerHTML='';
-  members.forEach(function(m){var o=document.createElement('option');o.value=m.user_id;o.textContent=(m.profiles&&m.profiles.name||'?')+(m.user_id===CU.id?' (you)':'');if(m.user_id===CU.id)o.selected=true;sel.appendChild(o);});
-  var cb=g('exp-split'); cb.innerHTML='';
-  members.forEach(function(m){
-    var label=document.createElement('label');
-    label.style.cssText='display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;padding:6px 10px;border:1.5px solid #ebe8e3;border-radius:8px';
-    var inp=document.createElement('input');inp.type='checkbox';inp.value=m.user_id;inp.checked=true;
-    label.appendChild(inp);label.appendChild(document.createTextNode((m.profiles&&m.profiles.name||'?')+(m.user_id===CU.id?' (you)':'')));
-    cb.appendChild(label);
-  });
-  sv('exp-desc','');sv('exp-amt','');hideErr('exp-err');
-  openM('m-exp');
-}
-
-async function doAddExp(){
-  var title=v('exp-desc'), amount=parseFloat(g('exp-amt').value);
-  if(!title||!amount){showErr('exp-err','Fill in description and amount');return;}
-  var paidBy=g('exp-paid').value;
-  var paidByName=g('exp-paid').selectedOptions[0].textContent.replace(' (you)','');
-  var split=Array.from(document.querySelectorAll('#exp-split input:checked')).map(function(el){return el.value;});
-  if(!split.length){showErr('exp-err','Select at least one person');return;}
-  hideErr('exp-err');
-  await sb.from('expenses').insert({trip_id:CT.id,title:title,amount:amount,paid_by:paidBy,paid_by_name:paidByName,split_among:split,date:new Date().toISOString().split('T')[0]});
-  closeM('m-exp');tabExp();
-}
+async function tabExp(){var res=await sb.from('expenses').select('*').eq('trip_id',CT.id).order('created_at',{ascending:false});var exps=res.data||[];var members=CT._members||[];var total=exps.reduce(function(s,e){return s+Number(e.amount);},0);var bal={};members.forEach(function(m){bal[m.user_id]={name:m.profiles&&m.profiles.name||'?',amount:0};});exps.forEach(function(e){var split=e.split_among||[];if(!split.length)return;var per=e.amount/split.length;if(bal[e.paid_by])bal[e.paid_by].amount+=e.amount;split.forEach(function(uid){if(bal[uid])bal[uid].amount-=per;});});var myBal=bal[CU.id]&&bal[CU.id].amount||0;var myBalColor=myBal>0.01?'#059669':myBal<-0.01?'#dc2626':'#1a1814';var myBalBg=myBal>0.01?'background:#f0fdf4':myBal<-0.01?'background:#fef2f2':'';var settles=calcSettles(bal);var settleHtml='';settles.forEach(function(s){settleHtml+='<div class="settle-row"><span class="bold">'+s.from+'</span><span style="color:#e8572a;font-size:16px">&rarr;</span><span class="bold">'+s.to+'</span><span class="bold" style="margin-left:auto;color:#059669">$'+s.amount.toFixed(2)+'</span></div>';});var balHtml='';Object.entries(bal).forEach(function(entry){var uid=entry[0],bv=entry[1];var cls=bv.amount>0.01?'pos':bv.amount<-0.01?'neg':'muted';balHtml+='<div class="balance-row"><div class="flex ac gap8">'+makeAv(bv.name,28)+'<span class="sm">'+bv.name+(uid===CU.id?' (you)':'')+'</span></div><span class="'+cls+'">'+(bv.amount>0.01?'+':'')+'$'+Math.abs(bv.amount).toFixed(2)+'</span></div>';});var expHtml='';exps.forEach(function(e){var per=(e.amount/(e.split_among&&e.split_among.length||1)).toFixed(2);expHtml+='<div class="row"><div style="width:36px;height:36px;border-radius:10px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F4B8;</div><div style="flex:1"><div class="bold sm">'+e.title+'</div><div class="xs muted">Paid by '+e.paid_by_name+' &middot; $'+per+'/person</div></div><div class="bold">$'+Number(e.amount).toFixed(2)+'</div></div>';});g('trip-content').innerHTML='<div class="section-header"><div><div class="section-title">Expenses</div><p class="sm muted">Track who paid what</p></div><button class="btn btn-primary btn-sm" onclick="openAddExp()">+ Add</button></div><div class="grid3"><div class="stat-card"><div class="xs muted">Total spent</div><div class="stat-val">$'+total.toFixed(0)+'</div></div><div class="stat-card" style="'+myBalBg+'"><div class="xs muted">Your balance</div><div class="stat-val" style="color:'+myBalColor+'">'+(myBal>0.01?'+':'')+'$'+Math.abs(myBal).toFixed(0)+'</div></div><div class="stat-card"><div class="xs muted">Expenses</div><div class="stat-val">'+exps.length+'</div></div></div>'+(settles.length?'<div class="card mb12"><div class="card-title mb8">How to settle up</div>'+settleHtml+'</div>':'')+'<div class="card mb12"><div class="card-title mb8">Balances</div>'+balHtml+'</div>'+(exps.length?'<div class="card"><div class="card-title mb8">All expenses</div>'+expHtml+'</div>':'');}
+function calcSettles(bal){var c=[],d=[];Object.entries(bal).forEach(function(entry){var name=entry[1].name,amount=entry[1].amount;if(amount>0.01)c.push({name:name,amount:amount});else if(amount<-0.01)d.push({name:name,amount:-amount});});c.sort(function(a,b){return b.amount-a.amount;});d.sort(function(a,b){return b.amount-a.amount;});var txns=[],i=0,j=0;var cc=c.map(function(x){return Object.assign({},x);}),dd=d.map(function(x){return Object.assign({},x);});while(i<cc.length&&j<dd.length){var amt=Math.min(cc[i].amount,dd[j].amount);txns.push({from:dd[j].name,to:cc[i].name,amount:amt});cc[i].amount-=amt;dd[j].amount-=amt;if(cc[i].amount<0.01)i++;if(dd[j].amount<0.01)j++;}return txns;}
+function openAddExp(){var members=CT._members||[];var sel=g('exp-paid');sel.innerHTML='';members.forEach(function(m){var o=document.createElement('option');o.value=m.user_id;o.textContent=(m.profiles&&m.profiles.name||'?')+(m.user_id===CU.id?' (you)':'');if(m.user_id===CU.id)o.selected=true;sel.appendChild(o);});var cb=g('exp-split');cb.innerHTML='';members.forEach(function(m){var label=document.createElement('label');label.style.cssText='display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;padding:6px 10px;border:1.5px solid #ebe8e3;border-radius:8px';var inp=document.createElement('input');inp.type='checkbox';inp.value=m.user_id;inp.checked=true;label.appendChild(inp);label.appendChild(document.createTextNode((m.profiles&&m.profiles.name||'?')+(m.user_id===CU.id?' (you)':'')));cb.appendChild(label);});sv('exp-desc','');sv('exp-amt','');hideErr('exp-err');openM('m-exp');}
+async function doAddExp(){var title=v('exp-desc'),amount=parseFloat(g('exp-amt').value);if(!title||!amount){showErr('exp-err','Fill in description and amount');return;}var paidBy=g('exp-paid').value;var paidByName=g('exp-paid').selectedOptions[0].textContent.replace(' (you)','');var split=Array.from(document.querySelectorAll('#exp-split input:checked')).map(function(el){return el.value;});if(!split.length){showErr('exp-err','Select at least one person');return;}hideErr('exp-err');await sb.from('expenses').insert({trip_id:CT.id,title:title,amount:amount,paid_by:paidBy,paid_by_name:paidByName,split_among:split,date:new Date().toISOString().split('T')[0]});closeM('m-exp');tabExp();}
 
 // POLLS
-async function tabPolls(){
-  var res=await sb.from('polls').select('*').eq('trip_id',CT.id).order('created_at',{ascending:false});
-  var polls=res.data||[];
-  var ce=canEdit()||isHost();
-
-  var html='<div class="section-header"><div><div class="section-title">Polls</div><p class="sm muted">Make group decisions fast</p></div>'+(ce?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-poll\')">+ New poll</button>':'')+'</div>';
-
-  if(!polls.length){
-    html+='<div class="empty"><div class="empty-icon">&#x1F5F3;</div><div class="empty-title">No polls yet</div><div class="empty-text">'+(ce?'Create a poll to get input':'The host will create polls here')+'</div></div>';
-  } else {
-    polls.forEach(function(p){
-      var opts=p.options||[], votes=p.votes||{}, total=Object.keys(votes).length, myVote=votes[CU.id];
-      var counts=opts.map(function(_,i){return Object.values(votes).filter(function(v){return v===i;}).length;});
-      var winIdx=counts.indexOf(Math.max.apply(null,counts));
-      var statusDot='<span style="width:7px;height:7px;border-radius:50%;background:'+(p.is_open?'#059669':'#d5d2cb')+';display:inline-block;margin-right:4px"></span>';
-      var toggleBtn=ce?'<button onclick="togglePoll(\''+p.id+'\','+p.is_open+')" class="btn btn-secondary btn-sm">'+(p.is_open?'Close':'Reopen')+'</button>':'';
-      var optHtml='';
-      opts.forEach(function(opt,i){
-        var pct=total>0?Math.round(counts[i]/total*100):0;
-        var isWin=!p.is_open&&i===winIdx&&counts[i]>0;
-        var isMine=myVote===i;
-        var borderColor=isWin?'#0f7b6c':isMine?'#e8572a':'#ebe8e3';
-        var barBg=isWin?'#0f7b6c':isMine?'#e8572a':'#e5e7eb';
-        var disabled=p.is_open?'':'disabled';
-        optHtml+='<button onclick="castVote(\''+p.id+'\','+i+')" class="poll-option" style="border-color:'+borderColor+'" '+disabled+'>'
-          +'<div class="poll-bar" style="background:'+barBg+';width:'+pct+'%"></div>'
-          +'<span class="poll-label">'+(isMine?'&#x2713; ':isWin?'&#x1F3C6; ':'')+opt+'</span>'
-          +'<span class="poll-pct">'+pct+'% ('+counts[i]+')</span>'
-          +'</button>';
-      });
-      html+='<div class="card mb12"><div class="flex ac jb mb12"><div><div class="sm muted mb8">'+statusDot+(p.is_open?'Open':'Closed')+' &middot; '+total+' vote'+(total!==1?'s':'')+'</div><div class="card-title">'+p.question+'</div></div>'+toggleBtn+'</div>'+optHtml+'</div>';
-    });
-  }
-  g('trip-content').innerHTML=html;
-}
-
-async function castVote(pollId,idx){
-  var res=await sb.from('polls').select('votes,is_open').eq('id',pollId).single();
-  if(!res.data||!res.data.is_open)return;
-  var votes=Object.assign({},(res.data&&res.data.votes)||{});
-  votes[CU.id]=idx;
-  await sb.from('polls').update({votes:votes}).eq('id',pollId);
-  tabPolls();
-}
-
-async function togglePoll(id,isOpen){
-  await sb.from('polls').update({is_open:!isOpen}).eq('id',id);
-  tabPolls();
-}
-
-async function doAddPoll(){
-  var q=v('poll-q');if(!q){showErr('poll-err','Question required');return;}
-  var opts=g('poll-opts').value.split('\n').map(function(s){return s.trim();}).filter(Boolean);
-  if(opts.length<2){showErr('poll-err','Add at least 2 options');return;}
-  hideErr('poll-err');
-  await sb.from('polls').insert({trip_id:CT.id,created_by:CU.id,question:q,options:opts,votes:{},is_open:true});
-  closeM('m-poll');tabPolls();
-}
+async function tabPolls(){var res=await sb.from('polls').select('*').eq('trip_id',CT.id).order('created_at',{ascending:false});var polls=res.data||[];var ce=canEdit()||isHost();var html='<div class="section-header"><div><div class="section-title">Polls</div><p class="sm muted">Make group decisions fast</p></div>'+(ce?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-poll\')">+ New poll</button>':'')+'</div>';if(!polls.length){html+='<div class="empty"><div class="empty-icon">&#x1F5F3;</div><div class="empty-title">No polls yet</div><div class="empty-text">'+(ce?'Create a poll to get input':'The host will create polls here')+'</div></div>';}else{polls.forEach(function(p){var opts=p.options||[],votes=p.votes||{},total=Object.keys(votes).length,myVote=votes[CU.id];var counts=opts.map(function(_,i){return Object.values(votes).filter(function(v){return v===i;}).length;});var winIdx=counts.indexOf(Math.max.apply(null,counts));var dot='<span style="width:7px;height:7px;border-radius:50%;background:'+(p.is_open?'#059669':'#d5d2cb')+';display:inline-block;margin-right:4px"></span>';var tb=ce?'<button onclick="togglePoll(\''+p.id+'\','+p.is_open+')" class="btn btn-secondary btn-sm">'+(p.is_open?'Close':'Reopen')+'</button>':'';var optHtml='';opts.forEach(function(opt,i){var pct=total>0?Math.round(counts[i]/total*100):0;var isWin=!p.is_open&&i===winIdx&&counts[i]>0;var isMine=myVote===i;var bc=isWin?'#0f7b6c':isMine?'#e8572a':'#ebe8e3';var bb=isWin?'#0f7b6c':isMine?'#e8572a':'#e5e7eb';var dis=p.is_open?'':'disabled';optHtml+='<button onclick="castVote(\''+p.id+'\','+i+')" class="poll-option" style="border-color:'+bc+'" '+dis+'><div class="poll-bar" style="background:'+bb+';width:'+pct+'%"></div><span class="poll-label">'+(isMine?'&#x2713; ':isWin?'&#x1F3C6; ':'')+opt+'</span><span class="poll-pct">'+pct+'% ('+counts[i]+')</span></button>';});html+='<div class="card mb12"><div class="flex ac jb mb12"><div><div class="sm muted mb8">'+dot+(p.is_open?'Open':'Closed')+' &middot; '+total+' vote'+(total!==1?'s':'')+'</div><div class="card-title">'+p.question+'</div></div>'+tb+'</div>'+optHtml+'</div>';}  );}g('trip-content').innerHTML=html;}
+async function castVote(pollId,idx){var res=await sb.from('polls').select('votes,is_open').eq('id',pollId).single();if(!res.data||!res.data.is_open)return;var votes=Object.assign({},(res.data&&res.data.votes)||{});votes[CU.id]=idx;await sb.from('polls').update({votes:votes}).eq('id',pollId);tabPolls();}
+async function togglePoll(id,isOpen){await sb.from('polls').update({is_open:!isOpen}).eq('id',id);tabPolls();}
+async function doAddPoll(){var q=v('poll-q');if(!q){showErr('poll-err','Question required');return;}var opts=g('poll-opts').value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(opts.length<2){showErr('poll-err','Add at least 2 options');return;}hideErr('poll-err');await sb.from('polls').insert({trip_id:CT.id,created_by:CU.id,question:q,options:opts,votes:{},is_open:true});closeM('m-poll');tabPolls();}
 
 // UPDATES
-async function tabUpdates(){
-  var res=await sb.from('announcements').select('*').eq('trip_id',CT.id).order('pinned',{ascending:false}).order('created_at',{ascending:false});
-  var anns=res.data||[];
-  var cp=canEdit()||isHost();
-
-  var html='<div class="section-header"><div><div class="section-title">Updates</div><p class="sm muted">Announcements from the host</p></div>'+(cp?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-update\')">+ Post</button>':'')+'</div>';
-
-  if(!anns.length){
-    html+='<div class="empty"><div class="empty-icon">&#x1F4E3;</div><div class="empty-title">No updates yet</div><div class="empty-text">'+(cp?'Post an update to keep everyone informed':'The host will post updates here')+'</div></div>';
-  } else {
-    anns.forEach(function(a){
-      var pinBadge=a.pinned?'<span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600">&#x1F4CC; Pinned</span>':'';
-      var delBtn=cp?'<button onclick="delUpdate(\''+a.id+'\')" style="background:none;border:none;cursor:pointer;color:#6b6760;font-size:13px;margin-left:auto">&#x2715;</button>':'';
-      html+='<div class="ann-card"><div class="ann-header">'+makeAv(a.created_by_name||'?',28)+'<span class="bold sm">'+a.created_by_name+'</span>'+pinBadge+'<span class="xs muted" style="margin-left:auto">'+ago(a.created_at)+'</span>'+delBtn+'</div><div style="font-size:14px;line-height:1.6;white-space:pre-wrap">'+a.message+'</div></div>';
-    });
-  }
-  g('trip-content').innerHTML=html;
-}
-
-async function doPostUpdate(){
-  var msg=v('upd-msg');if(!msg)return;
-  await sb.from('announcements').insert({trip_id:CT.id,created_by:CU.id,created_by_name:myName(),message:msg,pinned:g('upd-pin').checked});
-  sv('upd-msg','');g('upd-pin').checked=false;
-  closeM('m-update');tabUpdates();
-}
-
-async function delUpdate(id){
-  if(!confirm('Delete this update?'))return;
-  await sb.from('announcements').delete().eq('id',id);
-  tabUpdates();
-}
+async function tabUpdates(){var res=await sb.from('announcements').select('*').eq('trip_id',CT.id).order('pinned',{ascending:false}).order('created_at',{ascending:false});var anns=res.data||[];var cp=canEdit()||isHost();var html='<div class="section-header"><div><div class="section-title">Updates</div><p class="sm muted">Announcements from the host</p></div>'+(cp?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-update\')">+ Post</button>':'')+'</div>';if(!anns.length){html+='<div class="empty"><div class="empty-icon">&#x1F4E3;</div><div class="empty-title">No updates yet</div><div class="empty-text">'+(cp?'Post an update to keep everyone informed':'The host will post updates here')+'</div></div>';}else{anns.forEach(function(a){var pb=a.pinned?'<span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600">&#x1F4CC; Pinned</span>':'';var db=cp?'<button onclick="delUpdate(\''+a.id+'\')" style="background:none;border:none;cursor:pointer;color:#6b6760;font-size:13px;margin-left:auto">&#x2715;</button>':'';html+='<div class="ann-card"><div class="ann-header">'+makeAv(a.created_by_name||'?',28)+'<span class="bold sm">'+a.created_by_name+'</span>'+pb+'<span class="xs muted" style="margin-left:auto">'+ago(a.created_at)+'</span>'+db+'</div><div style="font-size:14px;line-height:1.6;white-space:pre-wrap">'+a.message+'</div></div>';});}g('trip-content').innerHTML=html;}
+async function doPostUpdate(){var msg=v('upd-msg');if(!msg)return;await sb.from('announcements').insert({trip_id:CT.id,created_by:CU.id,created_by_name:myName(),message:msg,pinned:g('upd-pin').checked});sv('upd-msg','');g('upd-pin').checked=false;closeM('m-update');tabUpdates();}
+async function delUpdate(id){if(!confirm('Delete this update?'))return;await sb.from('announcements').delete().eq('id',id);tabUpdates();}
 
 // MEMBERS
-async function tabMembers(){
-  var res=await sb.from('trip_members').select('*, profiles(id,name,email)').eq('trip_id',CT.id);
-  CT._members=res.data||[];
-  var cm=canEdit()||isHost();
-  var roleLabel={host:'&#x1F451; Host','co-host':'&#x1F6E1; Co-host',member:'Member'};
-
-  var rows='';
-  (res.data||[]).forEach(function(m){
-    var name=m.profiles&&m.profiles.name||'Unknown';
-    var email=m.profiles&&m.profiles.email||'';
-    var isMe=m.user_id===CU.id;
-    var isHostRow=m.role==='host';
-    var actions='';
-    if(cm&&!isMe&&!isHostRow){
-      actions='<select onchange="updateRole(\''+m.user_id+'\',this.value)" style="font-size:12px;border:1.5px solid #ebe8e3;border-radius:8px;padding:4px 8px;cursor:pointer">'
-        +'<option value="member"'+(m.role==='member'?' selected':'')+'>Member</option>'
-        +'<option value="co-host"'+(m.role==='co-host'?' selected':'')+'>Co-host</option>'
-        +'</select>'
-        +'<button onclick="removeMember(\''+m.user_id+'\')" class="btn btn-danger btn-sm">Remove</button>';
-    }
-    rows+='<div class="row">'+makeAv(name,36)+'<div style="flex:1"><div class="bold sm">'+name+(isMe?' <span class="chip">you</span>':'')+'</div><div class="xs muted">'+email+'</div></div><span class="chip">'+roleLabel[m.role]+'</span>'+actions+'</div>';
-  });
-
-  g('trip-content').innerHTML='<div class="section-header"><div><div class="section-title">Members</div><p class="sm muted">'+((res.data||[]).length)+' people on this trip</p></div>'+(cm?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-invite\')">+ Invite</button>':'')+'</div>'
-    +'<div class="card">'+rows+'</div>'
-    +'<div class="card mt12"><div class="card-title mb8">Share invite link</div><p class="sm muted mb12">Share this link — anyone can join after logging in.</p><button class="btn btn-secondary w100" onclick="copyInvite()">&#x1F4CB; Copy invite link</button></div>';
-}
-
-async function doInvite(){
-  var email=v('inv-email');if(!email){showErr('inv-err','Email required');return;}
-  hideErr('inv-err');g('inv-ok').style.display='none';
-  var res=await sb.from('profiles').select('id,name,email').eq('email',email).single();
-  if(!res.data){showErr('inv-err','No TripSync account found for '+email+'. They need to sign up first.');return;}
-  var already=(CT._members||[]).find(function(m){return m.user_id===res.data.id;});
-  if(already){showErr('inv-err','This person is already in the trip');return;}
-  await sb.from('trip_members').insert({trip_id:CT.id,user_id:res.data.id,role:'member'});
-  showOk('inv-ok','Added '+res.data.name+' to the trip!');
-  sv('inv-email','');
-  await tabMembers();renderHero();
-}
-
-async function updateRole(uid,role){
-  await sb.from('trip_members').update({role:role}).eq('trip_id',CT.id).eq('user_id',uid);
-  tabMembers();
-}
-
-async function removeMember(uid){
-  if(!confirm('Remove this member?'))return;
-  await sb.from('trip_members').delete().eq('trip_id',CT.id).eq('user_id',uid);
-  tabMembers();
-}
+async function tabMembers(){var res=await sb.from('trip_members').select('*, profiles(id,name,email)').eq('trip_id',CT.id);CT._members=res.data||[];var cm=canEdit()||isHost();var roleLabel={host:'&#x1F451; Host','co-host':'&#x1F6E1; Co-host',member:'Member'};var rows='';(res.data||[]).forEach(function(m){var name=m.profiles&&m.profiles.name||'Unknown';var email=m.profiles&&m.profiles.email||'';var isMe=m.user_id===CU.id;var isHostRow=m.role==='host';var actions='';if(cm&&!isMe&&!isHostRow){actions='<select onchange="updateRole(\''+m.user_id+'\',this.value)" style="font-size:12px;border:1.5px solid #ebe8e3;border-radius:8px;padding:4px 8px;cursor:pointer"><option value="member"'+(m.role==='member'?' selected':'')+'>Member</option><option value="co-host"'+(m.role==='co-host'?' selected':'')+'>Co-host</option></select><button onclick="removeMember(\''+m.user_id+'\')" class="btn btn-danger btn-sm">Remove</button>';}rows+='<div class="row">'+makeAv(name,36)+'<div style="flex:1;min-width:0"><div class="bold sm">'+name+(isMe?' <span class="chip">you</span>':'')+'</div><div class="xs muted">'+email+'</div></div><span class="chip">'+roleLabel[m.role]+'</span>'+actions+'</div>';});g('trip-content').innerHTML='<div class="section-header"><div><div class="section-title">Members</div><p class="sm muted">'+((res.data||[]).length)+' people on this trip</p></div>'+(cm?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-invite\')">+ Invite</button>':'')+'</div><div class="card">'+rows+'</div><div class="card mt12"><div class="card-title mb8">Invite others</div><p class="sm muted mb12">Share your invite link via text or email. Anyone with the link can join after logging in.</p><button class="btn btn-secondary w100" onclick="openM(\'m-invite\')">&#x1F4E4; Share invite link</button></div>';}
+async function updateRole(uid,role){await sb.from('trip_members').update({role:role}).eq('trip_id',CT.id).eq('user_id',uid);tabMembers();}
+async function removeMember(uid){if(!confirm('Remove this member?'))return;await sb.from('trip_members').delete().eq('trip_id',CT.id).eq('user_id',uid);tabMembers();}
 
 // JOIN VIA LINK
-async function checkJoin(){
-  var params=new URLSearchParams(window.location.search);
-  var joinId=params.get('join');
-  if(!joinId)return false;
-  if(!CU){sessionStorage.setItem('pendingJoin',joinId);return false;}
-  var ex=await sb.from('trip_members').select('user_id').eq('trip_id',joinId).eq('user_id',CU.id).single();
-  if(!ex.data){await sb.from('trip_members').insert({trip_id:joinId,user_id:CU.id,role:'member'});}
-  window.history.replaceState({},'',window.location.pathname);
-  await openTrip(joinId);
-  return true;
-}
+async function checkJoin(){var params=new URLSearchParams(window.location.search);var joinId=params.get('join');if(!joinId)return false;if(!CU){sessionStorage.setItem('pendingJoin',joinId);return false;}var ex=await sb.from('trip_members').select('user_id').eq('trip_id',joinId).eq('user_id',CU.id).single();if(!ex.data){await sb.from('trip_members').insert({trip_id:joinId,user_id:CU.id,role:'member'});}window.history.replaceState({},'',window.location.pathname);await openTrip(joinId);return true;}
 
 // BOOT
-async function boot(){
-  var sessRes=await sb.auth.getSession();
-  var session=sessRes.data&&sessRes.data.session;
-  if(session&&session.user){
-    CU=session.user;
-    var profRes=await sb.from('profiles').select('*').eq('id',CU.id).single();
-    CP=profRes.data;
-    var pending=sessionStorage.getItem('pendingJoin');
-    if(pending){
-      sessionStorage.removeItem('pendingJoin');
-      await sb.from('trip_members').insert({trip_id:pending,user_id:CU.id,role:'member'});
-      window.history.replaceState({},'',window.location.pathname);
-      await openTrip(pending);
-    } else {
-      var joined=await checkJoin();
-      if(!joined)showDash();
-    }
-  } else {
-    var params=new URLSearchParams(window.location.search);
-    if(params.get('join'))sessionStorage.setItem('pendingJoin',params.get('join'));
-    showPg('pg-auth');
-  }
-}
-
+async function boot(){var sessRes=await sb.auth.getSession();var session=sessRes.data&&sessRes.data.session;if(session&&session.user){CU=session.user;var pr=await sb.from('profiles').select('*').eq('id',CU.id).single();CP=pr.data;var pending=sessionStorage.getItem('pendingJoin');if(pending){sessionStorage.removeItem('pendingJoin');await sb.from('trip_members').insert({trip_id:pending,user_id:CU.id,role:'member'});window.history.replaceState({},'',window.location.pathname);await openTrip(pending);}else{var joined=await checkJoin();if(!joined)showDash();}}else{var params=new URLSearchParams(window.location.search);if(params.get('join'))sessionStorage.setItem('pendingJoin',params.get('join'));showPg('pg-auth');}}
 boot();
 </script>
 </body>
