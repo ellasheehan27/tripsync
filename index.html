@@ -802,7 +802,8 @@ function renderCalendar(allAvail) {
       if(r>=1)cls+=' heat-high'; else if(r>=.6)cls+=' heat-mid'; else cls+=' heat-low'
     }
     const day=parseInt(ds.split('-')[2])
-    return `<div class="${cls}" onclick="${past?'':'toggleDay(\''+ds+'\')'}" title="${count} available">${day}${count>0?`<div class="cal-day-count">${count}</div>`:''}</div>`
+    const clickHandler = past ? '' : 'toggleDay(\'' + ds + '\')';
+    return '<div class="'+cls+'" onclick="'+clickHandler+'" title="'+count+' available">'+day+(count>0?'<div class="cal-day-count">'+count+'</div>':'')+'</div>'
   }).join('')
 
   const submitted = (allAvail||[]).map(a=>`<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">${makeAvatar(a.profiles?.name||'?',28)}<span class="text-sm">${a.profiles?.name||'?'} — ${a.dates?.length||0} day${a.dates?.length!==1?'s':''}</span></div>`).join('')
@@ -862,7 +863,7 @@ async function renderDestinations() {
           <span class="text-sm text-muted">Your rank: ${myRank?`#${myRank}`:'not ranked'}</span>
           ${[1,2,3].filter(r=>r<=(dests||[]).length||r===1).map(r=>`<button onclick="rankDest('${d.id}',${r})" class="btn btn-sm ${myRank===r?'btn-primary':'btn-secondary'}">#${r}</button>`).join('')}
           <button onclick="rankDest('${d.id}',null)" class="btn btn-sm btn-secondary">Clear</button>
-        `:`<span class="text-sm" style="color:#0f7b6c">✅ This destination is locked in!</span>`}
+        : lockedSpan}
         ${canEdit()&&!isLocked?`<button onclick="lockDest('${d.id}','${d.location}')" class="lock-btn">Lock in</button>`:''}
         ${canEdit()&&isLocked?`<button onclick="unlockDest('${d.id}')" class="lock-btn locked">Unlock</button>`:''}
       </div>
@@ -1099,7 +1100,7 @@ async function renderPolls() {
       </div>
       ${optHtml}
     </div>`
-  }).join('') : '<div class="empty"><div class="empty-icon">🗳️</div><div class="empty-title">No polls yet</div><div class="empty-text">${canCreate?"Create a poll to get the group's input":"The host will create polls here"}</div></div>'
+  }).join('') : '<div class="empty"><div class="empty-icon">&#x1F5F3;&#xFE0F;</div><div class="empty-title">No polls yet</div><div class="empty-text">Create a poll to get the group input</div></div>'
 
   $('trip-content').innerHTML = `
     <div class="flex items-center justify-between mb-16">
@@ -1136,16 +1137,11 @@ async function renderUpdates() {
   const {data:anns} = await sb.from('announcements').select('*').eq('trip_id',currentTrip.id).order('pinned',{ascending:false}).order('created_at',{ascending:false})
   const canPost=canEdit()
 
-  const annCards=(anns||[]).length?(anns||[]).map(a=>`<div class="ann-card ${a.pinned?'pinned':''}">
-    <div class="ann-header">
-      ${makeAvatar(a.created_by_name||'?',28)}
-      <span class="ann-name">${a.created_by_name}</span>
-      ${a.pinned?'<span class="badge" style="background:#fef3c7;color:#92400e">📌 Pinned</span>':''}
-      <span class="ann-time" style="margin-left:auto">${ago(a.created_at)}</span>
-      ${canPost?`<button onclick="deleteUpdate('${a.id}')" style="background:none;border:none;cursor:pointer;color:#6b6760;padding:2px 6px;border-radius:6px;font-size:13px" title="Delete">✕</button>`:''}
-    </div>
-    <div class="ann-msg">${a.message}</div>
-  </div>`).join('') : '<div class="empty"><div class="empty-icon">📣</div><div class="empty-title">No updates yet</div><div class="empty-text">${canPost?"Post an update to keep everyone in the loop":"The host will post updates here"}</div></div>'
+  const annCards=(anns||[]).length?(anns||[]).map(a=>{
+    const deleteBtn = canPost ? '<button onclick="deleteUpdate(\''+a.id+'\')" style="background:none;border:none;cursor:pointer;color:#6b6760;padding:2px 6px;border-radius:6px;font-size:13px" title="Delete">&#x2715;</button>' : '';
+    const pinnedBadge = a.pinned ? '<span class="badge" style="background:#fef3c7;color:#92400e">&#x1F4CC; Pinned</span>' : '';
+    return '<div class="ann-card '+(a.pinned?'pinned':'')+'"><div class="ann-header">'+makeAvatar(a.created_by_name||'?',28)+'<span class="ann-name">'+a.created_by_name+'</span>'+pinnedBadge+'<span class="ann-time" style="margin-left:auto">'+ago(a.created_at)+'</span>'+deleteBtn+'</div><div class="ann-msg">'+a.message+'</div></div>'
+  }).join('') : '<div class="empty"><div class="empty-icon">&#x1F4E3;</div><div class="empty-title">No updates yet</div><div class="empty-text">Updates will appear here</div></div>'
 
   $('trip-content').innerHTML = `
     <div class="flex items-center justify-between mb-16">
