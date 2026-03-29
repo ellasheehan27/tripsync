@@ -482,12 +482,12 @@ h1,h2,h3,.syne{font-family:'Syne',sans-serif}
 </div>
 
 <script>
-// ─── Supabase ────────────────────────────────────────────────────────────────
+// --- Supabase ----------------------------------------------------------------
 const SB_URL = 'https://ykxprrbbsldbwmhfmrkf.supabase.co'
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlreHBycmJic2xkYndtaGZtcmtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyMzYyOTAsImV4cCI6MjA4OTgxMjI5MH0.Gt8MeYBh6n8KbChSQ-7bWXzf_yZ0-BU4_LyFEVFZhSM'
 const sb = supabase.createClient(SB_URL, SB_KEY)
 
-// ─── State ───────────────────────────────────────────────────────────────────
+// --- State -------------------------------------------------------------------
 let currentUser = null
 let currentProfile = null
 let currentTrip = null
@@ -495,7 +495,7 @@ let currentTab = 'overview'
 let calMonth = new Date()
 let myAvailDates = new Set()
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// --- Helpers -----------------------------------------------------------------
 const $ = id => document.getElementById(id)
 const show = id => $(id).style.display = 'block'
 const hide = id => $(id).style.display = 'none'
@@ -528,7 +528,7 @@ function makeAvatar(name, size=34) {
   return `<div class="avatar" style="width:${s};height:${s};background:${c};font-size:${Math.floor(size*.38)}px">${initials(name)}</div>`
 }
 
-// ─── Auth ─────────────────────────────────────────────────────────────────────
+// --- Auth ---------------------------------------------------------------------
 function switchAuthTab(tab) {
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
   event.target.classList.add('active')
@@ -569,7 +569,7 @@ async function logout() {
   showPage('page-auth')
 }
 
-// ─── Dashboard ───────────────────────────────────────────────────────────────
+// --- Dashboard ---------------------------------------------------------------
 async function showDashboard() {
   showPage('page-dashboard')
   const name = currentProfile?.name || currentUser?.user_metadata?.name || 'Traveler'
@@ -616,7 +616,7 @@ function renderTrips(trips) {
   grid.innerHTML = cards + newBtn
 }
 
-// ─── Create Trip ─────────────────────────────────────────────────────────────
+// --- Create Trip -------------------------------------------------------------
 function openCreateTrip() {
   $('ct-name').value=''; $('ct-dest').value=''; $('ct-start').value=''; $('ct-end').value=''
   $('ct-photo-preview').style.display='none'; $('ct-photo-upload-ui').style.display='block'
@@ -668,7 +668,7 @@ async function createTrip() {
   await openTrip(trip.id)
 }
 
-// ─── Open Trip ────────────────────────────────────────────────────────────────
+// --- Open Trip ----------------------------------------------------------------
 async function openTrip(tripId) {
   const {data:trip} = await sb.from('trips').select('*').eq('id',tripId).single()
   if(!trip){alert('Trip not found');return}
@@ -713,7 +713,7 @@ function canEdit() {
   return isHost() || me?.role==='co-host'
 }
 
-// ─── Overview Tab ─────────────────────────────────────────────────────────────
+// --- Overview Tab -------------------------------------------------------------
 function renderOverview() {
   const t = currentTrip
   const edit = canEdit()
@@ -745,7 +745,7 @@ function quickCard(icon,title,desc,tab) {
   </div>`
 }
 
-// ─── Edit Trip ────────────────────────────────────────────────────────────────
+// --- Edit Trip ----------------------------------------------------------------
 function openEditTrip() {
   const t = currentTrip
   setVal('et-name',t.name); setVal('et-dest',t.destination); setVal('et-start',t.date_start); setVal('et-end',t.date_end)
@@ -769,7 +769,7 @@ async function saveEditTrip() {
   renderTripHero(); closeModal('modal-edit-trip'); renderOverview()
 }
 
-// ─── Availability Tab ─────────────────────────────────────────────────────────
+// --- Availability Tab ---------------------------------------------------------
 async function renderAvailability() {
   const {data} = await sb.from('availability').select('*,profiles(name)').eq('trip_id',currentTrip.id)
   const allAvail = data||[]
@@ -834,7 +834,7 @@ async function saveAvailability() {
   alert('✅ Availability saved!')
 }
 
-// ─── Destinations Tab ─────────────────────────────────────────────────────────
+// --- Destinations Tab ---------------------------------------------------------
 async function renderDestinations() {
   const {data:dests} = await sb.from('destinations').select('*').eq('trip_id',currentTrip.id).order('created_at')
   const scored = (dests||[]).map(d=>{
@@ -908,7 +908,7 @@ async function unlockDest(id) {
   renderDestinations(); renderTripHero()
 }
 
-// ─── Activities Tab ───────────────────────────────────────────────────────────
+// --- Activities Tab -----------------------------------------------------------
 async function renderActivities() {
   const {data:acts} = await sb.from('activities').select('*').eq('trip_id',currentTrip.id).order('created_at')
   const scored = (acts||[]).map(a=>{
@@ -977,7 +977,7 @@ async function addActivity() {
   closeModal('modal-add-activity'); renderActivities()
 }
 
-// ─── Expenses Tab ─────────────────────────────────────────────────────────────
+// --- Expenses Tab -------------------------------------------------------------
 async function renderExpenses() {
   const {data:exps} = await sb.from('expenses').select('*').eq('trip_id',currentTrip.id).order('created_at',{ascending:false})
   const members = currentTrip._members
@@ -1068,7 +1068,7 @@ async function addExpense() {
   closeModal('modal-add-expense'); renderExpenses()
 }
 
-// ─── Polls Tab ────────────────────────────────────────────────────────────────
+// --- Polls Tab ----------------------------------------------------------------
 async function renderPolls() {
   const {data:polls} = await sb.from('polls').select('*').eq('trip_id',currentTrip.id).order('created_at',{ascending:false})
   const canCreate=canEdit()
@@ -1131,7 +1131,7 @@ async function addPoll() {
   closeModal('modal-add-poll'); renderPolls()
 }
 
-// ─── Updates Tab ──────────────────────────────────────────────────────────────
+// --- Updates Tab --------------------------------------------------------------
 async function renderUpdates() {
   const {data:anns} = await sb.from('announcements').select('*').eq('trip_id',currentTrip.id).order('pinned',{ascending:false}).order('created_at',{ascending:false})
   const canPost=canEdit()
@@ -1169,7 +1169,7 @@ async function deleteUpdate(id) {
   await sb.from('announcements').delete().eq('id',id); renderUpdates()
 }
 
-// ─── Members Tab ──────────────────────────────────────────────────────────────
+// --- Members Tab --------------------------------------------------------------
 async function renderMembers() {
   const {data:members} = await sb.from('trip_members').select('*,profiles(id,name,email)').eq('trip_id',currentTrip.id)
   currentTrip._members = members||[]
@@ -1235,7 +1235,7 @@ function copyInviteLink() {
   navigator.clipboard.writeText(url).then(()=>alert('✅ Invite link copied! Share it with your friends.')).catch(()=>prompt('Copy this link:',url))
 }
 
-// ─── Join via link ────────────────────────────────────────────────────────────
+// --- Join via link ------------------------------------------------------------
 async function checkJoinParam() {
   const params=new URLSearchParams(window.location.search)
   const joinId=params.get('join')
@@ -1249,7 +1249,7 @@ async function checkJoinParam() {
   await openTrip(joinId)
 }
 
-// ─── Boot ─────────────────────────────────────────────────────────────────────
+// --- Boot ---------------------------------------------------------------------
 async function boot() {
   const {data:{session}} = await sb.auth.getSession()
   if(session?.user){
