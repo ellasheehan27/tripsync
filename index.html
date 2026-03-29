@@ -5,1263 +5,1029 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TripSync</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:#f5f2ed;color:#1a1814;-webkit-font-smoothing:antialiased;min-height:100vh}
-h1,h2,h3,.syne{font-family:'Syne',sans-serif}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px}
-
-/* Layout */
+h1,h2,h3{font-family:'Syne',sans-serif}
 .page{display:none;min-height:100vh}.page.active{display:block}
 .center{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-.container{max-width:960px;margin:0 auto;padding:0 20px}
-
-/* Auth */
 .auth-card{background:#fff;border-radius:24px;padding:48px 40px;max-width:420px;width:100%;box-shadow:0 4px 40px rgba(0,0,0,.08)}
 .logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;justify-content:center}
-.logo-icon{width:44px;height:44px;background:#e8572a;border-radius:12px;display:flex;align-items:center;justify-content:center}
-.logo-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
-.logo-text{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#1a1814}
+.logo-icon{width:44px;height:44px;background:#e8572a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.logo-text{font-family:'Syne',sans-serif;font-size:22px;font-weight:800}
 .tabs{display:flex;background:#f5f2ed;border-radius:12px;padding:4px;margin-bottom:24px}
-.tab{flex:1;padding:8px;text-align:center;border:none;background:none;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;color:#6b6760;transition:.15s}
+.tab{flex:1;padding:8px;text-align:center;border:none;background:none;border-radius:9px;font-size:13px;font-weight:500;cursor:pointer;color:#6b6760;transition:.15s;font-family:'DM Sans',sans-serif}
 .tab.active{background:#fff;color:#1a1814;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+input,textarea,select{width:100%;padding:12px 14px;background:#f5f2ed;border:1.5px solid transparent;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;color:#1a1814;outline:none;transition:.15s;resize:vertical;box-sizing:border-box}
+input:focus,textarea:focus,select:focus{border-color:#e8572a;background:#fff}
+input::placeholder,textarea::placeholder{color:#b0aca6}
 .field{margin-bottom:16px}
-.field label{display:block;font-size:13px;font-weight:600;color:#1a1814;margin-bottom:6px}
-.field input,.field textarea,.field select{width:100%;padding:12px 14px;background:#f5f2ed;border:1.5px solid transparent;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;color:#1a1814;outline:none;transition:.15s;resize:vertical}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:#e8572a;background:#fff}
-.field input::placeholder,.field textarea::placeholder{color:#b0aca6}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.15s;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
 .btn:active{transform:scale(.98)}
-.btn-primary{background:#e8572a;color:#fff}
-.btn-primary:hover{background:#d44e24}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed}
-.btn-secondary{background:#f5f2ed;color:#1a1814}
-.btn-secondary:hover{background:#ebe8e3}
-.btn-ghost{background:none;color:#6b6760;padding:8px 12px}
-.btn-ghost:hover{background:#f5f2ed;color:#1a1814}
-.btn-full{width:100%}
-.btn-sm{padding:8px 14px;font-size:13px;border-radius:10px}
-.btn-danger{background:#fee2e2;color:#dc2626}
-.btn-danger:hover{background:#fecaca}
-.err{background:#fee2e2;color:#dc2626;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:16px}
-.ok{background:#d1fae5;color:#065f46;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:16px}
-
-/* Nav */
+.btn-primary{background:#e8572a;color:#fff}.btn-primary:hover{background:#d44e24}
+.btn-secondary{background:#f5f2ed;color:#1a1814}.btn-secondary:hover{background:#ebe8e3}
+.btn-ghost{background:none;color:#6b6760;padding:8px 12px}.btn-ghost:hover{background:#f5f2ed}
+.btn-full{width:100%}.btn-sm{padding:8px 14px;font-size:13px;border-radius:10px}
+.btn-danger{background:#fee2e2;color:#dc2626}.btn-danger:hover{background:#fecaca}
+.err{background:#fee2e2;color:#dc2626;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none}
+.ok{background:#d1fae5;color:#065f46;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none}
 .nav{background:#fff;border-bottom:1px solid #ebe8e3;position:sticky;top:0;z-index:100}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:960px;margin:0 auto;padding:0 20px}
-.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
-.nav-logo-icon{width:32px;height:32px;background:#e8572a;border-radius:9px;display:flex;align-items:center;justify-content:center}
-.nav-logo-icon svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer}
+.nav-logo-icon{width:32px;height:32px;background:#e8572a;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
 .nav-logo-text{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#1a1814}
 .nav-right{display:flex;align-items:center;gap:8px}
-.avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0;cursor:pointer}
-
-/* Dashboard */
-.dashboard-header{padding:40px 0 32px}
-.dashboard-header h1{font-size:32px;font-weight:800;margin-bottom:6px}
-.dashboard-header p{color:#6b6760;font-size:15px}
+.avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.container{max-width:960px;margin:0 auto;padding:0 20px}
 .trips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding-bottom:40px}
-.trip-card{background:#fff;border-radius:20px;overflow:hidden;cursor:pointer;transition:.2s;border:1.5px solid #ebe8e3;text-decoration:none;display:block}
+.trip-card{background:#fff;border-radius:20px;overflow:hidden;cursor:pointer;transition:.2s;border:1.5px solid #ebe8e3;display:block}
 .trip-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.1);border-color:#e8572a}
-.trip-card-img{width:100%;height:160px;object-fit:cover;display:block;background:#ebe8e3}
-.trip-card-img-placeholder{width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:48px}
-.trip-card-body{padding:16px 18px 18px}
-.trip-card-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:4px}
-.trip-card-meta{font-size:13px;color:#6b6760;display:flex;flex-direction:column;gap:3px}
-.trip-card-meta span{display:flex;align-items:center;gap:5px}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600}
-.badge-host{background:#fef3c7;color:#92400e}
-.badge-member{background:#f0fdf4;color:#166534}
+.trip-img{width:100%;height:160px;object-fit:cover;display:block;background:#ebe8e3}
+.trip-img-placeholder{width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.trip-body{padding:16px 18px 18px}
+.trip-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:4px}
+.trip-meta{font-size:13px;color:#6b6760}
 .new-trip-card{background:#fff;border-radius:20px;border:2px dashed #d5d2cb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:.2s;min-height:200px;color:#9ca3af}
 .new-trip-card:hover{border-color:#e8572a;color:#e8572a;background:#fdf9f7}
-.new-trip-card-icon{width:48px;height:48px;border-radius:14px;background:#f5f2ed;display:flex;align-items:center;justify-content:center;font-size:22px}
-.new-trip-card-text{font-weight:600;font-size:14px}
-
-/* Trip Page */
 .trip-hero{position:relative;height:240px;background:#1a1814;overflow:hidden}
 .trip-hero img{width:100%;height:100%;object-fit:cover;opacity:.85}
 .trip-hero-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px}
 .trip-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.6))}
 .trip-hero-content{position:absolute;bottom:0;left:0;right:0;padding:24px}
-.trip-hero-content h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:4px}
+.trip-hero-content h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px;font-family:'Syne',sans-serif}
 .trip-hero-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.trip-hero-meta span{font-size:13px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:4px}
-.trip-tabs{background:#fff;border-bottom:1px solid #ebe8e3;sticky;top:60px;z-index:90;overflow-x:auto}
+.trip-hero-meta span{font-size:13px;color:rgba(255,255,255,.85)}
+.trip-tabs{background:#fff;border-bottom:1px solid #ebe8e3;top:60px;z-index:90;overflow-x:auto}
 .trip-tabs-inner{display:flex;max-width:960px;margin:0 auto;padding:0 20px}
-.trip-tab{padding:14px 16px;font-size:13px;font-weight:600;color:#6b6760;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.15s}
+.trip-tab{padding:14px 16px;font-size:13px;font-weight:600;color:#6b6760;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.15s;font-family:'DM Sans',sans-serif}
 .trip-tab.active{color:#e8572a;border-bottom-color:#e8572a}
-.trip-tab:hover:not(.active){color:#1a1814}
 .trip-content{max-width:960px;margin:0 auto;padding:24px 20px}
-
-/* Cards */
-.card{background:#fff;border-radius:16px;border:1.5px solid #ebe8e3;overflow:hidden}
-.card-padded{padding:20px}
-.card+.card{margin-top:12px}
+.card{background:#fff;border-radius:16px;border:1.5px solid #ebe8e3;padding:20px;margin-bottom:12px}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .card-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
-.section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:16px}
-.divider{height:1px;background:#ebe8e3;margin:16px 0}
-
-/* Members */
-.member-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f5f2ed}
-.member-row:last-child{border-bottom:none}
-.member-info{flex:1}
-.member-name{font-weight:600;font-size:14px}
-.member-email{font-size:12px;color:#6b6760}
-
-/* Activities / Voting */
-.activity-row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #f5f2ed}
-.activity-row:last-child{border-bottom:none}
-.vote-btns{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
+.divider{height:1px;background:#ebe8e3;margin:12px 0}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f5f2ed}
+.row:last-child{border-bottom:none}
+.vote-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0}
 .vote-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid #ebe8e3;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.15s}
 .vote-btn:hover{border-color:#e8572a}
-.vote-btn.voted-up{background:#e8572a;border-color:#e8572a;color:#fff}
-.vote-btn.voted-down{background:#f5f2ed;border-color:#d5d2cb}
-.vote-count{font-size:12px;font-weight:700;color:#6b6760}
-.activity-info{flex:1}
-.activity-name{font-weight:600;font-size:14px;margin-bottom:2px}
-.activity-meta{font-size:12px;color:#6b6760}
-.lock-btn{padding:6px 10px;border-radius:8px;border:1.5px solid #ebe8e3;background:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;color:#6b6760}
+.vote-btn.up{background:#e8572a;border-color:#e8572a;color:#fff}
+.vote-btn.down{background:#f5f2ed;border-color:#d5d2cb}
+.vote-score{font-size:12px;font-weight:700;color:#6b6760}
+.lock-btn{padding:6px 10px;border-radius:8px;border:1.5px solid #ebe8e3;background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:#6b6760;font-family:'DM Sans',sans-serif}
 .lock-btn:hover{border-color:#0f7b6c;color:#0f7b6c}
 .lock-btn.locked{background:#0f7b6c;border-color:#0f7b6c;color:#fff}
-
-/* Availability Calendar */
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
-.cal-day-header{text-align:center;font-size:11px;font-weight:600;color:#6b6760;padding:4px 0}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
+.cal-hdr{text-align:center;font-size:11px;font-weight:600;color:#6b6760;padding:4px 0}
 .cal-day{aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid transparent;transition:.15s;font-size:13px;font-weight:500;position:relative}
-.cal-day:hover:not(.cal-day-empty):not(.cal-day-past){background:#f5f2ed}
-.cal-day.selected{border-color:#e8572a;background:#fdf1ec;color:#e8572a;font-weight:700}
-.cal-day.cal-day-past{color:#d5d2cb;cursor:default}
-.cal-day.cal-day-empty{cursor:default}
-.cal-day-count{font-size:9px;color:#6b6760;line-height:1}
-.cal-day.heat-low{background:#d1fae5}
-.cal-day.heat-mid{background:#6ee7b7}
-.cal-day.heat-high{background:#059669;color:#fff}
+.cal-day:hover:not(.past):not(.empty){background:#f5f2ed}
+.cal-day.sel{border-color:#e8572a;background:#fdf1ec;color:#e8572a;font-weight:700}
+.cal-day.past{color:#d5d2cb;cursor:default}
+.cal-day.empty{cursor:default}
+.cal-day.h1{background:#d1fae5}
+.cal-day.h2{background:#6ee7b7}
+.cal-day.h3{background:#059669;color:#fff}
+.cal-count{font-size:9px;color:#6b6760;line-height:1}
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
 .cal-nav-btn{background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;color:#6b6760;font-size:18px}
-.cal-nav-btn:hover{background:#f5f2ed;color:#1a1814}
-.cal-month{font-weight:700;font-size:15px}
-
-/* Expenses */
-.expense-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f5f2ed}
-.expense-row:last-child{border-bottom:none}
-.expense-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;background:#fef3c7;flex-shrink:0}
-.expense-info{flex:1}
-.expense-name{font-weight:600;font-size:14px}
-.expense-meta{font-size:12px;color:#6b6760}
-.expense-amount{font-weight:700;font-size:15px}
-.balance-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f5f2ed}
-.balance-row:last-child{border-bottom:none}
-.balance-pos{color:#059669;font-weight:700}
-.balance-neg{color:#dc2626;font-weight:700}
-
-/* Destinations */
-.dest-card{border:1.5px solid #ebe8e3;border-radius:14px;padding:16px;margin-bottom:10px;transition:.15s}
-.dest-card.locked-dest{border-color:#0f7b6c;background:#f0fdf4}
-.dest-card.leading{border-color:#e8572a}
-
-/* Polls */
-.poll-option{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid #ebe8e3;background:#fff;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;text-align:left;transition:.15s;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.poll-option:hover:not(.disabled){border-color:#e8572a}
-.poll-option.my-vote{border-color:#e8572a;background:#fdf1ec;font-weight:600}
-.poll-option.winner{border-color:#0f7b6c;background:#f0fdf4}
-.poll-bar{position:absolute;inset:0;background:#f5f2ed;z-index:0;transition:.5s}
-.poll-option.my-vote .poll-bar{background:#fdf1ec}
-.poll-option.winner .poll-bar{background:#f0fdf4}
-.poll-label{position:relative;z-index:1}
-.poll-pct{position:relative;z-index:1;font-size:12px;font-weight:600;color:#6b6760}
-
-/* Announcements */
-.ann-card{background:#fffbf0;border:1.5px solid #fde68a;border-radius:14px;padding:16px;margin-bottom:10px}
-.ann-card.pinned{border-color:#f59e0b}
-.ann-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.ann-name{font-weight:600;font-size:13px}
-.ann-time{font-size:11px;color:#6b6760}
-.ann-msg{font-size:14px;line-height:1.6;white-space:pre-wrap}
-
-/* Modals */
+.cal-nav-btn:hover{background:#f5f2ed}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:flex-end;justify-content:center;padding:20px}
 @media(min-width:600px){.modal-overlay{align-items:center}}
 .modal-overlay.hidden{display:none}
-.modal{background:#fff;border-radius:24px 24px 24px 24px;padding:28px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.modal{background:#fff;border-radius:24px;padding:28px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
 .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .modal-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
 .modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#6b6760;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.modal-close:hover{background:#f5f2ed;color:#1a1814}
-
-/* Misc */
+.modal-close:hover{background:#f5f2ed}
 .empty{text-align:center;padding:48px 20px;color:#6b6760}
 .empty-icon{font-size:48px;margin-bottom:12px}
 .empty-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#1a1814;margin-bottom:6px}
-.empty-text{font-size:14px;margin-bottom:20px}
-.flex{display:flex}.gap-8{gap:8px}.gap-12{gap:12px}.items-center{align-items:center}.justify-between{justify-content:space-between}.flex-1{flex:1}
-.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mb-12{margin-bottom:12px}
-.text-sm{font-size:13px}.text-xs{font-size:11px}.text-muted{color:#6b6760}.fw-600{font-weight:600}
-.w-full{width:100%}
-.photo-upload{border:2px dashed #d5d2cb;border-radius:14px;padding:32px;text-align:center;cursor:pointer;transition:.15s;position:relative}
+.photo-upload{border:2px dashed #d5d2cb;border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:.15s;position:relative}
 .photo-upload:hover{border-color:#e8572a;background:#fdf9f7}
 .photo-upload input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .photo-preview{width:100%;height:160px;object-fit:cover;border-radius:12px;display:block}
 .chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;background:#f5f2ed;color:#6b6760}
+.poll-option{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid #ebe8e3;background:#fff;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;text-align:left;transition:.15s;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.poll-option:hover:not([disabled]){border-color:#e8572a}
+.poll-option.my-vote{border-color:#e8572a;font-weight:600}
+.poll-option.winner{border-color:#0f7b6c}
+.poll-bar{position:absolute;inset:0;z-index:0;transition:.5s;opacity:.15}
+.poll-label{position:relative;z-index:1}
+.poll-pct{position:relative;z-index:1;font-size:12px;font-weight:600;color:#6b6760}
+.ann-card{background:#fffbf0;border:1.5px solid #fde68a;border-radius:14px;padding:16px;margin-bottom:10px}
+.ann-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .settle-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid #f5f2ed;font-size:14px}
 .settle-row:last-child{border-bottom:none}
-.settle-arrow{color:#e8572a;font-size:16px}
-.online-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block}
+.balance-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f5f2ed}
+.balance-row:last-child{border-bottom:none}
+.pos{color:#059669;font-weight:700}.neg{color:#dc2626;font-weight:700}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.stat-card{background:#fff;border-radius:16px;border:1.5px solid #ebe8e3;padding:16px;text-align:center}
+.stat-val{font-size:24px;font-weight:800;font-family:'Syne',sans-serif;margin-top:4px}
+.dest-card{border:1.5px solid #ebe8e3;border-radius:14px;padding:16px;margin-bottom:10px}
+.dest-card.leading{border-color:#e8572a}
+.dest-card.locked{border-color:#0f7b6c;background:#f0fdf4}
+.flex{display:flex}.gap8{gap:8px}.gap12{gap:12px}.ac{align-items:center}.jb{justify-content:space-between}.f1{flex:1}.wrap{flex-wrap:wrap}
+.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
+.w100{width:100%}.sm{font-size:13px}.xs{font-size:11px}.muted{color:#6b6760}.bold{font-weight:600}
 </style>
 </head>
 <body>
 
-<!-- AUTH PAGE -->
-<div id="page-auth" class="page active">
+<div id="pg-auth" class="page active">
   <div class="center">
     <div class="auth-card">
-      <div class="logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        </div>
-        <span class="logo-text">TripSync</span>
-      </div>
+      <div class="logo"><div class="logo-icon">&#x2708;</div><span class="logo-text">TripSync</span></div>
       <div class="tabs">
-        <button class="tab active" onclick="switchAuthTab('login')">Log in</button>
-        <button class="tab" onclick="switchAuthTab('signup')">Sign up</button>
+        <button class="tab active" onclick="authTab('login',this)">Log in</button>
+        <button class="tab" onclick="authTab('signup',this)">Sign up</button>
       </div>
-      <div id="auth-err" class="err" style="display:none"></div>
-      <div id="auth-ok" class="ok" style="display:none"></div>
-      <div id="auth-login">
-        <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="you@email.com"/></div>
-        <div class="field"><label>Password</label><input type="password" id="login-pw" placeholder="••••••••"/></div>
-        <button class="btn btn-primary btn-full" onclick="login()">Log in →</button>
+      <div id="auth-err" class="err"></div>
+      <div id="login-form">
+        <div class="field"><label>Email</label><input type="email" id="li-email" placeholder="you@email.com"></div>
+        <div class="field"><label>Password</label><input type="password" id="li-pw" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"></div>
+        <button class="btn btn-primary btn-full" onclick="doLogin()">Log in &rarr;</button>
       </div>
-      <div id="auth-signup" style="display:none">
-        <div class="field"><label>Your name</label><input type="text" id="signup-name" placeholder="Ella Sheehan"/></div>
-        <div class="field"><label>Email</label><input type="email" id="signup-email" placeholder="you@email.com"/></div>
-        <div class="field"><label>Password</label><input type="password" id="signup-pw" placeholder="At least 6 characters"/></div>
-        <button class="btn btn-primary btn-full" onclick="signup()">Create account →</button>
+      <div id="signup-form" style="display:none">
+        <div class="field"><label>Your name</label><input type="text" id="su-name" placeholder="Ella Sheehan"></div>
+        <div class="field"><label>Email</label><input type="email" id="su-email" placeholder="you@email.com"></div>
+        <div class="field"><label>Password</label><input type="password" id="su-pw" placeholder="At least 6 characters"></div>
+        <button class="btn btn-primary btn-full" onclick="doSignup()">Create account &rarr;</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- DASHBOARD PAGE -->
-<div id="page-dashboard" class="page">
-  <nav class="nav">
-    <div class="nav-inner">
-      <a class="nav-logo" href="#" onclick="showDashboard()">
-        <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
-        <span class="nav-logo-text">TripSync</span>
-      </a>
-      <div class="nav-right">
-        <div id="nav-avatar" class="avatar" title="Profile"></div>
-        <button class="btn btn-ghost btn-sm" onclick="logout()">Log out</button>
-      </div>
-    </div>
-  </nav>
+<div id="pg-dash" class="page">
+  <nav class="nav"><div class="nav-inner">
+    <div class="nav-logo" onclick="showDash()"><div class="nav-logo-icon">&#x2708;</div><span class="nav-logo-text">TripSync</span></div>
+    <div class="nav-right"><div id="dash-av" class="avatar"></div><button class="btn btn-ghost btn-sm" onclick="doLogout()">Log out</button></div>
+  </div></nav>
   <div class="container">
-    <div class="dashboard-header">
-      <h1 id="dash-greeting">Your Trips</h1>
-      <p class="text-muted">All your group adventures in one place</p>
-    </div>
-    <div id="trips-grid" class="trips-grid">
-      <div class="new-trip-card" onclick="openCreateTrip()">
-        <div class="new-trip-card-icon">✈️</div>
-        <div class="new-trip-card-text">Plan a new trip</div>
-      </div>
-    </div>
+    <div style="padding:40px 0 32px"><h1 id="dash-hi" style="font-size:32px;font-weight:800;margin-bottom:6px">Your Trips</h1><p class="muted">All your group adventures in one place</p></div>
+    <div id="trips-grid" class="trips-grid"></div>
   </div>
 </div>
 
-<!-- TRIP PAGE -->
-<div id="page-trip" class="page">
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="flex items-center gap-8">
-        <button class="btn btn-ghost btn-sm" onclick="showDashboard()">← Back</button>
-        <a class="nav-logo" href="#" onclick="showDashboard()">
-          <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
-          <span class="nav-logo-text">TripSync</span>
-        </a>
-      </div>
-      <div class="nav-right">
-        <button class="btn btn-secondary btn-sm" onclick="copyInviteLink()" id="invite-btn">Copy invite link</button>
-        <div id="trip-nav-avatar" class="avatar"></div>
-      </div>
+<div id="pg-trip" class="page">
+  <nav class="nav"><div class="nav-inner">
+    <div class="flex ac gap8">
+      <button class="btn btn-ghost btn-sm" onclick="showDash()">&larr; Back</button>
+      <div class="nav-logo" onclick="showDash()"><div class="nav-logo-icon">&#x2708;</div><span class="nav-logo-text">TripSync</span></div>
     </div>
-  </nav>
+    <div class="nav-right">
+      <button class="btn btn-secondary btn-sm" onclick="copyInvite()">Copy invite link</button>
+      <div id="trip-av" class="avatar"></div>
+    </div>
+  </div></nav>
   <div class="trip-hero">
-    <img id="trip-hero-img" src="" alt="" style="display:none">
-    <div id="trip-hero-placeholder" class="trip-hero-placeholder">✈️</div>
+    <img id="hero-img" src="" alt="" style="display:none">
+    <div id="hero-ph" class="trip-hero-placeholder">&#x2708;</div>
     <div class="trip-hero-overlay"></div>
     <div class="trip-hero-content">
-      <h1 id="trip-hero-name"></h1>
+      <h1 id="hero-name"></h1>
       <div class="trip-hero-meta">
-        <span id="trip-hero-dest"></span>
-        <span id="trip-hero-dates"></span>
-        <span id="trip-hero-members"></span>
+        <span id="hero-dest"></span>
+        <span id="hero-dates"></span>
+        <span id="hero-members"></span>
       </div>
     </div>
   </div>
-  <div class="trip-tabs">
-    <div class="trip-tabs-inner">
-      <button class="trip-tab active" onclick="showTab('overview')">Overview</button>
-      <button class="trip-tab" onclick="showTab('availability')">Availability</button>
-      <button class="trip-tab" onclick="showTab('destinations')">Destinations</button>
-      <button class="trip-tab" onclick="showTab('activities')">Activities</button>
-      <button class="trip-tab" onclick="showTab('expenses')">Expenses</button>
-      <button class="trip-tab" onclick="showTab('polls')">Polls</button>
-      <button class="trip-tab" onclick="showTab('updates')">Updates</button>
-      <button class="trip-tab" onclick="showTab('members')">Members</button>
-    </div>
-  </div>
-  <div class="trip-content" id="trip-content"></div>
+  <div class="trip-tabs"><div class="trip-tabs-inner">
+    <button class="trip-tab active" onclick="goTab('overview',this)">Overview</button>
+    <button class="trip-tab" onclick="goTab('avail',this)">Availability</button>
+    <button class="trip-tab" onclick="goTab('dests',this)">Destinations</button>
+    <button class="trip-tab" onclick="goTab('acts',this)">Activities</button>
+    <button class="trip-tab" onclick="goTab('expenses',this)">Expenses</button>
+    <button class="trip-tab" onclick="goTab('polls',this)">Polls</button>
+    <button class="trip-tab" onclick="goTab('updates',this)">Updates</button>
+    <button class="trip-tab" onclick="goTab('members',this)">Members</button>
+  </div></div>
+  <div id="trip-content" class="trip-content"></div>
 </div>
 
 <!-- MODALS -->
-<div id="modal-create-trip" class="modal-overlay hidden">
+<div id="m-create" class="modal-overlay hidden">
   <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">New trip ✈️</span>
-      <button class="modal-close" onclick="closeModal('modal-create-trip')">✕</button>
-    </div>
-    <div class="field"><label>Trip name *</label><input type="text" id="ct-name" placeholder='e.g. "Spain 2025"'/></div>
-    <div class="field"><label>Destination</label><input type="text" id="ct-dest" placeholder="Barcelona, Spain"/></div>
-    <div class="field"><label>Start date</label><input type="date" id="ct-start"/></div>
-    <div class="field"><label>End date</label><input type="date" id="ct-end"/></div>
-    <div class="field">
-      <label>Trip photo</label>
-      <div id="ct-photo-area" class="photo-upload">
-        <input type="file" id="ct-photo-input" accept="image/*" onchange="previewPhoto(this,'ct-photo-preview','ct-photo-area')">
-        <div id="ct-photo-upload-ui">
-          <div style="font-size:28px;margin-bottom:8px">📷</div>
-          <div style="font-size:14px;font-weight:600;color:#6b6760">Click to upload a photo</div>
-          <div style="font-size:12px;color:#b0aca6;margin-top:4px">JPG, PNG — optional</div>
-        </div>
-        <img id="ct-photo-preview" class="photo-preview" style="display:none">
+    <div class="modal-header"><span class="modal-title">New trip &#x2708;</span><button class="modal-close" onclick="closeM('m-create')">&#x2715;</button></div>
+    <div class="field"><label>Trip name *</label><input type="text" id="ct-name" placeholder="Spain 2025"></div>
+    <div class="field"><label>Destination</label><input type="text" id="ct-dest" placeholder="Barcelona, Spain"></div>
+    <div class="field"><label>Start date</label><input type="date" id="ct-s"></div>
+    <div class="field"><label>End date</label><input type="date" id="ct-e"></div>
+    <div class="field"><label>Trip photo</label>
+      <div class="photo-upload" id="ct-photo-wrap">
+        <input type="file" id="ct-photo" accept="image/*" onchange="prevPhoto(this,'ct-prev','ct-photo-ui')">
+        <div id="ct-photo-ui"><div style="font-size:28px;margin-bottom:8px">&#x1F4F7;</div><div style="font-size:14px;font-weight:600;color:#6b6760">Click to upload photo</div><div style="font-size:12px;color:#b0aca6;margin-top:4px">Optional</div></div>
+        <img id="ct-prev" class="photo-preview" style="display:none">
       </div>
     </div>
-    <div id="ct-err" class="err" style="display:none"></div>
-    <div class="flex gap-8 mt-16">
-      <button class="btn btn-secondary flex-1" onclick="closeModal('modal-create-trip')">Cancel</button>
-      <button class="btn btn-primary flex-1" onclick="createTrip()">Create trip</button>
-    </div>
+    <div id="ct-err" class="err"></div>
+    <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-create')">Cancel</button><button class="btn btn-primary f1" onclick="doCreateTrip()">Create trip</button></div>
   </div>
 </div>
 
-<div id="modal-add-activity" class="modal-overlay hidden">
+<div id="m-edit" class="modal-overlay hidden">
   <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">Add activity</span>
-      <button class="modal-close" onclick="closeModal('modal-add-activity')">✕</button>
-    </div>
-    <div class="field"><label>Activity name *</label><input type="text" id="act-name" placeholder="Dinner at Soho House"/></div>
-    <div class="field"><label>Description</label><input type="text" id="act-desc" placeholder="Optional details"/></div>
-    <div class="field"><label>Estimated cost</label><input type="text" id="act-cost" placeholder="$30/person"/></div>
-    <div id="act-err" class="err" style="display:none"></div>
-    <div class="flex gap-8 mt-16">
-      <button class="btn btn-secondary flex-1" onclick="closeModal('modal-add-activity')">Cancel</button>
-      <button class="btn btn-primary flex-1" onclick="addActivity()">Add activity</button>
-    </div>
-  </div>
-</div>
-
-<div id="modal-add-expense" class="modal-overlay hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">Add expense</span>
-      <button class="modal-close" onclick="closeModal('modal-add-expense')">✕</button>
-    </div>
-    <div class="field"><label>Description *</label><input type="text" id="exp-desc" placeholder="Airbnb, dinner, Ubers..."/></div>
-    <div class="field"><label>Total amount ($) *</label><input type="number" id="exp-amount" placeholder="0.00" step="0.01" min="0"/></div>
-    <div class="field"><label>Paid by</label><select id="exp-paidby"></select></div>
-    <div class="field"><label>Split among</label><div id="exp-split-checkboxes" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px"></div></div>
-    <div id="exp-err" class="err" style="display:none"></div>
-    <div class="flex gap-8 mt-16">
-      <button class="btn btn-secondary flex-1" onclick="closeModal('modal-add-expense')">Cancel</button>
-      <button class="btn btn-primary flex-1" onclick="addExpense()">Add expense</button>
-    </div>
-  </div>
-</div>
-
-<div id="modal-add-dest" class="modal-overlay hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">Suggest destination</span>
-      <button class="modal-close" onclick="closeModal('modal-add-dest')">✕</button>
-    </div>
-    <div class="field"><label>Location *</label><input type="text" id="dest-loc" placeholder="Tokyo, Japan"/></div>
-    <div class="field"><label>Why here?</label><input type="text" id="dest-why" placeholder="Amazing food, culture..."/></div>
-    <div class="field"><label>Estimated cost</label><input type="text" id="dest-cost" placeholder="$2000/person"/></div>
-    <div id="dest-err" class="err" style="display:none"></div>
-    <div class="flex gap-8 mt-16">
-      <button class="btn btn-secondary flex-1" onclick="closeModal('modal-add-dest')">Cancel</button>
-      <button class="btn btn-primary flex-1" onclick="addDestination()">Suggest</button>
-    </div>
-  </div>
-</div>
-
-<div id="modal-add-poll" class="modal-overlay hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">New poll</span>
-      <button class="modal-close" onclick="closeModal('modal-add-poll')">✕</button>
-    </div>
-    <div class="field"><label>Question *</label><input type="text" id="poll-q" placeholder="Which hotel should we book?"/></div>
-    <div class="field">
-      <label>Options (one per line) *</label>
-      <textarea id="poll-opts" placeholder="Option A&#10;Option B&#10;Option C" style="min-height:80px"></textarea>
-    </div>
-    <div id="poll-err" class="err" style="display:none"></div>
-    <div class="flex gap-8 mt-16">
-      <button class="btn btn-secondary flex-1" onclick="closeModal('modal-add-poll')">Cancel</button>
-      <button class="btn btn-primary flex-1" onclick="addPoll()">Create poll</button>
-    </div>
-  </div>
-</div>
-
-<div id="modal-post-update" class="modal-overlay hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">Post update</span>
-      <button class="modal-close" onclick="closeModal('modal-post-update')">✕</button>
-    </div>
-    <div class="field"><label>Message *</label><textarea id="upd-msg" placeholder="Share an update with the group..." style="min-height:100px"></textarea></div>
-    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-bottom:16px">
-      <input type="checkbox" id="upd-pin"> Pin this message
-    </label>
-    <div class="flex gap-8">
-      <button class="btn btn-secondary flex-1" onclick="closeModal('modal-post-update')">Cancel</button>
-      <button class="btn btn-primary flex-1" onclick="postUpdate()">Post</button>
-    </div>
-  </div>
-</div>
-
-<div id="modal-invite" class="modal-overlay hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">Invite someone</span>
-      <button class="modal-close" onclick="closeModal('modal-invite')">✕</button>
-    </div>
-    <p class="text-sm text-muted mb-12">They need to create a TripSync account first, then you can add them by email.</p>
-    <div class="field"><label>Their email *</label><input type="email" id="inv-email" placeholder="friend@email.com"/></div>
-    <div id="inv-err" class="err" style="display:none"></div>
-    <div id="inv-ok" class="ok" style="display:none"></div>
-    <div class="flex gap-8 mt-16">
-      <button class="btn btn-secondary flex-1" onclick="closeModal('modal-invite')">Cancel</button>
-      <button class="btn btn-primary flex-1" onclick="inviteMember()">Add to trip</button>
-    </div>
-  </div>
-</div>
-
-<div id="modal-edit-trip" class="modal-overlay hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title">Edit trip</span>
-      <button class="modal-close" onclick="closeModal('modal-edit-trip')">✕</button>
-    </div>
-    <div class="field"><label>Trip name *</label><input type="text" id="et-name"/></div>
-    <div class="field"><label>Destination</label><input type="text" id="et-dest"/></div>
-    <div class="field"><label>Start date</label><input type="date" id="et-start"/></div>
-    <div class="field"><label>End date</label><input type="date" id="et-end"/></div>
-    <div class="field">
-      <label>Change photo</label>
-      <div id="et-photo-area" class="photo-upload">
-        <input type="file" id="et-photo-input" accept="image/*" onchange="previewPhoto(this,'et-photo-preview','et-photo-area')">
-        <div id="et-photo-upload-ui">
-          <div style="font-size:24px;margin-bottom:6px">📷</div>
-          <div style="font-size:13px;font-weight:600;color:#6b6760">Click to change photo</div>
-        </div>
-        <img id="et-photo-preview" class="photo-preview" style="display:none">
+    <div class="modal-header"><span class="modal-title">Edit trip</span><button class="modal-close" onclick="closeM('m-edit')">&#x2715;</button></div>
+    <div class="field"><label>Trip name *</label><input type="text" id="et-name"></div>
+    <div class="field"><label>Destination</label><input type="text" id="et-dest"></div>
+    <div class="field"><label>Start date</label><input type="date" id="et-s"></div>
+    <div class="field"><label>End date</label><input type="date" id="et-e"></div>
+    <div class="field"><label>Change photo</label>
+      <div class="photo-upload">
+        <input type="file" id="et-photo" accept="image/*" onchange="prevPhoto(this,'et-prev','et-photo-ui')">
+        <div id="et-photo-ui"><div style="font-size:24px;margin-bottom:6px">&#x1F4F7;</div><div style="font-size:13px;font-weight:600;color:#6b6760">Click to change photo</div></div>
+        <img id="et-prev" class="photo-preview" style="display:none">
       </div>
     </div>
-    <div id="et-err" class="err" style="display:none"></div>
-    <div class="flex gap-8 mt-16">
-      <button class="btn btn-secondary flex-1" onclick="closeModal('modal-edit-trip')">Cancel</button>
-      <button class="btn btn-primary flex-1" onclick="saveEditTrip()">Save changes</button>
-    </div>
+    <div id="et-err" class="err"></div>
+    <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-edit')">Cancel</button><button class="btn btn-primary f1" onclick="doEditTrip()">Save changes</button></div>
+  </div>
+</div>
+
+<div id="m-act" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Add activity</span><button class="modal-close" onclick="closeM('m-act')">&#x2715;</button></div>
+    <div class="field"><label>Activity name *</label><input type="text" id="act-name" placeholder="Dinner at Nobu"></div>
+    <div class="field"><label>Description</label><input type="text" id="act-desc" placeholder="Optional details"></div>
+    <div class="field"><label>Estimated cost</label><input type="text" id="act-cost" placeholder="$30/person"></div>
+    <div id="act-err" class="err"></div>
+    <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-act')">Cancel</button><button class="btn btn-primary f1" onclick="doAddAct()">Add</button></div>
+  </div>
+</div>
+
+<div id="m-exp" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Add expense</span><button class="modal-close" onclick="closeM('m-exp')">&#x2715;</button></div>
+    <div class="field"><label>Description *</label><input type="text" id="exp-desc" placeholder="Airbnb, dinner..."></div>
+    <div class="field"><label>Total amount ($) *</label><input type="number" id="exp-amt" placeholder="0.00" step="0.01" min="0"></div>
+    <div class="field"><label>Paid by</label><select id="exp-paid"></select></div>
+    <div class="field"><label>Split among</label><div id="exp-split" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px"></div></div>
+    <div id="exp-err" class="err"></div>
+    <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-exp')">Cancel</button><button class="btn btn-primary f1" onclick="doAddExp()">Add expense</button></div>
+  </div>
+</div>
+
+<div id="m-dest" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Suggest destination</span><button class="modal-close" onclick="closeM('m-dest')">&#x2715;</button></div>
+    <div class="field"><label>Location *</label><input type="text" id="dest-loc" placeholder="Tokyo, Japan"></div>
+    <div class="field"><label>Why here?</label><input type="text" id="dest-why" placeholder="Amazing food, beaches..."></div>
+    <div class="field"><label>Est. cost</label><input type="text" id="dest-cost" placeholder="$2000/person"></div>
+    <div id="dest-err" class="err"></div>
+    <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-dest')">Cancel</button><button class="btn btn-primary f1" onclick="doAddDest()">Suggest</button></div>
+  </div>
+</div>
+
+<div id="m-poll" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">New poll</span><button class="modal-close" onclick="closeM('m-poll')">&#x2715;</button></div>
+    <div class="field"><label>Question *</label><input type="text" id="poll-q" placeholder="Which hotel should we book?"></div>
+    <div class="field"><label>Options (one per line) *</label><textarea id="poll-opts" placeholder="Option A&#10;Option B&#10;Option C" style="min-height:80px"></textarea></div>
+    <div id="poll-err" class="err"></div>
+    <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-poll')">Cancel</button><button class="btn btn-primary f1" onclick="doAddPoll()">Create poll</button></div>
+  </div>
+</div>
+
+<div id="m-update" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Post update</span><button class="modal-close" onclick="closeM('m-update')">&#x2715;</button></div>
+    <div class="field"><label>Message *</label><textarea id="upd-msg" placeholder="Share an update..." style="min-height:100px"></textarea></div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-bottom:16px"><input type="checkbox" id="upd-pin"> Pin this message</label>
+    <div class="flex gap8"><button class="btn btn-secondary f1" onclick="closeM('m-update')">Cancel</button><button class="btn btn-primary f1" onclick="doPostUpdate()">Post</button></div>
+  </div>
+</div>
+
+<div id="m-invite" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Invite someone</span><button class="modal-close" onclick="closeM('m-invite')">&#x2715;</button></div>
+    <p class="sm muted mb12">They need a TripSync account first, then add them by email.</p>
+    <div class="field"><label>Their email *</label><input type="email" id="inv-email" placeholder="friend@email.com"></div>
+    <div id="inv-err" class="err"></div>
+    <div id="inv-ok" class="ok"></div>
+    <div class="flex gap8 mt16"><button class="btn btn-secondary f1" onclick="closeM('m-invite')">Cancel</button><button class="btn btn-primary f1" onclick="doInvite()">Add to trip</button></div>
   </div>
 </div>
 
 <script>
-// --- Supabase ----------------------------------------------------------------
-const SB_URL = 'https://ykxprrbbsldbwmhfmrkf.supabase.co'
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlreHBycmJic2xkYndtaGZtcmtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyMzYyOTAsImV4cCI6MjA4OTgxMjI5MH0.Gt8MeYBh6n8KbChSQ-7bWXzf_yZ0-BU4_LyFEVFZhSM'
-const sb = supabase.createClient(SB_URL, SB_KEY)
+var SB_URL = 'https://ykxprrbbsldbwmhfmrkf.supabase.co';
+var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlreHBycmJic2xkYndtaGZtcmtmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyMzYyOTAsImV4cCI6MjA4OTgxMjI5MH0.Gt8MeYBh6n8KbChSQ-7bWXzf_yZ0-BU4_LyFEVFZhSM';
+var sb = supabase.createClient(SB_URL, SB_KEY);
 
-// --- State -------------------------------------------------------------------
-let currentUser = null
-let currentProfile = null
-let currentTrip = null
-let currentTab = 'overview'
-let calMonth = new Date()
-let myAvailDates = new Set()
+var CU = null, CP = null, CT = null, calMonth = new Date(), myDates = {};
 
-// --- Helpers -----------------------------------------------------------------
-const $ = id => document.getElementById(id)
-const show = id => $(id).style.display = 'block'
-const hide = id => $(id).style.display = 'none'
-const val = id => $(id).value.trim()
-const setVal = (id, v) => $(id).value = v || ''
+function g(id){ return document.getElementById(id); }
+function v(id){ return g(id).value.trim(); }
+function sv(id,val){ g(id).value = val || ''; }
+function showPg(id){ document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');}); g(id).classList.add('active'); window.scrollTo(0,0); }
+function openM(id){ g(id).classList.remove('hidden'); }
+function closeM(id){ g(id).classList.add('hidden'); }
+function showErr(id,msg){ var el=g(id); el.textContent=msg; el.style.display='block'; }
+function hideErr(id){ g(id).style.display='none'; }
+function showOk(id,msg){ var el=g(id); el.textContent=msg; el.style.display='block'; }
 
-const COLORS = ['#e8572a','#0f7b6c','#c9973a','#7c3aed','#db2777','#2563eb','#059669','#d97706']
-const avatarColor = name => { let h=0; for(const c of (name||'')) h+=c.charCodeAt(0); return COLORS[h%COLORS.length] }
-const initials = name => (name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)
-
-const fmtDate = d => d ? new Date(d+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : ''
-const fmtShort = d => d ? new Date(d+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}) : ''
-const ago = d => { const s=Math.floor((Date.now()-new Date(d))/1000); if(s<60)return'just now'; if(s<3600)return Math.floor(s/60)+'m ago'; if(s<86400)return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago' }
-
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
-  $(id).classList.add('active')
-  window.scrollTo(0,0)
+var COLORS = ['#e8572a','#0f7b6c','#c9973a','#7c3aed','#db2777','#2563eb','#059669','#d97706'];
+function avColor(name){
+  var h=0, s=name||'';
+  for(var i=0;i<s.length;i++) h+=s.charCodeAt(i);
+  return COLORS[h%COLORS.length];
+}
+function initials(name){
+  var parts=(name||'?').split(' ');
+  return parts.map(function(w){return w[0]||'';}).join('').toUpperCase().slice(0,2);
+}
+function makeAv(name,size){
+  size=size||34;
+  return '<div class="avatar" style="width:'+size+'px;height:'+size+'px;background:'+avColor(name)+';font-size:'+Math.floor(size*.38)+'px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700">'+initials(name)+'</div>';
+}
+function fmtD(d){ if(!d)return ''; var dt=new Date(d+'T00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+function fmtS(d){ if(!d)return ''; var dt=new Date(d+'T00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+function ago(d){
+  var s=Math.floor((Date.now()-new Date(d))/1000);
+  if(s<60)return 'just now';
+  if(s<3600)return Math.floor(s/60)+'m ago';
+  if(s<86400)return Math.floor(s/3600)+'h ago';
+  return Math.floor(s/86400)+'d ago';
+}
+function isHost(){ return CT && CU && CT.host_id===CU.id; }
+function canEdit(){
+  if(!CT||!CU)return false;
+  if(isHost())return true;
+  var me=(CT._members||[]).find(function(m){return m.user_id===CU.id;});
+  return me && me.role==='co-host';
 }
 
-function openModal(id) { $(id).classList.remove('hidden') }
-function closeModal(id) { $(id).classList.add('hidden') }
-
-function showErr(id, msg) { const el=$(id); el.textContent=msg; el.style.display='block' }
-function hideErr(id) { $(id).style.display='none' }
-
-function makeAvatar(name, size=34) {
-  const c = avatarColor(name)
-  const s = size+'px'
-  return `<div class="avatar" style="width:${s};height:${s};background:${c};font-size:${Math.floor(size*.38)}px">${initials(name)}</div>`
+// AUTH
+function authTab(mode,btn){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  btn.classList.add('active');
+  g('login-form').style.display = mode==='login'?'block':'none';
+  g('signup-form').style.display = mode==='signup'?'block':'none';
+  g('auth-err').style.display='none';
 }
 
-// --- Auth ---------------------------------------------------------------------
-function switchAuthTab(tab) {
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
-  event.target.classList.add('active')
-  if(tab==='login'){show('auth-login');hide('auth-signup')}
-  else{hide('auth-login');show('auth-signup')}
-  hide('auth-err'); hide('auth-ok')
+async function doLogin(){
+  var email=v('li-email'), pw=v('li-pw');
+  if(!email||!pw){showErr('auth-err','Please fill in all fields');return;}
+  hideErr('auth-err');
+  var res=await sb.auth.signInWithPassword({email:email,password:pw});
+  if(res.error){showErr('auth-err',res.error.message);return;}
+  await afterLogin(res.data.user);
 }
 
-async function login() {
-  const email=val('login-email'), pw=val('login-pw')
-  if(!email||!pw){showErr('auth-err','Please fill in all fields');return}
-  hideErr('auth-err')
-  const {data,error} = await sb.auth.signInWithPassword({email,password:pw})
-  if(error){showErr('auth-err',error.message);return}
-  await onLogin(data.user)
+async function doSignup(){
+  var name=v('su-name'), email=v('su-email'), pw=v('su-pw');
+  if(!name||!email||!pw){showErr('auth-err','Please fill in all fields');return;}
+  if(pw.length<6){showErr('auth-err','Password must be at least 6 characters');return;}
+  hideErr('auth-err');
+  var res=await sb.auth.signUp({email:email,password:pw,options:{data:{name:name}}});
+  if(res.error){showErr('auth-err',res.error.message);return;}
+  if(res.data.user) await afterLogin(res.data.user);
 }
 
-async function signup() {
-  const name=val('signup-name'), email=val('signup-email'), pw=val('signup-pw')
-  if(!name||!email||!pw){showErr('auth-err','Please fill in all fields');return}
-  if(pw.length<6){showErr('auth-err','Password must be at least 6 characters');return}
-  hideErr('auth-err')
-  const {data,error} = await sb.auth.signUp({email,password:pw,options:{data:{name}}})
-  if(error){showErr('auth-err',error.message);return}
-  if(data.user){await onLogin(data.user)}
+async function afterLogin(user){
+  CU=user;
+  var profRes=await sb.from('profiles').select('*').eq('id',user.id).single();
+  CP=profRes.data;
+  showDash();
 }
 
-async function onLogin(user) {
-  currentUser = user
-  const {data:prof} = await sb.from('profiles').select('*').eq('id',user.id).single()
-  currentProfile = prof
-  showDashboard()
+async function doLogout(){
+  await sb.auth.signOut();
+  CU=null; CP=null; CT=null;
+  showPg('pg-auth');
 }
 
-async function logout() {
-  await sb.auth.signOut()
-  currentUser=null; currentProfile=null; currentTrip=null
-  showPage('page-auth')
+function myName(){ return (CP&&CP.name)||((CU&&CU.user_metadata&&CU.user_metadata.name))||((CU&&CU.email&&CU.email.split('@')[0]))||'Traveler'; }
+
+// DASHBOARD
+async function showDash(){
+  showPg('pg-dash');
+  var name=myName();
+  g('dash-hi').textContent='Hey '+name.split(' ')[0]+' \uD83D\uDC4B';
+  var av=g('dash-av'); av.textContent=initials(name); av.style.background=avColor(name);
+  await loadTrips();
 }
 
-// --- Dashboard ---------------------------------------------------------------
-async function showDashboard() {
-  showPage('page-dashboard')
-  const name = currentProfile?.name || currentUser?.user_metadata?.name || 'Traveler'
-  $('dash-greeting').textContent = `Hey ${name.split(' ')[0]} 👋`
-  const av = $('nav-avatar')
-  av.textContent = initials(name)
-  av.style.background = avatarColor(name)
-  await loadTrips()
-}
-
-async function loadTrips() {
-  const {data:memberRows} = await sb.from('trip_members').select('trip_id').eq('user_id',currentUser.id)
-  const ids = (memberRows||[]).map(r=>r.trip_id)
-  let trips = []
+async function loadTrips(){
+  var mRes=await sb.from('trip_members').select('trip_id').eq('user_id',CU.id);
+  var ids=(mRes.data||[]).map(function(r){return r.trip_id;});
+  var trips=[];
   if(ids.length>0){
-    const {data} = await sb.from('trips').select('*').in('id',ids).order('created_at',{ascending:false})
-    trips = data||[]
+    var tRes=await sb.from('trips').select('*').in('id',ids).order('created_at',{ascending:false});
+    trips=tRes.data||[];
   }
-  renderTrips(trips)
+  renderTrips(trips);
 }
 
-function renderTrips(trips) {
-  const grid = $('trips-grid')
-  const newBtn = `<div class="new-trip-card" onclick="openCreateTrip()"><div class="new-trip-card-icon">✈️</div><div class="new-trip-card-text">Plan a new trip</div></div>`
-  if(!trips.length){ grid.innerHTML = newBtn; return }
-  const cards = trips.map(t => {
-    const isHost = t.host_id===currentUser.id
-    const img = t.image_url
-      ? `<img class="trip-card-img" src="${t.image_url}" alt="${t.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'">`
-      : ''
-    const placeholder = `<div class="trip-card-img-placeholder" style="${img?'display:none':''}">✈️</div>`
-    return `<div class="trip-card" onclick="openTrip('${t.id}')">
-      ${img}${placeholder}
-      <div class="trip-card-body">
-        <div class="trip-card-name">${t.name}</div>
-        <div class="trip-card-meta">
-          ${t.destination?`<span>📍 ${t.destination}</span>`:''}
-          ${t.date_start?`<span>📅 ${fmtShort(t.date_start)}${t.date_end?' → '+fmtShort(t.date_end):''}</span>`:''}
-          <span style="margin-top:4px">${isHost?'<span class="badge badge-host">👑 Host</span>':'<span class="badge badge-member">Member</span>'}</span>
-        </div>
-      </div>
-    </div>`
-  }).join('')
-  grid.innerHTML = cards + newBtn
+function renderTrips(trips){
+  var grid=g('trips-grid');
+  var newBtn='<div class="new-trip-card" onclick="openCreateTrip()"><div style="font-size:40px;margin-bottom:8px">&#x2708;</div><div style="font-weight:600;font-size:14px">Plan a new trip</div></div>';
+  if(!trips.length){grid.innerHTML=newBtn;return;}
+  var html='';
+  trips.forEach(function(t){
+    var hostBadge=t.host_id===CU.id?'<span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">&#x1F451; Host</span>':'<span style="background:#f0fdf4;color:#166534;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">Member</span>';
+    var imgHtml=t.image_url?'<img class="trip-img" src="'+t.image_url+'" alt="'+t.name+'">':'<div class="trip-img-placeholder">&#x2708;</div>';
+    var destHtml=t.destination?'<div>&#x1F4CD; '+t.destination+'</div>':'';
+    var dateHtml=(t.date_start)?'<div>&#x1F4C5; '+fmtS(t.date_start)+(t.date_end?' &rarr; '+fmtS(t.date_end):'')+'</div>':'';
+    html+='<div class="trip-card" onclick="openTrip(\''+t.id+'\')">'+imgHtml+'<div class="trip-body"><div class="trip-name">'+t.name+'</div><div class="trip-meta">'+destHtml+dateHtml+'<div style="margin-top:6px">'+hostBadge+'</div></div></div></div>';
+  });
+  grid.innerHTML=html+newBtn;
 }
 
-// --- Create Trip -------------------------------------------------------------
-function openCreateTrip() {
-  $('ct-name').value=''; $('ct-dest').value=''; $('ct-start').value=''; $('ct-end').value=''
-  $('ct-photo-preview').style.display='none'; $('ct-photo-upload-ui').style.display='block'
-  $('ct-photo-input').value=''
-  hideErr('ct-err')
-  openModal('modal-create-trip')
+// CREATE TRIP
+function openCreateTrip(){
+  sv('ct-name','');sv('ct-dest','');sv('ct-s','');sv('ct-e','');
+  g('ct-prev').style.display='none'; g('ct-photo-ui').style.display='block';
+  g('ct-photo').value=''; hideErr('ct-err');
+  openM('m-create');
 }
 
-function previewPhoto(input, previewId, areaId) {
-  const file = input.files[0]; if(!file) return
-  const reader = new FileReader()
-  reader.onload = e => {
-    const prev = $(previewId)
-    prev.src = e.target.result
-    prev.style.display = 'block'
-    const ui = $(areaId).querySelector('[id$="-upload-ui"]')
-    if(ui) ui.style.display='none'
+function prevPhoto(input,prevId,uiId){
+  var file=input.files[0]; if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var prev=g(prevId); prev.src=e.target.result; prev.style.display='block';
+    g(uiId).style.display='none';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function uploadPhoto(inputId, tripId){
+  var input=g(inputId); if(!input.files[0])return null;
+  var file=input.files[0];
+  var ext=file.name.split('.').pop();
+  var path='trips/'+tripId+'.'+ext;
+  var upRes=await sb.storage.from('trip-photos').upload(path,file,{upsert:true});
+  if(upRes.error){console.error('upload',upRes.error);return null;}
+  return sb.storage.from('trip-photos').getPublicUrl(path).data.publicUrl;
+}
+
+async function doCreateTrip(){
+  var name=v('ct-name');
+  if(!name){showErr('ct-err','Trip name is required');return;}
+  hideErr('ct-err');
+  var res=await sb.from('trips').insert({name:name,host_id:CU.id,destination:v('ct-dest')||null,date_start:v('ct-s')||null,date_end:v('ct-e')||null}).select().single();
+  if(res.error){showErr('ct-err',res.error.message);return;}
+  var trip=res.data;
+  if(g('ct-photo').files[0]){
+    var url=await uploadPhoto('ct-photo',trip.id);
+    if(url){await sb.from('trips').update({image_url:url}).eq('id',trip.id); trip.image_url=url;}
   }
-  reader.readAsDataURL(file)
+  closeM('m-create');
+  await openTrip(trip.id);
 }
 
-async function uploadPhoto(input, tripId) {
-  const file = input.files[0]; if(!file) return null
-  const ext = file.name.split('.').pop()
-  const path = `trips/${tripId}.${ext}`
-  const {error} = await sb.storage.from('trip-photos').upload(path, file, {upsert:true})
-  if(error){console.error('upload error',error); return null}
-  const {data} = sb.storage.from('trip-photos').getPublicUrl(path)
-  return data.publicUrl
+// OPEN TRIP
+async function openTrip(tripId){
+  var tRes=await sb.from('trips').select('*').eq('id',tripId).single();
+  if(!tRes.data){alert('Trip not found');return;}
+  CT=tRes.data;
+  var mRes=await sb.from('trip_members').select('*, profiles(id,name,email)').eq('trip_id',tripId);
+  CT._members=mRes.data||[];
+  var name=myName();
+  var av=g('trip-av'); av.textContent=initials(name); av.style.background=avColor(name);
+  renderHero();
+  showPg('pg-trip');
+  goTab('overview', document.querySelector('.trip-tab'));
 }
 
-async function createTrip() {
-  const name = val('ct-name')
-  if(!name){showErr('ct-err','Trip name is required');return}
-  hideErr('ct-err')
-  const {data:trip, error} = await sb.from('trips').insert({
-    name, host_id:currentUser.id,
-    destination: val('ct-dest')||null,
-    date_start: val('ct-start')||null,
-    date_end: val('ct-end')||null
-  }).select().single()
-  if(error){showErr('ct-err',error.message);return}
-  const photoInput = $('ct-photo-input')
-  if(photoInput.files[0]){
-    const url = await uploadPhoto(photoInput, trip.id)
-    if(url) await sb.from('trips').update({image_url:url}).eq('id',trip.id)
-  }
-  closeModal('modal-create-trip')
-  await openTrip(trip.id)
+function renderHero(){
+  g('hero-name').textContent=CT.name;
+  if(CT.image_url){g('hero-img').src=CT.image_url;g('hero-img').style.display='block';g('hero-ph').style.display='none';}
+  else{g('hero-img').style.display='none';g('hero-ph').style.display='flex';}
+  g('hero-dest').innerHTML=CT.destination?'&#x1F4CD; '+CT.destination:'';
+  g('hero-dates').innerHTML=CT.date_start?'&#x1F4C5; '+fmtS(CT.date_start)+(CT.date_end?' &rarr; '+fmtS(CT.date_end):''):'';
+  g('hero-members').innerHTML='&#x1F465; '+(CT._members.length)+' member'+(CT._members.length!==1?'s':'');
 }
 
-// --- Open Trip ----------------------------------------------------------------
-async function openTrip(tripId) {
-  const {data:trip} = await sb.from('trips').select('*').eq('id',tripId).single()
-  if(!trip){alert('Trip not found');return}
-  currentTrip = trip
-  const {data:memberRows} = await sb.from('trip_members').select('*,profiles(id,name,email)').eq('trip_id',tripId)
-  currentTrip._members = memberRows||[]
-  const name = currentProfile?.name||currentUser?.user_metadata?.name||'?'
-  const av = $('trip-nav-avatar')
-  av.textContent=initials(name); av.style.background=avatarColor(name)
-  renderTripHero()
-  showPage('page-trip')
-  showTab('overview')
+function goTab(name,btn){
+  document.querySelectorAll('.trip-tab').forEach(function(t){t.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  var tabs={overview:tabOverview,avail:tabAvail,dests:tabDests,acts:tabActs,expenses:tabExp,polls:tabPolls,updates:tabUpdates,members:tabMembers};
+  if(tabs[name])tabs[name]();
 }
 
-function renderTripHero() {
-  const t = currentTrip
-  $('trip-hero-name').textContent = t.name
-  if(t.image_url){
-    const img=$('trip-hero-img'); img.src=t.image_url; img.style.display='block'
-    hide('trip-hero-placeholder')
+function copyInvite(){
+  var url=window.location.origin+window.location.pathname+'?join='+CT.id;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(function(){alert('Invite link copied! Share it with your friends.');});
   } else {
-    hide('trip-hero-img'); show('trip-hero-placeholder')
+    prompt('Copy this link:',url);
   }
-  $('trip-hero-dest').innerHTML = t.destination ? `📍 ${t.destination}` : ''
-  $('trip-hero-dates').innerHTML = t.date_start ? `📅 ${fmtShort(t.date_start)}${t.date_end?' → '+fmtShort(t.date_end):''}` : ''
-  $('trip-hero-members').innerHTML = `👥 ${currentTrip._members.length} member${currentTrip._members.length!==1?'s':''}`
 }
 
-function showTab(tab) {
-  currentTab = tab
-  document.querySelectorAll('.trip-tab').forEach((el,i)=>{
-    const tabs=['overview','availability','destinations','activities','expenses','polls','updates','members']
-    el.classList.toggle('active', tabs[i]===tab)
-  })
-  const renders = {overview:renderOverview,availability:renderAvailability,destinations:renderDestinations,activities:renderActivities,expenses:renderExpenses,polls:renderPolls,updates:renderUpdates,members:renderMembers}
-  if(renders[tab]) renders[tab]()
+// OVERVIEW
+function tabOverview(){
+  var edit=canEdit()||isHost();
+  var locked=CT.locked_destination?'<div style="background:#f0fdf4;border:1.5px solid #0f7b6c;border-radius:12px;padding:12px 14px;margin-top:8px"><span style="color:#0f7b6c;font-weight:600">&#x2705; Destination locked: '+CT.locked_destination+'</span></div>':'';
+  var destRow=CT.destination?'<div class="flex ac gap8 mb8"><span style="font-size:18px">&#x1F4CD;</span><span class="bold">'+CT.destination+'</span></div>':'';
+  var dateRow=CT.date_start?'<div class="flex ac gap8 mb8"><span style="font-size:18px">&#x1F4C5;</span><span>'+fmtD(CT.date_start)+(CT.date_end?' &rarr; '+fmtD(CT.date_end):'')+'</span></div>':'';
+  var noDetails=(!CT.destination&&!CT.date_start&&!CT.locked_destination)?'<p class="muted sm">No details yet. Tap Edit to add dates and destination.</p>':'';
+  g('trip-content').innerHTML='<div class="card"><div class="card-header"><span class="card-title">Trip details</span>'+(edit?'<button class="btn btn-secondary btn-sm" onclick="openEditTrip()">&#x270F; Edit</button>':'')+'</div>'+destRow+dateRow+locked+noDetails+'</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">'
+    +'<div class="card" style="cursor:pointer" onclick="goTab(\'avail\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F4C5;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Availability</div><div class="sm muted">See when everyone is free</div></div>'
+    +'<div class="card" style="cursor:pointer" onclick="goTab(\'dests\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F30D;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Destinations</div><div class="sm muted">Vote on where to go</div></div>'
+    +'<div class="card" style="cursor:pointer" onclick="goTab(\'acts\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F3AF;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Activities</div><div class="sm muted">Plan what to do</div></div>'
+    +'<div class="card" style="cursor:pointer" onclick="goTab(\'expenses\',null)"><div style="font-size:24px;margin-bottom:6px">&#x1F4B8;</div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Expenses</div><div class="sm muted">Split costs fairly</div></div>'
+    +'</div>';
 }
 
-function isHost() { return currentTrip?.host_id===currentUser?.id }
-function canEdit() {
-  const me = currentTrip?._members?.find(m=>m.user_id===currentUser?.id)
-  return isHost() || me?.role==='co-host'
+function openEditTrip(){
+  sv('et-name',CT.name);sv('et-dest',CT.destination);sv('et-s',CT.date_start);sv('et-e',CT.date_end);
+  g('et-prev').style.display='none';g('et-photo-ui').style.display='block';g('et-photo').value='';hideErr('et-err');
+  openM('m-edit');
 }
 
-// --- Overview Tab -------------------------------------------------------------
-function renderOverview() {
-  const t = currentTrip
-  const edit = canEdit()
-  $('trip-content').innerHTML = `
-    <div class="card card-padded">
-      <div class="card-header">
-        <span class="card-title">Trip details</span>
-        ${edit?`<button class="btn btn-secondary btn-sm" onclick="openEditTrip()">✏️ Edit</button>`:''}
-      </div>
-      ${t.destination?`<div class="flex items-center gap-8 mb-8"><span style="font-size:18px">📍</span><span class="fw-600">${t.destination}</span></div>`:''}
-      ${t.date_start?`<div class="flex items-center gap-8 mb-8"><span style="font-size:18px">📅</span><span>${fmtDate(t.date_start)}${t.date_end?' → '+fmtDate(t.date_end):''}</span></div>`:''}
-      ${t.locked_destination?`<div style="background:#f0fdf4;border:1.5px solid #0f7b6c;border-radius:12px;padding:12px 14px;margin-top:8px"><span style="color:#0f7b6c;font-weight:600">✅ Destination locked: ${t.locked_destination}</span></div>`:''}
-      ${!t.destination&&!t.date_start&&!t.locked_destination?'<p class="text-muted text-sm">No details yet — tap Edit to add dates and destination.</p>':''}
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-      ${quickCard('📅','Availability','See when everyone is free','availability')}
-      ${quickCard('🌍','Destinations','Vote on where to go','destinations')}
-      ${quickCard('🎯','Activities','Plan what to do','activities')}
-      ${quickCard('💸','Expenses','Split costs fairly','expenses')}
-    </div>
-  `
+async function doEditTrip(){
+  var name=v('et-name');if(!name){showErr('et-err','Name required');return;}
+  hideErr('et-err');
+  var updates={name:name,destination:v('et-dest')||null,date_start:v('et-s')||null,date_end:v('et-e')||null};
+  if(g('et-photo').files[0]){var url=await uploadPhoto('et-photo',CT.id);if(url)updates.image_url=url;}
+  await sb.from('trips').update(updates).eq('id',CT.id);
+  var r=await sb.from('trips').select('*').eq('id',CT.id).single();
+  CT=Object.assign(CT,r.data);
+  renderHero();closeM('m-edit');tabOverview();
 }
 
-function quickCard(icon,title,desc,tab) {
-  return `<div class="card card-padded" style="cursor:pointer" onclick="showTab('${tab}')">
-    <div style="font-size:24px;margin-bottom:6px">${icon}</div>
-    <div style="font-weight:700;font-size:14px;margin-bottom:2px">${title}</div>
-    <div class="text-sm text-muted">${desc}</div>
-  </div>`
+// AVAILABILITY
+async function tabAvail(){
+  var res=await sb.from('availability').select('*, profiles(name)').eq('trip_id',CT.id);
+  var all=res.data||[];
+  var mine=all.find(function(r){return r.user_id===CU.id;});
+  myDates={};
+  if(mine&&mine.dates){mine.dates.forEach(function(d){myDates[d]=true;});}
+  renderCal(all);
 }
 
-// --- Edit Trip ----------------------------------------------------------------
-function openEditTrip() {
-  const t = currentTrip
-  setVal('et-name',t.name); setVal('et-dest',t.destination); setVal('et-start',t.date_start); setVal('et-end',t.date_end)
-  $('et-photo-preview').style.display='none'; $('et-photo-upload-ui').style.display='block'
-  $('et-photo-input').value=''; hideErr('et-err')
-  openModal('modal-edit-trip')
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var DAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
+
+function renderCal(all){
+  var year=calMonth.getFullYear(), month=calMonth.getMonth();
+  var firstDay=new Date(year,month,1).getDay();
+  var days=new Date(year,month+1,0).getDate();
+  var cells=[]; for(var i=0;i<firstDay;i++)cells.push(null);
+  for(var d=1;d<=days;d++){var ds=year+'-'+String(month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');cells.push(ds);}
+  while(cells.length%7!==0)cells.push(null);
+
+  var max=(all||[]).length||1;
+  function countFor(ds){return (all||[]).filter(function(a){return a.dates&&a.dates.indexOf(ds)>=0;}).length;}
+
+  var hdrs=''; DAYS.forEach(function(d){hdrs+='<div class="cal-hdr">'+d+'</div>';});
+
+  var dayCells='';
+  cells.forEach(function(ds){
+    if(!ds){dayCells+='<div class="cal-day empty"></div>';return;}
+    var count=countFor(ds), sel=!!myDates[ds];
+    var today=new Date(new Date().toDateString());
+    var past=new Date(ds)<today;
+    var cls='cal-day'+(past?' past':'')+(sel?' sel':'');
+    if(!past&&!sel&&count>0){var r=count/max;cls+=r>=1?' h3':r>=.6?' h2':' h1';}
+    var day=parseInt(ds.split('-')[2]);
+    var countEl=count>0?'<div class="cal-count">'+count+'</div>':'';
+    var onclick=past?'':'toggleDay(\''+ds+'\')';
+    dayCells+='<div class="'+cls+'" onclick="'+onclick+'" title="'+count+' available">'+day+countEl+'</div>';
+  });
+
+  var submitted='';
+  (all||[]).forEach(function(a){submitted+=makeAv(a.profiles&&a.profiles.name||'?',28)+'<span class="sm" style="margin-right:8px">'+(a.profiles&&a.profiles.name||'?')+'</span>';});
+
+  g('trip-content').innerHTML='<div class="card"><div class="card-header"><span class="card-title">When is everyone free?</span></div><p class="sm muted mb12">Tap dates you\'re available then hit Save. Darker green = more people free.</p><div class="cal-nav"><button class="cal-nav-btn" onclick="changeMonth(-1)">&#x2039;</button><span style="font-weight:700;font-size:15px">'+MONTHS[month]+' '+year+'</span><button class="cal-nav-btn" onclick="changeMonth(1)">&#x203A;</button></div><div class="cal-grid">'+hdrs+dayCells+'</div><button class="btn btn-primary w100 mt16" onclick="saveAvail()">Save my availability</button></div>'+(all.length?'<div class="card mt12"><div class="card-title mb8">Who\'s submitted</div><div class="flex ac wrap gap8">'+submitted+'</div></div>':'');
 }
 
-async function saveEditTrip() {
-  const name=val('et-name'); if(!name){showErr('et-err','Name required');return}
-  hideErr('et-err')
-  const updates={name,destination:val('et-dest')||null,date_start:val('et-start')||null,date_end:val('et-end')||null}
-  const photoInput=$('et-photo-input')
-  if(photoInput.files[0]){
-    const url=await uploadPhoto(photoInput,currentTrip.id)
-    if(url) updates.image_url=url
+function changeMonth(dir){calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+dir,1);tabAvail();}
+function toggleDay(ds){if(myDates[ds])delete myDates[ds];else myDates[ds]=true;tabAvail();}
+
+async function saveAvail(){
+  var name=myName();
+  var dates=Object.keys(myDates);
+  await sb.from('availability').upsert({trip_id:CT.id,user_id:CU.id,user_name:name,dates:dates,updated_at:new Date().toISOString()},{onConflict:'trip_id,user_id'});
+  alert('Availability saved!');
+  tabAvail();
+}
+
+// DESTINATIONS
+async function tabDests(){
+  var res=await sb.from('destinations').select('*').eq('trip_id',CT.id).order('created_at');
+  var dests=res.data||[];
+  var scored=dests.map(function(d){
+    var votes=d.votes||{}, score=0;
+    Object.values(votes).forEach(function(r){score+=Math.max(0,(dests.length+1)-r);});
+    return Object.assign({},d,{score:score,voterCount:Object.keys(votes).length});
+  }).sort(function(a,b){return b.score-a.score;});
+
+  var html='<div class="section-header"><div><div class="section-title">Destinations</div><p class="sm muted">Rank your favorites</p></div><button class="btn btn-primary btn-sm" onclick="openM(\'m-dest\')">+ Suggest</button></div>';
+
+  if(!scored.length){
+    html+='<div class="empty"><div class="empty-icon">&#x1F30D;</div><div class="empty-title">No destinations yet</div><div class="empty-text">Be the first to suggest somewhere</div></div>';
+  } else {
+    scored.forEach(function(d,idx){
+      var myRank=d.votes&&d.votes[CU.id]?d.votes[CU.id]:null;
+      var icon=d.locked?'&#x1F512;':idx===0&&d.score>0?'&#x1F3C6;':'&#x1F4CD;';
+      var lockedBadge=d.locked?'<span style="background:#dcfce7;color:#166534;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">Locked in</span>':'';
+      var scoreBadge=d.score>0?'<span class="chip">'+d.score+' pts &middot; '+d.voterCount+' vote'+(d.voterCount!==1?'s':'')+'</span>':'';
+      var rankBtns='';
+      if(!d.locked){
+        rankBtns='<span class="sm muted">Your rank: '+(myRank?'#'+myRank:'not ranked')+'</span>';
+        for(var r=1;r<=Math.min(3,dests.length||1);r++){
+          rankBtns+='<button onclick="rankDest(\''+d.id+'\','+r+')" class="btn btn-sm '+(myRank===r?'btn-primary':'btn-secondary')+'">#'+r+'</button>';
+        }
+        rankBtns+='<button onclick="rankDest(\''+d.id+'\',null)" class="btn btn-sm btn-secondary">Clear</button>';
+      }
+      var lockBtn='';
+      if(canEdit()||isHost()){
+        if(!d.locked)lockBtn='<button onclick="lockDest(\''+d.id+'\',\''+d.location+'\')" class="lock-btn">Lock in</button>';
+        else lockBtn='<button onclick="unlockDest(\''+d.id+'\')" class="lock-btn locked">Unlock</button>';
+      }
+      html+='<div class="dest-card '+(d.locked?'locked':idx===0&&d.score>0?'leading':'')+'">'
+        +'<div class="flex ac gap8 mb8"><span style="font-size:20px">'+icon+'</span><span class="bold" style="font-size:15px">'+d.location+'</span>'+lockedBadge+scoreBadge+'</div>'
+        +(d.description?'<p class="sm muted mb8">'+d.description+'</p>':'')
+        +(d.estimated_cost?'<p class="sm muted mb8">~'+d.estimated_cost+'</p>':'')
+        +'<div class="flex ac gap8 wrap">'+rankBtns+lockBtn+'</div></div>';
+    });
   }
-  await sb.from('trips').update(updates).eq('id',currentTrip.id)
-  const {data} = await sb.from('trips').select('*').eq('id',currentTrip.id).single()
-  currentTrip={...currentTrip,...data}
-  renderTripHero(); closeModal('modal-edit-trip'); renderOverview()
+  g('trip-content').innerHTML=html;
 }
 
-// --- Availability Tab ---------------------------------------------------------
-async function renderAvailability() {
-  const {data} = await sb.from('availability').select('*,profiles(name)').eq('trip_id',currentTrip.id)
-  const allAvail = data||[]
-  const mine = allAvail.find(r=>r.user_id===currentUser.id)
-  myAvailDates = new Set(mine?.dates||[])
-  renderCalendar(allAvail)
+async function rankDest(id,rank){
+  var res=await sb.from('destinations').select('votes').eq('id',id).single();
+  var votes=Object.assign({},(res.data&&res.data.votes)||{});
+  if(rank===null)delete votes[CU.id]; else votes[CU.id]=rank;
+  await sb.from('destinations').update({votes:votes}).eq('id',id);
+  tabDests();
 }
 
-function renderCalendar(allAvail) {
-  const year=calMonth.getFullYear(), month=calMonth.getMonth()
-  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December']
-  const firstDay=new Date(year,month,1).getDay()
-  const days=new Date(year,month+1,0).getDate()
-  const cells=[...Array(firstDay).fill(null)]
-  for(let d=1;d<=days;d++) cells.push(`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`)
-  while(cells.length%7!==0) cells.push(null)
+async function lockDest(id,location){
+  await sb.from('destinations').update({locked:true}).eq('id',id);
+  await sb.from('trips').update({locked_destination:location}).eq('id',CT.id);
+  CT.locked_destination=location;
+  tabDests();renderHero();
+}
 
-  const countFor = ds => (allAvail||[]).filter(a=>a.dates?.includes(ds)).length
-  const max = allAvail?.length||1
+async function unlockDest(id){
+  await sb.from('destinations').update({locked:false}).eq('id',id);
+  await sb.from('trips').update({locked_destination:null}).eq('id',CT.id);
+  CT.locked_destination=null;
+  tabDests();renderHero();
+}
 
-  const dayHeaders=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="cal-day-header">${d}</div>`).join('')
+async function doAddDest(){
+  var loc=v('dest-loc');if(!loc){showErr('dest-err','Location required');return;}
+  hideErr('dest-err');
+  await sb.from('destinations').insert({trip_id:CT.id,suggested_by:CU.id,suggested_by_name:myName(),location:loc,description:v('dest-why')||null,estimated_cost:v('dest-cost')||null,votes:{},locked:false});
+  closeM('m-dest');tabDests();
+}
 
-  const dayCells = cells.map(ds=>{
-    if(!ds) return '<div class="cal-day cal-day-empty"></div>'
-    const count=countFor(ds), sel=myAvailDates.has(ds)
-    const past=new Date(ds)<new Date(new Date().toDateString())
-    let cls='cal-day'+(past?' cal-day-past':'')+(sel?' selected':'')
-    if(!past&&!sel&&count>0){
-      const r=count/max
-      if(r>=1)cls+=' heat-high'; else if(r>=.6)cls+=' heat-mid'; else cls+=' heat-low'
+// ACTIVITIES
+async function tabActs(){
+  var res=await sb.from('activities').select('*').eq('trip_id',CT.id).order('created_at');
+  var acts=res.data||[];
+  var scored=acts.map(function(a){
+    var v=a.votes||{};
+    var up=Object.values(v).filter(function(x){return x==='up';}).length;
+    var down=Object.values(v).filter(function(x){return x==='down';}).length;
+    return Object.assign({},a,{up:up,down:down,score:up-down});
+  }).sort(function(a,b){
+    if(a.locked&&!b.locked)return -1;if(!a.locked&&b.locked)return 1;return b.score-a.score;
+  });
+
+  var html='<div class="section-header"><div><div class="section-title">Activities</div><p class="sm muted">Vote on what you want to do</p></div><button class="btn btn-primary btn-sm" onclick="openM(\'m-act\')">+ Add</button></div>';
+
+  if(!scored.length){
+    html+='<div class="empty"><div class="empty-icon">&#x1F3AF;</div><div class="empty-title">No activities yet</div><div class="empty-text">Add things you want to do</div></div>';
+  } else {
+    html+='<div class="card">';
+    scored.forEach(function(a){
+      var myVote=a.votes&&a.votes[CU.id]||null;
+      var upCls='vote-btn'+(myVote==='up'?' up':'');
+      var downCls='vote-btn'+(myVote==='down'?' down':'');
+      var scoreColor=a.score>0?'color:#059669':a.score<0?'color:#dc2626':'color:#6b6760';
+      var lockBtn='';
+      if(canEdit()||isHost()){
+        lockBtn='<div style="display:flex;flex-direction:column;gap:4px">'
+          +'<button onclick="toggleLockAct(\''+a.id+'\','+a.locked+')" class="lock-btn'+(a.locked?' locked':'')+'">'+(a.locked?'Unlock':'Lock')+'</button>'
+          +'<button onclick="delAct(\''+a.id+'\')" class="btn btn-danger btn-sm">&#x2715;</button>'
+          +'</div>';
+      }
+      var lockedTag=a.locked?'<span style="background:#dcfce7;color:#166534;padding:2px 6px;border-radius:20px;font-size:11px;font-weight:600;margin-left:4px">&#x1F512;</span>':'';
+      html+='<div class="row">'
+        +'<div class="vote-wrap">'
+        +'<button class="'+upCls+'" onclick="voteAct(\''+a.id+'\',\'up\')">&#x25B2;</button>'
+        +'<span class="vote-score" style="'+scoreColor+'">'+(a.score>0?'+':'')+a.score+'</span>'
+        +'<button class="'+downCls+'" onclick="voteAct(\''+a.id+'\',\'down\')">&#x25BC;</button>'
+        +'</div>'
+        +'<div style="flex:1">'
+        +'<div class="bold">'+a.title+lockedTag+'</div>'
+        +'<div class="sm muted">'+(a.description||'')+(a.cost?' &middot; ~'+a.cost:'')+(a.suggested_by_name?' &middot; by '+a.suggested_by_name:'')+'</div>'
+        +'<div class="sm muted">'+a.up+' &#x1F44D; &middot; '+a.down+' &#x1F44E;</div>'
+        +'</div>'
+        +lockBtn
+        +'</div>';
+    });
+    html+='</div>';
+  }
+  g('trip-content').innerHTML=html;
+}
+
+async function voteAct(id,type){
+  var res=await sb.from('activities').select('votes').eq('id',id).single();
+  var votes=Object.assign({},(res.data&&res.data.votes)||{});
+  if(votes[CU.id]===type)delete votes[CU.id]; else votes[CU.id]=type;
+  await sb.from('activities').update({votes:votes}).eq('id',id);
+  tabActs();
+}
+
+async function toggleLockAct(id,isLocked){
+  await sb.from('activities').update({locked:!isLocked}).eq('id',id);
+  tabActs();
+}
+
+async function delAct(id){
+  if(!confirm('Delete this activity?'))return;
+  await sb.from('activities').delete().eq('id',id);
+  tabActs();
+}
+
+async function doAddAct(){
+  var name=v('act-name');if(!name){showErr('act-err','Name required');return;}
+  hideErr('act-err');
+  await sb.from('activities').insert({trip_id:CT.id,suggested_by:CU.id,suggested_by_name:myName(),title:name,description:v('act-desc')||null,cost:v('act-cost')||null,votes:{},locked:false});
+  closeM('m-act');tabActs();
+}
+
+// EXPENSES
+async function tabExp(){
+  var res=await sb.from('expenses').select('*').eq('trip_id',CT.id).order('created_at',{ascending:false});
+  var exps=res.data||[];
+  var members=CT._members||[];
+  var total=exps.reduce(function(s,e){return s+Number(e.amount);},0);
+  var bal={};
+  members.forEach(function(m){bal[m.user_id]={name:m.profiles&&m.profiles.name||'?',amount:0};});
+  exps.forEach(function(e){
+    var split=e.split_among||[];if(!split.length)return;
+    var per=e.amount/split.length;
+    if(bal[e.paid_by])bal[e.paid_by].amount+=e.amount;
+    split.forEach(function(uid){if(bal[uid])bal[uid].amount-=per;});
+  });
+
+  var myBal=bal[CU.id]&&bal[CU.id].amount||0;
+  var myBalColor=myBal>0.01?'#059669':myBal<-0.01?'#dc2626':'#1a1814';
+  var myBalBg=myBal>0.01?'background:#f0fdf4':myBal<-0.01?'background:#fef2f2':'';
+
+  var settles=calcSettles(bal);
+
+  var settleHtml='';
+  settles.forEach(function(s){settleHtml+='<div class="settle-row"><span class="bold">'+s.from+'</span><span style="color:#e8572a;font-size:16px">&rarr;</span><span class="bold">'+s.to+'</span><span class="bold" style="margin-left:auto;color:#059669">$'+s.amount.toFixed(2)+'</span></div>';});
+
+  var balHtml='';
+  Object.entries(bal).forEach(function(entry){
+    var uid=entry[0],v=entry[1];
+    var cls=v.amount>0.01?'pos':v.amount<-0.01?'neg':'muted';
+    balHtml+='<div class="balance-row"><div class="flex ac gap8">'+makeAv(v.name,28)+'<span class="sm">'+v.name+(uid===CU.id?' (you)':'')+'</span></div><span class="'+cls+'">'+(v.amount>0.01?'+':'')+'$'+Math.abs(v.amount).toFixed(2)+'</span></div>';
+  });
+
+  var expHtml='';
+  exps.forEach(function(e){
+    var per=(e.amount/(e.split_among&&e.split_among.length||1)).toFixed(2);
+    expHtml+='<div class="row"><div style="width:36px;height:36px;border-radius:10px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F4B8;</div><div style="flex:1"><div class="bold sm">'+e.title+'</div><div class="xs muted">Paid by '+e.paid_by_name+' &middot; $'+per+'/person</div></div><div class="bold">$'+Number(e.amount).toFixed(2)+'</div></div>';
+  });
+
+  g('trip-content').innerHTML='<div class="section-header"><div><div class="section-title">Expenses</div><p class="sm muted">Track who paid what</p></div><button class="btn btn-primary btn-sm" onclick="openAddExp()">+ Add</button></div>'
+    +'<div class="grid3"><div class="stat-card"><div class="xs muted">Total spent</div><div class="stat-val">$'+total.toFixed(0)+'</div></div>'
+    +'<div class="stat-card" style="'+myBalBg+'"><div class="xs muted">Your balance</div><div class="stat-val" style="color:'+myBalColor+'">'+(myBal>0.01?'+':'')+'$'+Math.abs(myBal).toFixed(0)+'</div></div>'
+    +'<div class="stat-card"><div class="xs muted">Expenses</div><div class="stat-val">'+exps.length+'</div></div></div>'
+    +(settles.length?'<div class="card mb12"><div class="card-title mb8">How to settle up</div>'+settleHtml+'</div>':'')
+    +'<div class="card mb12"><div class="card-title mb8">Balances</div>'+balHtml+'</div>'
+    +(exps.length?'<div class="card"><div class="card-title mb8">All expenses</div>'+expHtml+'</div>':'');
+}
+
+function calcSettles(bal){
+  var c=[],d=[];
+  Object.entries(bal).forEach(function(entry){var name=entry[1].name,amount=entry[1].amount;if(amount>0.01)c.push({name:name,amount:amount});else if(amount<-0.01)d.push({name:name,amount:-amount});});
+  c.sort(function(a,b){return b.amount-a.amount;}); d.sort(function(a,b){return b.amount-a.amount;});
+  var txns=[],i=0,j=0;
+  var cc=c.map(function(x){return Object.assign({},x);}), dd=d.map(function(x){return Object.assign({},x);});
+  while(i<cc.length&&j<dd.length){var amt=Math.min(cc[i].amount,dd[j].amount);txns.push({from:dd[j].name,to:cc[i].name,amount:amt});cc[i].amount-=amt;dd[j].amount-=amt;if(cc[i].amount<0.01)i++;if(dd[j].amount<0.01)j++;}
+  return txns;
+}
+
+function openAddExp(){
+  var members=CT._members||[];
+  var sel=g('exp-paid'); sel.innerHTML='';
+  members.forEach(function(m){var o=document.createElement('option');o.value=m.user_id;o.textContent=(m.profiles&&m.profiles.name||'?')+(m.user_id===CU.id?' (you)':'');if(m.user_id===CU.id)o.selected=true;sel.appendChild(o);});
+  var cb=g('exp-split'); cb.innerHTML='';
+  members.forEach(function(m){
+    var label=document.createElement('label');
+    label.style.cssText='display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;padding:6px 10px;border:1.5px solid #ebe8e3;border-radius:8px';
+    var inp=document.createElement('input');inp.type='checkbox';inp.value=m.user_id;inp.checked=true;
+    label.appendChild(inp);label.appendChild(document.createTextNode((m.profiles&&m.profiles.name||'?')+(m.user_id===CU.id?' (you)':'')));
+    cb.appendChild(label);
+  });
+  sv('exp-desc','');sv('exp-amt','');hideErr('exp-err');
+  openM('m-exp');
+}
+
+async function doAddExp(){
+  var title=v('exp-desc'), amount=parseFloat(g('exp-amt').value);
+  if(!title||!amount){showErr('exp-err','Fill in description and amount');return;}
+  var paidBy=g('exp-paid').value;
+  var paidByName=g('exp-paid').selectedOptions[0].textContent.replace(' (you)','');
+  var split=Array.from(document.querySelectorAll('#exp-split input:checked')).map(function(el){return el.value;});
+  if(!split.length){showErr('exp-err','Select at least one person');return;}
+  hideErr('exp-err');
+  await sb.from('expenses').insert({trip_id:CT.id,title:title,amount:amount,paid_by:paidBy,paid_by_name:paidByName,split_among:split,date:new Date().toISOString().split('T')[0]});
+  closeM('m-exp');tabExp();
+}
+
+// POLLS
+async function tabPolls(){
+  var res=await sb.from('polls').select('*').eq('trip_id',CT.id).order('created_at',{ascending:false});
+  var polls=res.data||[];
+  var ce=canEdit()||isHost();
+
+  var html='<div class="section-header"><div><div class="section-title">Polls</div><p class="sm muted">Make group decisions fast</p></div>'+(ce?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-poll\')">+ New poll</button>':'')+'</div>';
+
+  if(!polls.length){
+    html+='<div class="empty"><div class="empty-icon">&#x1F5F3;</div><div class="empty-title">No polls yet</div><div class="empty-text">'+(ce?'Create a poll to get input':'The host will create polls here')+'</div></div>';
+  } else {
+    polls.forEach(function(p){
+      var opts=p.options||[], votes=p.votes||{}, total=Object.keys(votes).length, myVote=votes[CU.id];
+      var counts=opts.map(function(_,i){return Object.values(votes).filter(function(v){return v===i;}).length;});
+      var winIdx=counts.indexOf(Math.max.apply(null,counts));
+      var statusDot='<span style="width:7px;height:7px;border-radius:50%;background:'+(p.is_open?'#059669':'#d5d2cb')+';display:inline-block;margin-right:4px"></span>';
+      var toggleBtn=ce?'<button onclick="togglePoll(\''+p.id+'\','+p.is_open+')" class="btn btn-secondary btn-sm">'+(p.is_open?'Close':'Reopen')+'</button>':'';
+      var optHtml='';
+      opts.forEach(function(opt,i){
+        var pct=total>0?Math.round(counts[i]/total*100):0;
+        var isWin=!p.is_open&&i===winIdx&&counts[i]>0;
+        var isMine=myVote===i;
+        var borderColor=isWin?'#0f7b6c':isMine?'#e8572a':'#ebe8e3';
+        var barBg=isWin?'#0f7b6c':isMine?'#e8572a':'#e5e7eb';
+        var disabled=p.is_open?'':'disabled';
+        optHtml+='<button onclick="castVote(\''+p.id+'\','+i+')" class="poll-option" style="border-color:'+borderColor+'" '+disabled+'>'
+          +'<div class="poll-bar" style="background:'+barBg+';width:'+pct+'%"></div>'
+          +'<span class="poll-label">'+(isMine?'&#x2713; ':isWin?'&#x1F3C6; ':'')+opt+'</span>'
+          +'<span class="poll-pct">'+pct+'% ('+counts[i]+')</span>'
+          +'</button>';
+      });
+      html+='<div class="card mb12"><div class="flex ac jb mb12"><div><div class="sm muted mb8">'+statusDot+(p.is_open?'Open':'Closed')+' &middot; '+total+' vote'+(total!==1?'s':'')+'</div><div class="card-title">'+p.question+'</div></div>'+toggleBtn+'</div>'+optHtml+'</div>';
+    });
+  }
+  g('trip-content').innerHTML=html;
+}
+
+async function castVote(pollId,idx){
+  var res=await sb.from('polls').select('votes,is_open').eq('id',pollId).single();
+  if(!res.data||!res.data.is_open)return;
+  var votes=Object.assign({},(res.data&&res.data.votes)||{});
+  votes[CU.id]=idx;
+  await sb.from('polls').update({votes:votes}).eq('id',pollId);
+  tabPolls();
+}
+
+async function togglePoll(id,isOpen){
+  await sb.from('polls').update({is_open:!isOpen}).eq('id',id);
+  tabPolls();
+}
+
+async function doAddPoll(){
+  var q=v('poll-q');if(!q){showErr('poll-err','Question required');return;}
+  var opts=g('poll-opts').value.split('\n').map(function(s){return s.trim();}).filter(Boolean);
+  if(opts.length<2){showErr('poll-err','Add at least 2 options');return;}
+  hideErr('poll-err');
+  await sb.from('polls').insert({trip_id:CT.id,created_by:CU.id,question:q,options:opts,votes:{},is_open:true});
+  closeM('m-poll');tabPolls();
+}
+
+// UPDATES
+async function tabUpdates(){
+  var res=await sb.from('announcements').select('*').eq('trip_id',CT.id).order('pinned',{ascending:false}).order('created_at',{ascending:false});
+  var anns=res.data||[];
+  var cp=canEdit()||isHost();
+
+  var html='<div class="section-header"><div><div class="section-title">Updates</div><p class="sm muted">Announcements from the host</p></div>'+(cp?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-update\')">+ Post</button>':'')+'</div>';
+
+  if(!anns.length){
+    html+='<div class="empty"><div class="empty-icon">&#x1F4E3;</div><div class="empty-title">No updates yet</div><div class="empty-text">'+(cp?'Post an update to keep everyone informed':'The host will post updates here')+'</div></div>';
+  } else {
+    anns.forEach(function(a){
+      var pinBadge=a.pinned?'<span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600">&#x1F4CC; Pinned</span>':'';
+      var delBtn=cp?'<button onclick="delUpdate(\''+a.id+'\')" style="background:none;border:none;cursor:pointer;color:#6b6760;font-size:13px;margin-left:auto">&#x2715;</button>':'';
+      html+='<div class="ann-card"><div class="ann-header">'+makeAv(a.created_by_name||'?',28)+'<span class="bold sm">'+a.created_by_name+'</span>'+pinBadge+'<span class="xs muted" style="margin-left:auto">'+ago(a.created_at)+'</span>'+delBtn+'</div><div style="font-size:14px;line-height:1.6;white-space:pre-wrap">'+a.message+'</div></div>';
+    });
+  }
+  g('trip-content').innerHTML=html;
+}
+
+async function doPostUpdate(){
+  var msg=v('upd-msg');if(!msg)return;
+  await sb.from('announcements').insert({trip_id:CT.id,created_by:CU.id,created_by_name:myName(),message:msg,pinned:g('upd-pin').checked});
+  sv('upd-msg','');g('upd-pin').checked=false;
+  closeM('m-update');tabUpdates();
+}
+
+async function delUpdate(id){
+  if(!confirm('Delete this update?'))return;
+  await sb.from('announcements').delete().eq('id',id);
+  tabUpdates();
+}
+
+// MEMBERS
+async function tabMembers(){
+  var res=await sb.from('trip_members').select('*, profiles(id,name,email)').eq('trip_id',CT.id);
+  CT._members=res.data||[];
+  var cm=canEdit()||isHost();
+  var roleLabel={host:'&#x1F451; Host','co-host':'&#x1F6E1; Co-host',member:'Member'};
+
+  var rows='';
+  (res.data||[]).forEach(function(m){
+    var name=m.profiles&&m.profiles.name||'Unknown';
+    var email=m.profiles&&m.profiles.email||'';
+    var isMe=m.user_id===CU.id;
+    var isHostRow=m.role==='host';
+    var actions='';
+    if(cm&&!isMe&&!isHostRow){
+      actions='<select onchange="updateRole(\''+m.user_id+'\',this.value)" style="font-size:12px;border:1.5px solid #ebe8e3;border-radius:8px;padding:4px 8px;cursor:pointer">'
+        +'<option value="member"'+(m.role==='member'?' selected':'')+'>Member</option>'
+        +'<option value="co-host"'+(m.role==='co-host'?' selected':'')+'>Co-host</option>'
+        +'</select>'
+        +'<button onclick="removeMember(\''+m.user_id+'\')" class="btn btn-danger btn-sm">Remove</button>';
     }
-    const day=parseInt(ds.split('-')[2])
-    const clickHandler = past ? '' : 'toggleDay(\'' + ds + '\')';
-    return '<div class="'+cls+'" onclick="'+clickHandler+'" title="'+count+' available">'+day+(count>0?'<div class="cal-day-count">'+count+'</div>':'')+'</div>'
-  }).join('')
+    rows+='<div class="row">'+makeAv(name,36)+'<div style="flex:1"><div class="bold sm">'+name+(isMe?' <span class="chip">you</span>':'')+'</div><div class="xs muted">'+email+'</div></div><span class="chip">'+roleLabel[m.role]+'</span>'+actions+'</div>';
+  });
 
-  const submitted = (allAvail||[]).map(a=>`<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">${makeAvatar(a.profiles?.name||'?',28)}<span class="text-sm">${a.profiles?.name||'?'} — ${a.dates?.length||0} day${a.dates?.length!==1?'s':''}</span></div>`).join('')
-
-  $('trip-content').innerHTML = `
-    <div class="card card-padded">
-      <div class="card-header">
-        <span class="card-title">When is everyone free?</span>
-      </div>
-      <p class="text-sm text-muted mb-12">Tap dates you're available, then hit Save. Green = more people free.</p>
-      <div class="cal-nav">
-        <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
-        <span class="cal-month">${MONTHS[month]} ${year}</span>
-        <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
-      </div>
-      <div class="cal-grid">${dayHeaders}${dayCells}</div>
-      <button class="btn btn-primary w-full mt-16" onclick="saveAvailability()">Save my availability</button>
-    </div>
-    ${(allAvail||[]).length>0?`<div class="card card-padded mt-12"><div class="card-title mb-12">Who's submitted</div>${submitted}</div>`:''}
-  `
+  g('trip-content').innerHTML='<div class="section-header"><div><div class="section-title">Members</div><p class="sm muted">'+((res.data||[]).length)+' people on this trip</p></div>'+(cm?'<button class="btn btn-primary btn-sm" onclick="openM(\'m-invite\')">+ Invite</button>':'')+'</div>'
+    +'<div class="card">'+rows+'</div>'
+    +'<div class="card mt12"><div class="card-title mb8">Share invite link</div><p class="sm muted mb12">Share this link — anyone can join after logging in.</p><button class="btn btn-secondary w100" onclick="copyInvite()">&#x1F4CB; Copy invite link</button></div>';
 }
 
-function changeMonth(dir) { calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+dir,1); renderAvailability() }
-function toggleDay(ds) { myAvailDates.has(ds)?myAvailDates.delete(ds):myAvailDates.add(ds); renderAvailability() }
-async function saveAvailability() {
-  const name=currentProfile?.name||currentUser?.user_metadata?.name||'Unknown'
-  await sb.from('availability').upsert({trip_id:currentTrip.id,user_id:currentUser.id,user_name:name,dates:Array.from(myAvailDates),updated_at:new Date().toISOString()},{onConflict:'trip_id,user_id'})
-  renderAvailability()
-  alert('✅ Availability saved!')
+async function doInvite(){
+  var email=v('inv-email');if(!email){showErr('inv-err','Email required');return;}
+  hideErr('inv-err');g('inv-ok').style.display='none';
+  var res=await sb.from('profiles').select('id,name,email').eq('email',email).single();
+  if(!res.data){showErr('inv-err','No TripSync account found for '+email+'. They need to sign up first.');return;}
+  var already=(CT._members||[]).find(function(m){return m.user_id===res.data.id;});
+  if(already){showErr('inv-err','This person is already in the trip');return;}
+  await sb.from('trip_members').insert({trip_id:CT.id,user_id:res.data.id,role:'member'});
+  showOk('inv-ok','Added '+res.data.name+' to the trip!');
+  sv('inv-email','');
+  await tabMembers();renderHero();
 }
 
-// --- Destinations Tab ---------------------------------------------------------
-async function renderDestinations() {
-  const {data:dests} = await sb.from('destinations').select('*').eq('trip_id',currentTrip.id).order('created_at')
-  const scored = (dests||[]).map(d=>{
-    const votes=d.votes||{}; let score=0
-    Object.values(votes).forEach(r=>score+=Math.max(0,(dests.length+1)-r))
-    return {...d,score,voterCount:Object.keys(votes).length}
-  }).sort((a,b)=>b.score-a.score)
-
-  const cards = scored.length ? scored.map((d,idx)=>{
-    const myRank=d.votes?.[currentUser.id]||null
-    const isLocked=d.locked
-    return `<div class="dest-card ${isLocked?'locked-dest':idx===0&&d.score>0?'leading':''}">
-      <div class="flex items-center justify-between mb-8">
-        <div class="flex items-center gap-8">
-          <span style="font-size:20px">${isLocked?'🔒':idx===0&&d.score>0?'🏆':'📍'}</span>
-          <span class="fw-600" style="font-size:15px">${d.location}</span>
-          ${isLocked?'<span class="badge" style="background:#dcfce7;color:#166534">Locked in</span>':''}
-          ${d.score>0?`<span class="chip">${d.score} pts · ${d.voterCount} vote${d.voterCount!==1?'s':''}</span>`:''}
-        </div>
-      </div>
-      ${d.description?`<p class="text-sm text-muted mb-8">${d.description}</p>`:''}
-      ${d.estimated_cost?`<p class="text-sm text-muted mb-8">~${d.estimated_cost}</p>`:''}
-      <div class="flex items-center gap-8" style="flex-wrap:wrap">
-        ${!isLocked?`
-          <span class="text-sm text-muted">Your rank: ${myRank?`#${myRank}`:'not ranked'}</span>
-          ${[1,2,3].filter(r=>r<=(dests||[]).length||r===1).map(r=>`<button onclick="rankDest('${d.id}',${r})" class="btn btn-sm ${myRank===r?'btn-primary':'btn-secondary'}">#${r}</button>`).join('')}
-          <button onclick="rankDest('${d.id}',null)" class="btn btn-sm btn-secondary">Clear</button>
-        : lockedSpan}
-        ${canEdit()&&!isLocked?`<button onclick="lockDest('${d.id}','${d.location}')" class="lock-btn">Lock in</button>`:''}
-        ${canEdit()&&isLocked?`<button onclick="unlockDest('${d.id}')" class="lock-btn locked">Unlock</button>`:''}
-      </div>
-    </div>`
-  }).join('') : '<div class="empty"><div class="empty-icon">🌍</div><div class="empty-title">No destinations yet</div><div class="empty-text">Suggest somewhere you\'d love to go</div></div>'
-
-  $('trip-content').innerHTML = `
-    <div class="flex items-center justify-between mb-16">
-      <div><h2 class="section-title" style="margin:0">Destinations</h2><p class="text-sm text-muted">Rank your favorites — most points wins</p></div>
-      <button class="btn btn-primary btn-sm" onclick="openModal('modal-add-dest')">+ Suggest</button>
-    </div>
-    ${cards}
-  `
+async function updateRole(uid,role){
+  await sb.from('trip_members').update({role:role}).eq('trip_id',CT.id).eq('user_id',uid);
+  tabMembers();
 }
 
-async function addDestination() {
-  const loc=val('dest-loc'); if(!loc){showErr('dest-err','Location required');return}
-  hideErr('dest-err')
-  const name=currentProfile?.name||currentUser?.user_metadata?.name||'Someone'
-  await sb.from('destinations').insert({trip_id:currentTrip.id,suggested_by:currentUser.id,suggested_by_name:name,location:loc,description:val('dest-why')||null,estimated_cost:val('dest-cost')||null,votes:{},locked:false})
-  closeModal('modal-add-dest'); renderDestinations()
+async function removeMember(uid){
+  if(!confirm('Remove this member?'))return;
+  await sb.from('trip_members').delete().eq('trip_id',CT.id).eq('user_id',uid);
+  tabMembers();
 }
 
-async function rankDest(id, rank) {
-  const {data:fresh} = await sb.from('destinations').select('votes').eq('id',id).single()
-  const votes={...(fresh?.votes||{})}
-  if(rank===null) delete votes[currentUser.id]; else votes[currentUser.id]=rank
-  await sb.from('destinations').update({votes}).eq('id',id)
-  renderDestinations()
+// JOIN VIA LINK
+async function checkJoin(){
+  var params=new URLSearchParams(window.location.search);
+  var joinId=params.get('join');
+  if(!joinId)return false;
+  if(!CU){sessionStorage.setItem('pendingJoin',joinId);return false;}
+  var ex=await sb.from('trip_members').select('user_id').eq('trip_id',joinId).eq('user_id',CU.id).single();
+  if(!ex.data){await sb.from('trip_members').insert({trip_id:joinId,user_id:CU.id,role:'member'});}
+  window.history.replaceState({},'',window.location.pathname);
+  await openTrip(joinId);
+  return true;
 }
 
-async function lockDest(id, location) {
-  await sb.from('destinations').update({locked:true}).eq('id',id)
-  await sb.from('trips').update({locked_destination:location}).eq('id',currentTrip.id)
-  currentTrip.locked_destination=location
-  renderDestinations(); renderTripHero()
-}
-
-async function unlockDest(id) {
-  await sb.from('destinations').update({locked:false}).eq('id',id)
-  await sb.from('trips').update({locked_destination:null}).eq('id',currentTrip.id)
-  currentTrip.locked_destination=null
-  renderDestinations(); renderTripHero()
-}
-
-// --- Activities Tab -----------------------------------------------------------
-async function renderActivities() {
-  const {data:acts} = await sb.from('activities').select('*').eq('trip_id',currentTrip.id).order('created_at')
-  const scored = (acts||[]).map(a=>{
-    const v=a.votes||{}
-    const up=Object.values(v).filter(x=>x==='up').length
-    const down=Object.values(v).filter(x=>x==='down').length
-    return {...a,upCount:up,downCount:down,score:up-down}
-  }).sort((a,b)=>{
-    if(a.locked&&!b.locked)return -1; if(!a.locked&&b.locked)return 1; return b.score-a.score
-  })
-
-  const rows = scored.length ? scored.map(a=>{
-    const myVote=a.votes?.[currentUser.id]
-    return `<div class="activity-row">
-      <div class="vote-btns">
-        <button class="vote-btn ${myVote==='up'?'voted-up':''}" onclick="voteAct('${a.id}','up')">▲</button>
-        <span class="vote-count">${a.score>0?'+':''}${a.score}</span>
-        <button class="vote-btn ${myVote==='down'?'voted-down':''}" onclick="voteAct('${a.id}','down')">▼</button>
-      </div>
-      <div class="activity-info">
-        <div class="activity-name">${a.title}${a.locked?' 🔒':''}</div>
-        <div class="activity-meta">${[a.description,a.cost?'~'+a.cost:null,'by '+a.suggested_by_name].filter(Boolean).join(' · ')}</div>
-        <div class="activity-meta">${a.upCount} 👍 · ${a.downCount} 👎</div>
-      </div>
-      ${canEdit()?`<div style="display:flex;flex-direction:column;gap:4px">
-        <button onclick="toggleLockAct('${a.id}',${a.locked})" class="lock-btn ${a.locked?'locked':''}">${a.locked?'Unlock':'Lock'}</button>
-        <button onclick="deleteAct('${a.id}')" class="btn btn-danger btn-sm">✕</button>
-      </div>`:''}
-    </div>`
-  }).join('') : '<div class="empty"><div class="empty-icon">🎯</div><div class="empty-title">No activities yet</div><div class="empty-text">Add things you want to do on the trip</div></div>'
-
-  $('trip-content').innerHTML = `
-    <div class="flex items-center justify-between mb-16">
-      <div><h2 class="section-title" style="margin:0">Activities</h2><p class="text-sm text-muted">Vote on what you want to do</p></div>
-      <button class="btn btn-primary btn-sm" onclick="openModal('modal-add-activity')">+ Add</button>
-    </div>
-    <div class="card card-padded">${rows}</div>
-  `
-}
-
-async function voteAct(id, type) {
-  const {data:fresh} = await sb.from('activities').select('votes').eq('id',id).single()
-  const votes={...(fresh?.votes||{})}
-  if(votes[currentUser.id]===type) delete votes[currentUser.id]; else votes[currentUser.id]=type
-  await sb.from('activities').update({votes}).eq('id',id)
-  renderActivities()
-}
-
-async function toggleLockAct(id, isLocked) {
-  await sb.from('activities').update({locked:!isLocked}).eq('id',id)
-  renderActivities()
-}
-
-async function deleteAct(id) {
-  if(!confirm('Delete this activity?'))return
-  await sb.from('activities').delete().eq('id',id)
-  renderActivities()
-}
-
-async function addActivity() {
-  const name=val('act-name'); if(!name){showErr('act-err','Name required');return}
-  hideErr('act-err')
-  const who=currentProfile?.name||currentUser?.user_metadata?.name||'Someone'
-  await sb.from('activities').insert({trip_id:currentTrip.id,suggested_by:currentUser.id,suggested_by_name:who,title:name,description:val('act-desc')||null,cost:val('act-cost')||null,votes:{},locked:false})
-  $('act-name').value=''; $('act-desc').value=''; $('act-cost').value=''
-  closeModal('modal-add-activity'); renderActivities()
-}
-
-// --- Expenses Tab -------------------------------------------------------------
-async function renderExpenses() {
-  const {data:exps} = await sb.from('expenses').select('*').eq('trip_id',currentTrip.id).order('created_at',{ascending:false})
-  const members = currentTrip._members
-  const total=(exps||[]).reduce((s,e)=>s+Number(e.amount),0)
-
-  const balances={}
-  members.forEach(m=>{balances[m.user_id]={name:m.profiles?.name||'?',amount:0}})
-  ;(exps||[]).forEach(e=>{
-    const split=e.split_among||[]; if(!split.length)return
-    const per=e.amount/split.length
-    if(balances[e.paid_by])balances[e.paid_by].amount+=e.amount
-    split.forEach(uid=>{if(balances[uid])balances[uid].amount-=per})
-  })
-
-  const settlements=calcSettlements(balances)
-  const myBal=balances[currentUser.id]?.amount||0
-
-  const expRows=(exps||[]).length?`<div class="card card-padded"><div class="card-title mb-12">All expenses</div>${(exps||[]).map(e=>{
-    const per=(e.amount/(e.split_among?.length||1)).toFixed(2)
-    return `<div class="expense-row">
-      <div class="expense-icon">💸</div>
-      <div class="expense-info"><div class="expense-name">${e.title}</div><div class="expense-meta">Paid by ${e.paid_by_name} · $${per}/person</div></div>
-      <div class="expense-amount">$${Number(e.amount).toFixed(2)}</div>
-    </div>`
-  }).join('')}</div>`:''
-
-  const balRows=Object.entries(balances).map(([uid,{name,amount}])=>`<div class="balance-row">
-    <div class="flex items-center gap-8">${makeAvatar(name,28)}<span class="text-sm">${name}${uid===currentUser.id?' (you)':''}</span></div>
-    <span class="${amount>0.01?'balance-pos':amount<-0.01?'balance-neg':'text-muted'}">${amount>0.01?'+':''}$${Math.abs(amount).toFixed(2)}</span>
-  </div>`).join('')
-
-  const settleRows=settlements.map(s=>`<div class="settle-row"><span class="fw-600">${s.from}</span><span class="settle-arrow">→</span><span class="fw-600">${s.to}</span><span class="fw-600" style="margin-left:auto;color:#059669">$${s.amount.toFixed(2)}</span></div>`).join('')
-
-  $('trip-content').innerHTML = `
-    <div class="flex items-center justify-between mb-16">
-      <div><h2 class="section-title" style="margin:0">Expenses</h2><p class="text-sm text-muted">Track who paid what</p></div>
-      <button class="btn btn-primary btn-sm" onclick="openAddExpense()">+ Add</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px">
-      <div class="card card-padded" style="text-align:center"><div class="text-xs text-muted">Total spent</div><div style="font-size:22px;font-weight:800;margin-top:4px">$${total.toFixed(0)}</div></div>
-      <div class="card card-padded" style="text-align:center;background:${myBal>0.01?'#f0fdf4':myBal<-0.01?'#fef2f2':'#fff'}">
-        <div class="text-xs text-muted">Your balance</div>
-        <div style="font-size:22px;font-weight:800;margin-top:4px;color:${myBal>0.01?'#059669':myBal<-0.01?'#dc2626':'#1a1814'}">${myBal>0.01?'+':''}$${Math.abs(myBal).toFixed(0)}</div>
-      </div>
-      <div class="card card-padded" style="text-align:center"><div class="text-xs text-muted">Expenses</div><div style="font-size:22px;font-weight:800;margin-top:4px">${(exps||[]).length}</div></div>
-    </div>
-    ${settlements.length?`<div class="card card-padded mb-12"><div class="card-title mb-12">How to settle up</div>${settleRows}</div>`:''}
-    <div class="card card-padded mb-12"><div class="card-title mb-12">Balances</div>${balRows}</div>
-    ${expRows}
-  `
-}
-
-function calcSettlements(balances) {
-  const c=[],d=[]
-  Object.entries(balances).forEach(([,{name,amount}])=>{if(amount>0.01)c.push({name,amount});else if(amount<-0.01)d.push({name,amount:-amount})})
-  c.sort((a,b)=>b.amount-a.amount);d.sort((a,b)=>b.amount-a.amount)
-  const txns=[]; let i=0,j=0
-  const cc=c.map(x=>({...x})),dd=d.map(x=>({...x}))
-  while(i<cc.length&&j<dd.length){const amt=Math.min(cc[i].amount,dd[j].amount);txns.push({from:dd[j].name,to:cc[i].name,amount:amt});cc[i].amount-=amt;dd[j].amount-=amt;if(cc[i].amount<0.01)i++;if(dd[j].amount<0.01)j++}
-  return txns
-}
-
-function openAddExpense() {
-  const members=currentTrip._members
-  const sel=$('exp-paidby'); sel.innerHTML=''
-  members.forEach(m=>{const o=document.createElement('option');o.value=m.user_id;o.textContent=m.profiles?.name+(m.user_id===currentUser.id?' (you)':'');if(m.user_id===currentUser.id)o.selected=true;sel.appendChild(o)})
-  const cb=$('exp-split-checkboxes'); cb.innerHTML=''
-  members.forEach(m=>{
-    const label=document.createElement('label')
-    label.style.cssText='display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;padding:6px 10px;border:1.5px solid #ebe8e3;border-radius:8px'
-    const inp=document.createElement('input');inp.type='checkbox';inp.value=m.user_id;inp.checked=true;inp.id='split-'+m.user_id
-    label.appendChild(inp); label.appendChild(document.createTextNode(m.profiles?.name+(m.user_id===currentUser.id?' (you)':'')))
-    cb.appendChild(label)
-  })
-  $('exp-desc').value=''; $('exp-amount').value=''; hideErr('exp-err')
-  openModal('modal-add-expense')
-}
-
-async function addExpense() {
-  const title=val('exp-desc'),amount=parseFloat($('exp-amount').value)
-  if(!title||!amount){showErr('exp-err','Fill in description and amount');return}
-  const paidBy=$('exp-paidby').value
-  const paidByName=$('exp-paidby').selectedOptions[0]?.textContent?.replace(' (you)','')
-  const split=[...document.querySelectorAll('#exp-split-checkboxes input:checked')].map(el=>el.value)
-  if(!split.length){showErr('exp-err','Select at least one person to split with');return}
-  hideErr('exp-err')
-  await sb.from('expenses').insert({trip_id:currentTrip.id,title,amount,paid_by:paidBy,paid_by_name:paidByName,split_among:split,date:new Date().toISOString().split('T')[0]})
-  closeModal('modal-add-expense'); renderExpenses()
-}
-
-// --- Polls Tab ----------------------------------------------------------------
-async function renderPolls() {
-  const {data:polls} = await sb.from('polls').select('*').eq('trip_id',currentTrip.id).order('created_at',{ascending:false})
-  const canCreate=canEdit()
-
-  const pollCards=(polls||[]).length?(polls||[]).map(p=>{
-    const opts=p.options||[], votes=p.votes||{}, total=Object.keys(votes).length, myVote=votes[currentUser.id]
-    const counts=opts.map((_,i)=>Object.values(votes).filter(v=>v===i).length)
-    const winIdx=counts.indexOf(Math.max(...counts))
-    const optHtml=opts.map((opt,i)=>{
-      const pct=total>0?Math.round(counts[i]/total*100):0
-      const isWin=!p.is_open&&i===winIdx&&counts[i]>0
-      return `<button onclick="castVote('${p.id}',${i})" class="poll-option ${myVote===i?'my-vote':''} ${isWin?'winner':''} ${!p.is_open?'disabled':''}" ${!p.is_open?'disabled':''}>
-        <div class="poll-bar" style="width:${pct}%"></div>
-        <span class="poll-label">${myVote===i?'✓ ':isWin?'🏆 ':''}${opt}</span>
-        <span class="poll-pct">${pct}% (${counts[i]})</span>
-      </button>`
-    }).join('')
-    return `<div class="card card-padded mb-12">
-      <div class="flex items-center justify-between mb-12">
-        <div>
-          <span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:${p.is_open?'#059669':'#6b6760'};margin-bottom:4px">
-            <span style="width:7px;height:7px;border-radius:50%;background:${p.is_open?'#059669':'#d5d2cb'};display:inline-block"></span>
-            ${p.is_open?'Open':'Closed'} · ${total} vote${total!==1?'s':''}
-          </span>
-          <div class="card-title">${p.question}</div>
-        </div>
-        ${canCreate?`<button onclick="togglePoll('${p.id}',${p.is_open})" class="btn btn-secondary btn-sm">${p.is_open?'Close':'Reopen'}</button>`:''}
-      </div>
-      ${optHtml}
-    </div>`
-  }).join('') : '<div class="empty"><div class="empty-icon">&#x1F5F3;&#xFE0F;</div><div class="empty-title">No polls yet</div><div class="empty-text">Create a poll to get the group input</div></div>'
-
-  $('trip-content').innerHTML = `
-    <div class="flex items-center justify-between mb-16">
-      <div><h2 class="section-title" style="margin:0">Polls</h2><p class="text-sm text-muted">Make group decisions fast</p></div>
-      ${canCreate?`<button class="btn btn-primary btn-sm" onclick="openModal('modal-add-poll')">+ New poll</button>`:''}
-    </div>
-    ${pollCards}
-  `
-}
-
-async function castVote(pollId, idx) {
-  const {data:fresh} = await sb.from('polls').select('votes,is_open').eq('id',pollId).single()
-  if(!fresh?.is_open)return
-  const votes={...(fresh.votes||{})}; votes[currentUser.id]=idx
-  await sb.from('polls').update({votes}).eq('id',pollId)
-  renderPolls()
-}
-
-async function togglePoll(id, isOpen) {
-  await sb.from('polls').update({is_open:!isOpen}).eq('id',id); renderPolls()
-}
-
-async function addPoll() {
-  const q=val('poll-q'); if(!q){showErr('poll-err','Question required');return}
-  const opts=$('poll-opts').value.split('\n').map(s=>s.trim()).filter(Boolean)
-  if(opts.length<2){showErr('poll-err','Add at least 2 options');return}
-  hideErr('poll-err')
-  await sb.from('polls').insert({trip_id:currentTrip.id,created_by:currentUser.id,question:q,options:opts,votes:{},is_open:true})
-  closeModal('modal-add-poll'); renderPolls()
-}
-
-// --- Updates Tab --------------------------------------------------------------
-async function renderUpdates() {
-  const {data:anns} = await sb.from('announcements').select('*').eq('trip_id',currentTrip.id).order('pinned',{ascending:false}).order('created_at',{ascending:false})
-  const canPost=canEdit()
-
-  const annCards=(anns||[]).length?(anns||[]).map(a=>{
-    const deleteBtn = canPost ? '<button onclick="deleteUpdate(\''+a.id+'\')" style="background:none;border:none;cursor:pointer;color:#6b6760;padding:2px 6px;border-radius:6px;font-size:13px" title="Delete">&#x2715;</button>' : '';
-    const pinnedBadge = a.pinned ? '<span class="badge" style="background:#fef3c7;color:#92400e">&#x1F4CC; Pinned</span>' : '';
-    return '<div class="ann-card '+(a.pinned?'pinned':'')+'"><div class="ann-header">'+makeAvatar(a.created_by_name||'?',28)+'<span class="ann-name">'+a.created_by_name+'</span>'+pinnedBadge+'<span class="ann-time" style="margin-left:auto">'+ago(a.created_at)+'</span>'+deleteBtn+'</div><div class="ann-msg">'+a.message+'</div></div>'
-  }).join('') : '<div class="empty"><div class="empty-icon">&#x1F4E3;</div><div class="empty-title">No updates yet</div><div class="empty-text">Updates will appear here</div></div>'
-
-  $('trip-content').innerHTML = `
-    <div class="flex items-center justify-between mb-16">
-      <div><h2 class="section-title" style="margin:0">Updates</h2><p class="text-sm text-muted">Announcements from the host</p></div>
-      ${canPost?`<button class="btn btn-primary btn-sm" onclick="openModal('modal-post-update')">+ Post</button>`:''}
-    </div>
-    ${annCards}
-  `
-}
-
-async function postUpdate() {
-  const msg=val('upd-msg'); if(!msg)return
-  const name=currentProfile?.name||currentUser?.user_metadata?.name||'Host'
-  await sb.from('announcements').insert({trip_id:currentTrip.id,created_by:currentUser.id,created_by_name:name,message:msg,pinned:$('upd-pin').checked})
-  $('upd-msg').value=''; $('upd-pin').checked=false
-  closeModal('modal-post-update'); renderUpdates()
-}
-
-async function deleteUpdate(id) {
-  if(!confirm('Delete this update?'))return
-  await sb.from('announcements').delete().eq('id',id); renderUpdates()
-}
-
-// --- Members Tab --------------------------------------------------------------
-async function renderMembers() {
-  const {data:members} = await sb.from('trip_members').select('*,profiles(id,name,email)').eq('trip_id',currentTrip.id)
-  currentTrip._members = members||[]
-  const canManage=canEdit()
-  const roleTag={host:'👑 Host','co-host':'🛡️ Co-host',member:'Member'}
-
-  const rows=(members||[]).map(m=>`<div class="member-row">
-    ${makeAvatar(m.profiles?.name||'?',36)}
-    <div class="member-info">
-      <div class="member-name">${m.profiles?.name||'Unknown'}${m.user_id===currentUser.id?' <span class="chip">you</span>':''}</div>
-      <div class="member-email">${m.profiles?.email||''}</div>
-    </div>
-    <span class="chip">${roleTag[m.role]||'Member'}</span>
-    ${canManage&&m.user_id!==currentUser.id&&m.role!=='host'?`
-      <select onchange="updateRole('${m.user_id}',this.value)" style="font-size:12px;border:1.5px solid #ebe8e3;border-radius:8px;padding:4px 8px;cursor:pointer">
-        <option value="member" ${m.role==='member'?'selected':''}>Member</option>
-        <option value="co-host" ${m.role==='co-host'?'selected':''}>Co-host</option>
-      </select>
-      <button onclick="removeMember('${m.user_id}')" class="btn btn-danger btn-sm">Remove</button>
-    `:''}
-  </div>`).join('')
-
-  $('trip-content').innerHTML = `
-    <div class="flex items-center justify-between mb-16">
-      <div><h2 class="section-title" style="margin:0">Members</h2><p class="text-sm text-muted">${(members||[]).length} people on this trip</p></div>
-      ${canManage?`<button class="btn btn-primary btn-sm" onclick="openModal('modal-invite')">+ Invite</button>`:''}
-    </div>
-    <div class="card card-padded">${rows}</div>
-    <div class="card card-padded mt-12">
-      <div class="card-title mb-8">Share invite link</div>
-      <p class="text-sm text-muted mb-12">Anyone with this link can join the trip after logging in.</p>
-      <button class="btn btn-secondary w-full" onclick="copyInviteLink()">📋 Copy invite link</button>
-    </div>
-  `
-}
-
-async function inviteMember() {
-  const email=val('inv-email'); if(!email){showErr('inv-err','Email required');return}
-  hideErr('inv-err'); hide('inv-ok')
-  const {data:prof} = await sb.from('profiles').select('id,name,email').eq('email',email).single()
-  if(!prof){showErr('inv-err',`No TripSync account found for ${email}. They need to sign up first.`);return}
-  const already=(currentTrip._members||[]).find(m=>m.user_id===prof.id)
-  if(already){showErr('inv-err','This person is already in the trip');return}
-  await sb.from('trip_members').insert({trip_id:currentTrip.id,user_id:prof.id,role:'member'})
-  $('inv-ok').textContent=`✅ ${prof.name} added to the trip!`; show('inv-ok')
-  $('inv-email').value=''
-  await renderMembers(); renderTripHero()
-}
-
-async function updateRole(userId, role) {
-  await sb.from('trip_members').update({role}).eq('trip_id',currentTrip.id).eq('user_id',userId)
-  renderMembers()
-}
-
-async function removeMember(userId) {
-  if(!confirm('Remove this member from the trip?'))return
-  await sb.from('trip_members').delete().eq('trip_id',currentTrip.id).eq('user_id',userId)
-  renderMembers()
-}
-
-function copyInviteLink() {
-  const url=`${window.location.href.split('?')[0]}?join=${currentTrip.id}`
-  navigator.clipboard.writeText(url).then(()=>alert('✅ Invite link copied! Share it with your friends.')).catch(()=>prompt('Copy this link:',url))
-}
-
-// --- Join via link ------------------------------------------------------------
-async function checkJoinParam() {
-  const params=new URLSearchParams(window.location.search)
-  const joinId=params.get('join')
-  if(!joinId)return
-  if(!currentUser){sessionStorage.setItem('pendingJoin',joinId);return}
-  const {data:existing}=await sb.from('trip_members').select('user_id').eq('trip_id',joinId).eq('user_id',currentUser.id).single()
-  if(!existing){
-    await sb.from('trip_members').insert({trip_id:joinId,user_id:currentUser.id,role:'member'})
-  }
-  window.history.replaceState({},'',window.location.pathname)
-  await openTrip(joinId)
-}
-
-// --- Boot ---------------------------------------------------------------------
-async function boot() {
-  const {data:{session}} = await sb.auth.getSession()
-  if(session?.user){
-    currentUser=session.user
-    const {data:prof}=await sb.from('profiles').select('*').eq('id',session.user.id).single()
-    currentProfile=prof
-    const pending=sessionStorage.getItem('pendingJoin')
-    if(pending){sessionStorage.removeItem('pendingJoin');await sb.from('trip_members').insert({trip_id:pending,user_id:currentUser.id,role:'member'}).then(()=>{window.history.replaceState({},'',window.location.pathname);openTrip(pending)})}
-    else{await checkJoinParam();showDashboard()}
+// BOOT
+async function boot(){
+  var sessRes=await sb.auth.getSession();
+  var session=sessRes.data&&sessRes.data.session;
+  if(session&&session.user){
+    CU=session.user;
+    var profRes=await sb.from('profiles').select('*').eq('id',CU.id).single();
+    CP=profRes.data;
+    var pending=sessionStorage.getItem('pendingJoin');
+    if(pending){
+      sessionStorage.removeItem('pendingJoin');
+      await sb.from('trip_members').insert({trip_id:pending,user_id:CU.id,role:'member'});
+      window.history.replaceState({},'',window.location.pathname);
+      await openTrip(pending);
+    } else {
+      var joined=await checkJoin();
+      if(!joined)showDash();
+    }
   } else {
-    await checkJoinParam()
-    showPage('page-auth')
+    var params=new URLSearchParams(window.location.search);
+    if(params.get('join'))sessionStorage.setItem('pendingJoin',params.get('join'));
+    showPg('pg-auth');
   }
 }
 
-boot()
+boot();
 </script>
 </body>
 </html>
