@@ -270,7 +270,7 @@ select.inp{cursor:pointer}
 </div></nav>
 <div class="dash-wrap">
 <div class="dash-hero"><h1 id="dash-hi">Your trips</h1><p class="muted sm">All your adventures, one place</p></div>
-<div id="trips-grid" class="trip-grid"></div>
+<div id="trips-grid" class="trip-grid"></div><div id="dash-cal-wrap"></div>
 </div>
 </div>
 
@@ -454,7 +454,65 @@ async function afterLogin(user){CU=user;var pr=await sb.from('profiles').select(
 async function doLogout(){await sb.auth.signOut();CU=null;CP=null;CT=null;showPg('pg-auth');}
 
 //  DASHBOARD 
-async function showDash(){showPg('pg-dash');var name=myName();g('dash-hi').innerHTML='Hey '+name.split(' ')[0]+' &#128075;';var av=g('dash-av');av.textContent=ini(name);av.style.background=avc(name);var mr=await sb.from('trip_members').select('trip_id').eq('user_id',CU.id);var ids=(mr.data||[]).map(function(r){return r.trip_id;});var trips=[];if(ids.length){var tr=await sb.from('trips').select('*').in('id',ids).order('created_at',{ascending:false});trips=tr.data||[];}renderTrips(trips);}
+async function showDash(){showPg('pg-dash');var name=myName();g('dash-hi').innerHTML='Hey '+name.split(' ')[0]+' &#128075;';var av=g('dash-av');av.textContent=ini(name);av.style.background=avc(name);var mr=await sb.from('trip_members').select('trip_id').eq('user_id',CU.id);var ids=(mr.data||[]).map(function(r){return r.trip_id;});var trips=[];if(ids.length){var tr=await sb.from('trips').select('*').in('id',ids).order('created_at',{ascending:false});trips=tr.data||[];}renderTrips(trips);renderDashCal(trips);}
+var dashCalMonth = new Date();
+function renderDashCal(trips){
+  var wrap = g('dash-cal-wrap');
+  if(!wrap) return;
+  var now = dashCalMonth;
+  var year = now.getFullYear(), month = now.getMonth();
+  var firstDay = new Date(year,month,1).getDay();
+  var days = new Date(year,month+1,0).getDate();
+  var MNTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var WDAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
+
+  // Build a map of date -> [trip names]
+  var dateMap = {};
+  (trips||[]).forEach(function(t){
+    if(!t.date_start) return;
+    var s = new Date(t.date_start+'T00:00');
+    var e = t.date_end ? new Date(t.date_end+'T00:00') : s;
+    var cur = new Date(s);
+    while(cur <= e){
+      var ds = cur.toISOString().split('T')[0];
+      if(!dateMap[ds]) dateMap[ds]=[];
+      dateMap[ds].push({name:t.name, color: avc(t.name)});
+      cur.setDate(cur.getDate()+1);
+    }
+  });
+
+  var hdrs='';WDAYS.forEach(function(d){hdrs+='<div style="text-align:center;font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--ink3);padding:4px 0;text-transform:uppercase">'+d+'</div>';});
+
+  var cells='';
+  for(var i=0;i<firstDay;i++) cells+='<div></div>';
+  for(var d=1;d<=days;d++){
+    var ds=year+'-'+String(month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    var trips_today=dateMap[ds]||[];
+    var today=new Date().toISOString().split('T')[0]===ds;
+    var dots='';
+    trips_today.slice(0,2).forEach(function(t){
+      dots+='<div style="font-size:9px;color:#fff;background:'+t.color+';border-radius:3px;padding:1px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;margin-top:1px">'+t.name+'</div>';
+    });
+    if(trips_today.length>2) dots+='<div style="font-size:9px;color:var(--ink3)">+' +(trips_today.length-2)+' more</div>';
+    cells+='<div style="min-height:56px;border-radius:8px;padding:4px;border:1.5px solid '+(today?'var(--accent)':'var(--border)')+';background:'+(today?'var(--accent2)':'var(--white)')+'">'
+      +'<div style="font-size:12px;font-weight:'+(today?'700':'500')+';color:'+(today?'var(--accent)':'var(--ink)')+';margin-bottom:2px">'+d+'</div>'
+      +dots
+      +'</div>';
+  }
+
+  wrap.innerHTML='<div class="dash-wrap" style="padding-bottom:48px">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">'
+    +'<h2 style="font-size:18px;font-weight:700;letter-spacing:-.3px">Trip Calendar</h2>'
+    +'<div style="display:flex;align-items:center;gap:8px">'
+    +'<button onclick="changeDashCal(-1)" class="btn btn-s btn-sm">&#8592;</button>'
+    +'<span style="font-size:14px;font-weight:600">'+MNTHS[month]+' '+year+'</span>'
+    +'<button onclick="changeDashCal(1)" class="btn btn-s btn-sm">&#8594;</button>'
+    +'</div></div>'
+    +'<div style="background:var(--white);border-radius:var(--r2);border:1.5px solid var(--border);padding:16px">'
+    +'<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px">'+hdrs+cells+'</div>'
+    +'</div></div>';
+}
+function changeDashCal(dir){dashCalMonth=new Date(dashCalMonth.getFullYear(),dashCalMonth.getMonth()+dir,1);var mr2=sb.from('trip_members').select('trip_id').eq('user_id',CU.id);mr2.then(function(res){var ids=(res.data||[]).map(function(r){return r.trip_id;});if(!ids.length){renderDashCal([]);return;}sb.from('trips').select('*').in('id',ids).then(function(tr){renderDashCal(tr.data||[]);});});}
 function renderTrips(trips){var grid=g('trips-grid'),html='';trips.forEach(function(t){var hb=t.host_id===CU.id?'<span class="badge badge-host">Host</span>':'<span class="badge badge-member">Member</span>';var img=t.image_url?'<img class="tc-img" src="'+t.image_url+'" alt="">':'<div class="tc-ph">&#9992;</div>';var dest=t.destination?'<div>&#128205; '+t.destination+'</div>':'';var dates=t.date_start?'<div>&#128197; '+fmtShort(t.date_start)+(t.date_end?' to '+fmtShort(t.date_end):'')+'</div>':'';html+='<div class="trip-card" onclick="openTrip(\''+t.id+'\')">'+img+'<div class="tc-body"><div class="tc-name">'+t.name+'</div><div class="tc-meta">'+dest+dates+'<div style="margin-top:6px">'+hb+'</div></div></div></div>';});html+='<div class="new-card" onclick="openCreateTrip()"><div style="font-size:36px;margin-bottom:6px">&#9992;</div><div style="font-weight:700">Plan a new trip</div><div class="xs muted mt4">Tap to get started</div></div>';grid.innerHTML=html;}
 
 //  CREATE / EDIT TRIP 
